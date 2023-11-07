@@ -1,0 +1,1524 @@
+DATA = any fact that can be recorded or stored is called data.
+
+DATABASE = collection of data.
+
+DATABASE MANAGEMENT SYSTEM = a software which is used to construct or manipulate and retrieve data in the database.
+
+how we get data by your computer :
+
+1)client -> we can say that the machine is client like laptop or pc OR the google chrome or any other browser which helps us to contacting to the server is called client . 
+
+2) server : machine is called server in which server prog is install in it . meaning os server program it is a software which is serving of client all over the world. eg facebook server . 
+
+server contains same cpu , ram and hardisk . 
+
+works : suppose a guy ram opens laptop and types facebook.com , then his request is sending to the facebook server , then in ram there is a server program it helps us because there is millions of client , some people asking of facebook webpage or something , it is the duty of server prog to give apprepiate webpage to the client .
+
+suppose i want to make a server so i have to buy a hosting like go daddy or anyone in which i stored the data (proving hosting to client) .
+
+suppose i uploaded video files and photos in the server , then server hardisk has all the datafiles in it of my website , if a person tries to access my all videos and data files , then the apporiate video has to be fetch and that to be given to the server program , and then the server give it to the client ...
+
+so the question is who is fetch the videoo file???
+ans  = database management system ;
+
+columns in the tabel of a database called as attributes , fields also .
+
+rows are known as tuple, record .
+
+Advantages of database:
+1 - sharing is easy. ex = like fb we stored the profile photo and anybody seen it .
+2- avoid data duplicay ex = 2 baar ashish likh dunga table m toh same data store ho jayega wo m nhi chahata toh yeh usko rokta h . by use of primary key toh usse nhi hogi duplicay.
+3-data consistent = suppose 4 table h and sbme ashish naam h but hme kuch change krna h toh wo sbke ander hona chahiye.
+4 - confedential = alag alag logo ke liye alag alag view ho skta h like teacher ke liye alag and uske students ke liye alag.
+5 - highly securable.
+
+
+DATA MODEL : used to represent the structure in the database :
+
+1) er model = diagramitic reprentation 
+eg : like table called employee : it has some fields like name , moblie no , sex :
+then the system shows only table name and how many columns contain by that table .
+
+
+2) relational  model = represented using collection of table . 
+eg: in this it shows column with all the information in a table . 
+
+
+
+SQL (structured query language )
+
+A query language which is used to update or retrieve data in a realtional database .
+sql commands are used to communicate with the database to perform specific task.
+
+SQL COMMANDS are group into major 4 catogries depending on thier functionality :
+
+ 
+1 - DDL(data defination language) = data defination language = we generally create database and alter , truncate , drop in the database . 
+
+2 - DML(data manipulation language ) = DATA manipulation language : after creation of database , then we work on the data is called data manipulation . Mainly 3 Update , Insert and delete.
+
+3 - DCL(data control language)  = grant and revoke use 
+
+4 - TCL (transaction control language) = commit , rollback and savepoints commands are used in tcl 
+
+
+
+
+
+
+
+two types of database :
+
+1 - relational database
+2 - non relational database . 
+
+sql is a language used to communicate relational database and we used no-sql language for non relational database .
+
+relational database = any data which is stored in the harddisk ,has to be in a form of table.
+
+why we use sql :
+browser --------> server-------->database 
+
+we stored all the files in server. 
+front end core is basically a html file , the web page which we see is call a frontend which we interact in our screen , frontend means how it looks and backend means how it works. example car is frontend and backend is basically a engine .
+
+two types of language are there 1- relational algebra and second one is sql .
+relational algebra is a theoryritical language and sql is a practical language.
+
+we are not write relational algebra language in computer .
+sql is derived from the relational algebra , both are exactly same , equally powerful , means same thing is done with sql as in relational algebra.
+
+
+How to create a table in mysql , we can use both small alphabet or capital alphabets there is basically no difference in  that . Sql in not a case sensitive language .
+
+
+query == create table employee . (name of the table is employee)
+
+to add column in that table we have to do same first write the create table and then in( we have to write column name and its type .)
+
+like - create table employee( eid int , ename varchar(5) , gender char(1) , dob date);
+
+
+what is the difference between char(5) and varchar (5)
+
+1 - char provided 5 space for ename and same as varchar provided 5 space for ename .
+
+2 - if we write abc in the ename then 2 space is empty then our space is wasted , but in varchar if we write xyz its simply scan ename and then gives its space . 
+
+3 - we have used the char where we know specially what is that column required like in gender we have only three option whether its M(MALE) , F(FEMALE) , T(TRANS GENDER) , and we also know that it is only fill 1 alphabet in that like m or f . that means that char is usedful in that area , it also shows that varchar is basically complex and takes larger time to give space and stored the value because of scanning and character gives the particular space without scanning . 
+
+
+INSERTING TUPLES TO THE TABLE :
+
+create table employee( eid int , ename varchar(5) , gender char(1) , dob date);
+
+the table is created but there are no tuples is presesnt means no information in that table .
+
+To Insert information we use: 
+
+like - insert into employee values ( 100 , 'sam' , 'M' , 4/3/2001);
+the no of values we have write there is equal to the no of column present in employee table.
+
+if we have to add only 2 attributes then we use like this 
+                (we can change order also )
+
+insert into employee (eid , ename )   values ( 100 , 'sam');
+ -- the remaining attributes in this will  get NULL values in it . 
+
+
+
+
+
+CONSTRAINTS IN SQL-: restriction or that prevents something from occurring.
+
+
+1 ) if you want that your table does not contains a null value in a particular column then we can write it as:
+NULL constraint :
+ 
+create table employee( eid int ,
+                    ename varchar(5) , 
+                    gender char(1) NOT NULL,(that means the gender value does                                              not contain a null value is you give null to it then it shows error);
+                     dob date);
+
+2 ) if we khow that in universe no two no. are same then we used unique constraits to it like : 
+UNIQUE CONSTRAINT:
+
+create table employee( eid int ,
+                    ename varchar(5) , 
+                    gender char(1) NOT NULL  , 
+                     phoneno int UNIQUE (by writting unique if we write a duplicate                                          no then it shows error to that  );
+
+
+3 ) primary key , question - can we create a table without the primary key ?
+ans - the answer is yes .
+
+we never create a table without primary key in general . 
+
+create table employee( eid int PRIMARY KEY  ,
+                    ename varchar(5) , 
+                    gender char(1) NOT NULL  , 
+                     phoneno int UNIQUE  );
+
+(one tabel can have only one primary key only )
+(runs perfect but we know that we can have more that one primary key in table , the  we cannot write primary key again in any attribute , rather than following this syntax we used this :
+
+create table employee( eid int  ,
+                    ename varchar(5) , 
+                    gender char(1)   , 
+                     phoneno int , 
+                    primary key(eid , ename ) );
+			(In this both the keys together form a perimary key );
+
+          this is the better approach and all databases uses this syntax .
+
+what is primary keyyy ?
+ans - which helps us to uniquely identifies each row .and must contain unique values.
+which may consist of single attribute or multiple attribute together.
+
+it is a key which have gives property like it should be unique and not null . if we  do not write primary key in the upper syntax then we can easily give duplicate or null values to the eid and ename . if we do so then it throws error . 
+
+
+so an attribute in default can accept the null values and also the duplicates values in it .
+
+Composite key :A primary key having 2 or more attributes or columns is called composite key . 
+
+
+
+4 ) foriegn key :
+It is a column or a set of columns in a table that establishes a link or relationship between two tables in a relational database.
+
+Are the coulmns of a table that points to the primary key of another table.
+
+if we have to connect two tables in which one is employye information and the other is the department in which he was working . the foriegn key of employee table is refferring to the diD of the department table . 
+
+employee table                              department table 
+
+eid      ename    depID                     dID           dname                  
+100      sam      5000                      5000         accounts 
+                                            5001          market 
+                                            5002            HR 
+
+
+for employee table 
+ create table employee( eid int  ,
+                    ename varchar(5) , 
+                    depID int   , 
+                    primary key(eid) );
+
+for department table 
+ create table employee( dID int  , 
+                    dname varchar(20)   , 
+                    primary key(diD));
+
+to connect employee table to department table that both data can connect to each other .
+for employee table 
+create table employee( eid int  ,
+                    ename varchar(5) , 
+                    depID int   , 
+                    primary key(eid),
+                    foriegn key(depID) references department(dID) );
+
+we have to ensure that all the depid are present in the department table because a person works in the company must have some department name in the department table .
+
+
+5 ) check constraints :
+
+it is type of contraints in which we directly apply a condition while creating table eg :
+
+for employee table :
+
+ create table employee( eid int  ,
+                    ename varchar(5) , 
+                    salary int CHECK (salary>50),( this will ensure that salary must be                     greater than 50 k , if not then it will throw an error )
+                    primary key(eid) );
+
+6 ) default constraints
+
+suppose we dont want to put null values in the table so we can use default value while making table that will set a permanent value in that column if we do not provide any information in that column .
+
+
+for department table 
+ create table employee( dID int  , 
+                    dname varchar(20) default 'sonu'  , 
+                    primary key(diD));
+
+like : insert into department (did ) values (100 ); --> then dname will automatically get sonu without entering any name . 
+
+so we have total 6 constraints 
+1- not null
+2- unique
+3- primary key 
+4- foriegn key
+5- check
+6- default
+
+
+
+REFERALL TRIGGER ACTIONS (Cascade) : It is only done when two or more tables are join to each other .
+
+when we connect a forieng key then if in one table the department id is not present that it will give an error , to overcome that error we use CASCADE it means action in one table then also same action take in another table .
+
+like foriegn key(deptid) references department(did) on delete cascade );
+                                                      set null and set default	
+
+
+
+
+SELECT FROM WHERE EXPLAINED :
+
+select eid , ename from employee ; -- will show all the eid and enames in the table;
+
+select * from empoloyee ; -- gives all the information present at that table with columns          (all);
+
+que :-  whether select ename from employee show duplicates values or not ;
+ans - it is not eliminate duplicates , it shows all the values ;
+
+
+select distinct enames from employee ; -- it eleminates all duplicates and show the ename table.
+
+
+select ename from employee where age = 28; -- it will only show names of that member whose have the age 28 ; 
+
+
+
+inner join and join explained :
+
+employee table                                           department table 
+
+eid      ename    age    sex    dpno                    dno           dname                  
+100      sam       27    M      150                     150            HR  
+101      ram       28    M      150                     160          marketing 
+102      sam       27    M      160                     170           accounts 
+103      bob       29    M      170
+ 
+A JOIN clause is used to combine rows from two or more tables, based on a related column between them.
+
+Types of joins are :
+1)(INNER) JOIN: Returns records that have matching values in both tables.
+ 
+
+question - display the names of all the person who work for hr department by using where .
+
+how it works it match the 1 tuple to all the 3 tuple with the department name  like sam with all 3 then , ram with all three , those names dpno matches with dno with hr department will show the results.
+
+to write query like this: 
+yeh jo query likh rhe h wo bina inner use ke likh rhe h , where ka use krke normally .
+
+select ename
+from employee , department 
+where dpno = dno and dname = 'hr';
+
+or 
+
+SELECT *
+FROM Orders
+INNER JOIN Customers
+ON Orders.CustomerID=Customers.CustomerID;
+
+
+SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
+FROM Orders
+INNER JOIN Customers
+ON Orders.CustomerID=Customers.CustomerID;
+
+2) LEFT JOIN : In some databases LEFT JOIN is called LEFT OUTER JOIN.
+The LEFT JOIN keyword returns all records from the left table (table1), and the matching records from the right table (table2). The result is 0 records from the right side, if there is no match.
+
+iska mtb yeh h ki wo all left table ke records ko print krega and agar right table m bhi 
+kuch common hua toh wo bhi bs, pura right table print nhi krega .
+
+write query like this :
+
+SELECT column_name(s)
+FROM table1
+LEFT JOIN table2
+ON table1.column_name = table2.column_name;
+
+3)RIGHT (OUTER) JOIN: Returns all records from the right table, and the matched records from the left table.
+
+4)FULL (OUTER) JOIN: Returns all records when there is a match in either left or right table.and if no matches then print all the rows . 
+
+#tip = agr match hoga toh wo 1 baar print ho jayegi hr ek join ke ander aur usko hm common maan lenge aur agr match nhi hui like left , right aur full ke ander toh sb same as it is same print ho jayega .
+
+ALAISING in SQL :
+
+if in upper example both the name of the column are same then the software gets confused and gives error because it confuses between the two , which you have taking to compare . 
+so we have to do like this 
+
+select ename
+from employee , department 
+where employee.dpno = department.dno ;
+
+but by writing the table name again and again we use aliasng like this :
+
+select ename
+from employee as E , department as D  
+where E.dpno = D.dno ;   we created the shotcut of employee as e and department as d and then use it . 
+
+
+
+HOW TO USE UNION :
+
+select ename
+from employee ;
+   union 
+select dname 
+from employee ;
+   
+
+->THIS WILL GIVE ALL the name in the table and union means it does not repeat the name .
+The UNION operator selects only distinct values by default. To allow duplicate values, use UNION ALL:	
+ 
+->same as intersect in which it shows only the common names in the tables .
+
+->same as except in which it shows those names which contain only in one table and does have in another table.  
+
+
+LIKE OPERATOR 
+
+% =  gives 0 or more no of characters. 
+
+select from employee where ename like 'A%';
+like jo ename se start hinge wo aa jayenge isme .
+
+
+
+CONCATINATION(||) IN SQL :
+
+
+employee table 
+
+eid      fname    age    sex    dpno   lname                                   
+100      sam       27    M      150    sheety              
+101      ram       28    M      150     negi            
+102      sam       27    M      160    chauhan             
+103      bob       29    M      170    mathur
+
+
+query : select fname || lname as fullname from employee ;  this will concatinate means add fname and lname like sam sheety , ram negi , bob mathur etc.
+
+query : select 'full name is ' || fname || lname as full name from employee ; 
+
+this will give you - full name is bob sheety , full name is ram sheety and so on , and the table name is changed with the use of alias as full name as used in previous once .
+
+
+Between use : 
+
+select ename from employee where age between 20 and 30 ;  --> (this will gives names of that peoples who age is between 20 and 30 . it includes 20 and 30 also in it) .  
+
+
+alternate method of between :
+select ename from employee where age > 20 and age < 30 ;    
+
+select ename from employee where ename between 'b' and 'c' . ( this will sort according to the alphabatical order which taken stats with the alphabet name ). 
+
+
+
+Order by : generally sort the table according to the order. 
+
+select ename , eid from employee order by age, salary desc(it means according to descending)
+ 
+naturally it does ascending in order if you nothing write at the end  .
+
+
+ARTHEMATIC OPERATIONS IN SQL WHILE WRITING THE QUERY :
+select dname , age*10 (this will multiply the age by 10 and gives te result from employee );
+ 
+
+points 1 - if there is a null value is present in the age column and we multiply or divide it by something then we always get the null value in result .
+
+points 2 - select ename from employee where age >25;
+
+if in this condition if there is any null value is present in this then it is become an unknown value for us . because we cant know that value it may be greater than 25 and may be less than 25 so we can say that it is unknown value and cant be say that it is true or false , it do not show in the table.
+
+points 3- this is same occur when we use and , or operation in the query .
+
+
+
+AGGREGATE FUNCTIONS :
+1- SUM 
+2- AVG 
+3- MIN 
+4- MAX 
+5- COUNT
+
+query : select sum(age) from employee; == gives sum of all the ages 
+query : select avg(age) from employee; == gives average of ages 
+query : select min(age) from employee;== gives min value of age 
+query : select max(age) from employee; == give maximum value of age 
+query : select count(age) from employee; == gives no of ages present in the table .
+
+point 1- if there are null values at that column that it simply ignores the null values.
+
+if there is 5 tuples there and two of them are null values then it shows 3 values .
+
+query : select count(*) from employee; //this will give 5 values because there is only 2 null values at the ages only not all values are null that why it gives count of 5;
+
+
+
+IN in SQL :
+
+eid      fname    age    sex    dpno   lname                                   
+100      sam       27    M      150    sheety              
+101      ram       28    M      150     negi            
+102      sam       27    M      160    chauhan             
+103      bob       29    M      170    mathur
+
+
+query : select ename from employee where eid in (100 , 101, 105);
+in basically refers as or .
+
+so the output of this is only sam and ram . 
+
+query : select ename from employee where sex in (F , T); == this will tell me that we have to choose only transgender and female from the table. 
+
+it shows nothing because all the persons present in that table are male .
+
+USE OF NOT IN in SQL :it tells that no which are not present in IN statement .
+
+select ename from employee where eid not in (100 , 101);
+
+ans - it shows the ename of only sam and bob . 
+
+eid      fname    age    sex    dpno   lname                                   
+100      sam       27    M      150    sheety              
+101      ram       28    M      150     negi            
+102      sam       27    M      160    chauhan             
+103      bob       29    M      170    mathur
+ 
+
+select ename from employee where age not in (27 , 29);
+ans == it tells please provide me the names of that age no which are not 27 and 29 , so the answer is ram only .
+
+
+eid      fname    age    sex    dpno   lname                                   
+100      sam       27    M      150    sheety              
+101      ram     null    M      150     negi            
+102      sam       27    M      160    chauhan             
+103      bob     null    M      170    mathur
+
+query select ename from employee where age not in (28 , 29);
+
+points : if there are null values present in the age then to find the age of those column are unknown . then we cant say tht it is 28 or 29 so we cant consider it . 
+
+ANS : it is sam only which is not 28 or 29.
+
+
+
+
+ANY , SUM , ALL in SQL :
+ALL USE :
+
+eid      fname    age    sex    dpno   lname                                   
+100      sam       27    M      150    sheety              
+101      ram     null    M      150     negi            
+102      soo       28    M      160    chauhan             
+103      bob     null    M      170    mathur
+
+query : select ename from employee where age> all(25,26);
+all refers to and .
+
+it means that we have to select those names whose ages are greater than 25 and 26 :
+if the value is unknown it is not consider . 
+
+
+ANY OR SOME are exactly same in thier work there is no difference in that . 
+
+query :select ename from employee where age> some(25,26);
+
+if the age is greater than any of these single values then it will be count in the table.
+
+
+
+NESTED SUBQUIRES in SQL :--> having a query inside a query .
+
+employee table                                         department table 
+
+eid      ename    age    sex                         dno           dname                  
+100      sam       27    M                           100           HR  
+101      ram       28    F                           102          marketing 
+102      sam       27    M                           103           accounts 
+103      bob       29    F     
+
+
+query : select Dname from department where dno in (select E.eid from employee E where E.sex='m'); 
+
+so we can clearly see this that there is also a query in IN statement and we cant go futher without solving it , so we first solve the inside query (subquery) then () query :
+
+answer : the in() query will give those names where there is male and we can see it 100 and 102 can are male :
+
+
+select Dname from department where dno in (100 , 102); 
+
+GROUP BY CLAUSE in sql :
+
+The GROUP BY statement groups rows that have the same values into summary rows, like "find the number of customers in each country".
+
+The GROUP BY statement is often used with aggregate functions (COUNT(), MAX(), MIN(), SUM(), AVG()) to group the result-set by one or more columns.
+
+
+employee table                       
+
+eid      ename     ID   sal                                      
+100      sam       27    33                             
+101      ram       28    33                        
+102      sam       27    23                       
+103      bob       29    44 
+104      tam       27    50
+105      bam       28    55
+106      gam       28    55
+107      sus       29    50
+
+
+question : to find the average salary of each department :
+
+for this answer we have to use the group by statement like this :
+
+query : select EID , avg(sal) from employee group by EID ;(jo hm group by ke aage likhenge wo same hme select m bhi likhna padega ).  
+
+group by == yeh duplicates ko sirf ek baar hi likhta ha . 
+
+
+yeh query hme yeh batana chahti h ki average salary nikalni h hr ek Id ki .
+
+jaise maan lo 33 sal 5 bndo ki ha tb wo 5 count rakhlega ek saath and and un 5cho ki ek saath avg salary nikaal dega  
+
+toh yeh 2 column degi ek ke ander avg salary aur dusre ke ander uski ID iss query ke anusaar hmare pass 3 tuples ayenge and 3 avg salary .
+
+another eg:
+
+SELECT COUNT(CustomerID), Country
+FROM Customers
+GROUP BY Country;
+
+yeh count batega customer id ka ki wo country kitni baar aa rakhi h 
+
+3         iran 
+2         asia 
+2         india 
+1         finland 
+5         london
+
+iska mtb h ki 3baar iran aa rakhi h table m ,2 baar asia and so on toh wo table ko choti kr deta h and repeation avoid krta h and uski =jagah ek saath likh deta h .
+
+
+
+
+select ID , min(sal) from employee group by ID ;  -- yeh hme minimum salary bta degi apne apne id ki ki sabse jyada minimum salary kitni h particular id ki . 
+
+
+eid      ename     sex                                         
+100      sam       M                                 
+101      ram       F                           
+102      sam       F                         
+103      bob       M  
+104      tam       M
+105      bam       M
+106      gam       F
+107      sus       F
+
+
+select sex , count(*) from employee group by sex; this will give us both of male and females in the company , like   
+
+
+sex      count(*)
+M          4    
+F          4
+
+
+
+//some concepts also needed : 
+
+1)Update in sql :
+
+if you want to update a value in the particular row or all in database then you use the update statement :
+
+we write like this :
+
+UPDATE Employee
+SET ContactName='Alfred Schmidt', City='Frankfurt'
+WHERE CustomerID=1;
+
+update krdo empolyee table ko , set krdo contact name ko  = alfed and city ko = frank.. , jha pr bhi id no 1 ha .
+
+
+2) Delete in Sql :
+if you want to delete the data in the table then yo use it like this:
+
+DELETE FROM Customers WHERE CustomerName='Alfreds Futterkiste';
+
+delete krna h customertable se jha p coustor name ha alfed ..
+
+
+
+
+
+
+
+Joins Started :
+
+
+Use where clause without using Join:
+
+query : select * FROM table1 , table2 where Name = UserId ;
+
+
+
+
+1 - Cross Join = Table1 , 3 rows
+ 	         Table2 , 2 rows
+(multiply both the rows of the two different table )
+
+Query : select * from table1 , table2 ; 
+
+OR 
+
+select * from table1 cross join table2;
+
+result : 3*2 = 6 total query where each row matches with the other two in table 2 . 
+
+
+2 - Self Join : Table Joins with itself . (square of the no of rows it have)
+
+Table1 have 3 rows
+query : select * from table1 as A inner join table1 as B;
+
+table1 has 3 query so it multipy with itself hence total no of rows will be 9 , ie (3*3).
+
+
+3 - Inner Join = Results common rows between both the tables on the basic of On query which we wright , Mandatory to write the on query in inner join . 
+
+query : select * from table1 inner join table2 on Name = UserId Or
+select * from table1 inner join table2 // direct inner join lga dega ;
+
+if both the column names matches then it shows in the result .
+
+4 - Left join = Give all the left tables list for sure , whether it matches or not matches with other table . and If some matches then the other table data is also there . 
+
+
+Table1 = 3 rows and Table2 has 3 rows 
+
+query = select * from table1 left join table2 on PHNO = UserId;
+
+
+output = all rows of the left table which is table1 has 3 rows :
+
+ie = 3+(if matches with the other table then it also adds up);
+
+
+5= right join = gives all the right rows of the table whether it is in the left table or not.
+
+Table1 = 3 rows and Table2 has 2 rows 
+
+query : select * from table1 left join table2 on PHNO = UserId;
+
+isme same h upar waale ki trah ki :
+
+left table is table1 and right table is table2 . 
+
+so all the data of table2 which is 2 and if matches with the on query then adds up.
+
+
+
+6 - Full join :
+| ID | NAME     | AGE | ADDRESS   | SALARY   |
++----+----------+-----+-----------+----------+
+|  1 | Ramesh   |  32 | Ahmedabad |  2000.00 |
+|  2 | Khilan   |  25 | Delhi     |  1500.00 |
+|  3 | Kaushik  |  23 | Kota      |  2000.00 |
+|  4 | Chaitali |  25 | Mumbai    |  6500.00 |
+|  5 | Hardik   |  27 | Bhopal    |  8500.00 |
+|  6 | Komal    |  22 | MP        |  4500.00 |
+|  7 | Muffy    |  24 | Indore    | 10000.00 |
++----+----------+-----+-----------+----------+
+
+
++-----+---------------------+-------------+---------+
+| OID | DATE                | CUSTOMER_ID | AMOUNT  |
++-----+---------------------+-------------+---------+
+| 102 | 2009-10-08 00:00:00 |           3 | 3000.00 |
+| 100 | 2009-10-08 00:00:00 |           3 | 1500.00 |
+| 101 | 2009-11-20 00:00:00 |           2 | 1560.00 |
+| 103 | 2008-05-20 00:00:00 |           4 | 2060.00 |
++-----+---------------------+-------------+---------+
+
+
+query : SELECT ID, NAME, AMOUNT, DATE
+FROM CUSTOMERS
+FULL JOIN ORDERS
+ON CUSTOMERS.ID = ORDERS.CUSTOMER_ID;
+
++------+----------+--------+---------------------+
+| ID   | NAME     | AMOUNT | DATE                |
++------+----------+--------+---------------------+
+|    1 | Ramesh   |   NULL | NULL                |
+|    2 | Khilan   |   1560 | 2009-11-20 00:00:00 |
+|    3 | kaushik  |   3000 | 2009-10-08 00:00:00 |
+|    3 | kaushik  |   1500 | 2009-10-08 00:00:00 |
+|    4 | Chaitali |   2060 | 2008-05-20 00:00:00 |
+|    5 | Hardik   |   NULL | NULL                |
+|    6 | Komal    |   NULL | NULL                |
+|    7 | Muffy    |   NULL | NULL                |
++------+----------+--------+---------------------+
+
+pura data aa gya left and right ka jiski value match nhi kr rhi thi uske ander null aa gya bs .
+
+
+
+7 - UNION = The UNION operator is used to combine the result-set of two or more SELECT statements.
+-select statement hongi tbhi chlega yeh , select jo krenge wo same hone chahiye with datatype. 
+
+query : 
+SELECT * FROM table1
+UNION
+SELECT * FROM table2;
+	
+::The UNION operator selects only distinct values by default. To allow duplicate values, use UNION ALL
+
+
+Some tips and functions:
+
+SELECT * FROM Customers
+WHERE CustomerName LIKE 'a%';
+
+ans ? 
+:: real m yeh Capital A wala bhi customer de rha h iska mtb h ki like statement ke ander jo likhte h wo case insensitive h . A is equals to small a .
+
+questio =  like operator vs equals to operator 
+
+
+SELECT * FROM Customers
+WHERE CustomerName = 'alpha;
+
+yeh case sensitive h , a ka mtb chota a hi h . so it matches the exact values .
+
+
+
+Date concepts:
+
+
+:SELECT NAME, LISTPRICE, LISTPRICE + 10 AS ADJUSTED_LIST_PRICE  INTO newtable FROM [Production].[Product].
+
+//new table bna dega and phir usko name , listprice and listprice+10 uske ander aa jayenge from products table.
+
+//so it done 2 works :- creates a new table and then enter tuples into it. 
+
+
+::Temporary table : jb aapko ek temporary table banani ho kisi kaam ke liye aise h . aur temproray h means kaam nhi h uska baad so . so jaise hi hm uss page se jayenge toh wo table apne aap hi delete ho jayegi . for temporary table we use #.
+
+query:
+ SELECT NAME, LISTPRICE, LISTPRICE + 10 AS ADJUSTED_LIST_PRICE  INTO #tmpname FROM [Production].[Product]
+
+
+
+::Dates concepts :
+
+--DATES
+
+SELECT GETDATE()
+
+SELECT GETDATE() - 2
+
+--DATEPART
+
+SELECT DATEPART(yyyy, GETDATE())
+
+SELECT DATEPART(dd, GETDATE())
+
+SELECT DATEPART(mm, GETDATE())
+
+--DATEADD
+
+SELECT DATEADD(day, 4, GETDATE())
+SELECT DATEADD(month, 4, GETDATE())
+SELECT DATEADD(year, 4, GETDATE())
+
+--DATEDIFF
+SELECT DATEDIFF(day, '6/1/2015', GETDATE())
+SELECT DATEDIFF(month, '6/1/2015', GETDATE())
+
+SELECT DATEDIFF(month, '4/1/2015', GETDATE())
+
+SELECT DATEDIFF(year, '6/1/2014', GETDATE())
+
+--GET THE FIRST DAY OF THIS MONTH
+SELECT (DATEADD(dd, -(DATEPART(day, GETDATE()) - 1), GETDATE()))
+
+
+::Strings functions ::
+--STRING FUNCTIONS
+
+SELECT ORDERNUMBER, ORDERNAME, CONCAT(ORDERNAME, ' ' , ORDERNAME) AS CONCATENATEDTEXT FROM MYORDER
+
+--RAND(): generate random no 
+SELECT ORDERNUMBER, ORDERNAME, CONCAT(ORDERNAME, ' ' , RAND(5)) AS CONCATENATEDTEXT FROM MYORDER
+
+--LEFT : take characters from left which is 5 .
+SELECT ORDERNUMBER, ORDERNAME, LEFT(ORDERNAME, 5) FROM MYORDER
+
+--RIGHT: take characters from right which is 5 .
+SELECT ORDERNUMBER, ORDERNAME, RIGHT(ORDERNAME, 5) FROM MYORDER
+
+--SUBSTRING :1 se start ho rha h index no . 2 se start hoga aur 5th index tk krega 
+SELECT ORDERNUMBER, ORDERNAME, SUBSTRING(ORDERNAME, 2, 5) FROM MYORDER
+
+--LOWERCASE
+SELECT ORDERNUMBER, ORDERNAME, LOWER(ORDERNAME) FROM MYORDER
+
+--LENGHT OF STRING
+SELECT ORDERNUMBER, ORDERNAME, LEN(ORDERNAME) FROM MYORDER
+
+:first chacter should be capital and rest are small.
+SELECT ORDERNUMBER, ORDERNAME, CONCAT(UPPER(LEFT(ORDERNAME, 1)), LOWER(SUBSTRING(ORDERNAME, 2, LEN(ORDERNAME)))) FROM MYORDER
+
+--TRIM 
+SELECT '   MyText    '
+
+SELECT LTRIM('   MyText    ') : delete left side of spaces.
+SELECT RTRIM('   MyText    ') : delete right side of spaces.
+SELECT RTRIM(LTRIM('   MyText    ')): both sides of spaces.
+
+
+--Advanced Level Concepts of SQL 
+
+//Add a data to a new table .
+
+select CategoryName, IsActive as quantity into
+ [dbo].[newtable] from uday.dbo.tbl_Product_Category;
+
+Create a new table and insert the data from the existing table . It is a permanent table which is stored in the current database . 
+
+
+//TEMPORARY TABLE 
+select CategoryName, IsActive as quantity into #temptable from uday.dbo.tbl_Product_Category;
+
+#temptabe means it is a temporary table and it is visible only for you , if you just close the window this table is just vanished , only valid to a session 
+
+
+//VIEWS IN SQL 
+Views : does not create a table but actually created a window and shows the necesaary columns that you need .
+
+Query : 
+Create View MyCustomerView 
+as 
+select * from table where country = 'India';
+
+Execute:
+select * from MyCustomerView ;
+
+
+TRIGGERS :
+
+We doing something when some sort of things happened . Like if the donation is greater than 1000 million then send a mail , if the donation is 5m then send error and as well as save this in the log . and these actions are some sort of sql statement sequence .
+
+So triggers are statemenets that are automatically updated or run when some sort of an insert /update/delete happens in your table . you can write your own code for run . we can call this automated checks or sort of scripts that get executed when some event or activity happens in your table . 
+
+
+query :
+:This is the pattern 
+Create trigger demo(trigger name) on(which table do you want to fire trigger ) table 
+AFTER?BEFORE  INSERT/UPDATE/DELETE 
+AS 
+BEGIN 
+PRINT 'INSERT IS NOT ALLOWED '
+ROLLBACK Transaction  
+END 
+GO 
+
+
+original query :
+Create trigger Hi on mytable
+AFTER INSERT
+AS 
+BEGIN 
+PRINT 'INSERT IS NOT ALLOWED '
+ROLLBACK Transaction  
+END 
+GO 
+
+
+TEST THE TRIGGER : 
+INSERT INTO MYTABLE (1,2323,UDAY);
+
+ANS : 'INSERT IS NOT ALLOWED 'is PRINTED ;
+
+CHECK :  SELECT * FROM MYtable ; You will not seen any row inserted . Trigger was automatically fired .
+
+But the thing is that it is the table level beacuse we try to something in the table level and your statement get executed 
+. What is when you do not create a trigger at the table level .
+
+When you something want something at the database level , because we don't have to write trigger for every table. 
+
+
+
+At database level :->
+
+create trigger trig on databse 
+after create_table 
+AS
+begin 
+Print 'creation of new table is not allowed '
+roolback  transaction 
+end 
+go 
+
+
+
+IF YOU TRY TO CREATE A TABLE OVER HERE 
+CREATE TABLE MYDEMO ; TRIGGER FIRE AND DOEST ALLOW TO MAKE TABLE .
+
+
+
+STORED PROCEDURE : 
+
+IS A SET OF SQL STATEMENTS THAT ARE STORED IN THE DATABASE . 
+
+Query : 
+
+create procedure MytestProc 
+As
+Set nocount on --this will not show how many rows are affected
+select * from table ; 
+
+
+Execute stored procedure : 
+
+Execute MytestProc ;
+
+Another stored proc : 
+
+create procedure MytestProc2 
+As
+Set NOCOUNT off // this will show how many rows are affected
+select * from table ; 
+
+Execute  MytestProc2 or exec MytestProc2  ;
+
+DROP PROC MytestProc2; //drop the procedure 
+
+//Parameterised stored procedure : 
+
+
+Create procedure Myfirstparaproc
+@ParamName varchar(30)
+as 
+Set Nocount on
+select * from table where productname = @paramname ; 
+
+
+call that proc :
+exec myFirstPARAPROC @ParamName = 'warner' or 
+exec MyfristParamproc 'warner '  // values are passed must be in the same order //
+exec MyFirstParamProc  // and you not pass any parameter then it shows error ;  
+
+//so to overcome that problem that paramter is missing . then make the same procedure but slightly different way.
+
+Create procedure Myfirstparaproc
+@ParamName varchar(30) = 'defaultname'
+as 
+Set Nocount on
+select * from table where productname = @paramname ; 
+
+exec Myfirstparaproc ; //running normal 
+
+
+--Output Parameter :
+
+Create proc myoutputProc 
+@topshift varchar(30) output //I dont want this value from user , this is the output parameter 
+Set @topshift = (select top 1 id  from table) ;
+
+//declare the procdure 
+Declare @outputResult vachar(50);
+
+//execute the proc
+Exec myoutputProc @outputResult output ; // getting a single value 5 
+
+
+
+//If you want a stored procedure should do something and return a value. 
+
+--Returning values from stored procdure  
+
+Create proc myfirstReturnProc
+As
+Return 12 
+
+
+Declare @returnvalue int ;
+
+Exec @returnvalue = myfirstReturnProc;
+select @returnvalue // value should be 12 ; 
+
+
+
+
+UDF = USER DEFINE FUNCTION :
+
+tHREE TYPES OF FUNCTIONS ; 
+1 - SCALAR FUNCTIONS : RETURN A SINGLE DATA VALUE IN RETURN CLAUSE .
+2 - TABLED VALUED FUNCTIONS : RETURN A TABLE DATA TYPE.
+3 - SYSTEM FUNCTIONS : THESE ARE SYSTEM FUNCTIONS THAT CANNOT BE MODIFIED ND THAT PERFORM SOME SPECIFIC FUNCTIONS .
+
+
+::user define functions: that accept parameter and perform an action such as a complex clculation and returned the result of an action.
+
+
+1 scalar based :
+
+create function sales ()
+return money
+AS 
+Begin 
+Declare @ytsales Money 
+select @ytsales = sum(salesintable) from table 
+return  @ytsales
+
+Exec; 
+Declare @ytresult money(type)
+select @ytresult = sales(); 
+print @ytresult 
+
+
+--Paramertized functions 
+
+
+
+create function sales (@group varchar(20))
+return money
+AS 
+Begin 
+Declare @ytsales as Money 
+select @ytsales = sum(salesintable) from table where group = @group ; 
+return  @ytsales
+
+Declare @ytresult money(type)
+select @ytresult = sales('north America'); 
+print @ytresult 
+
+
+--function returning table ; 
+
+
+create function tbl 
+@id int 
+return table 
+as 
+begin 
+select * from table where id = @id ; 
+
+
+select * from tbl(7);
+or if you wnat paramters ; 
+select name , id from tbl(7);
+
+
+
+TRANACTIONS IN SQL:
+-if a transaction is succesful all the data modification are made during the transaction are commited and become the permanent part of the database.
+-if the transaction is failed then unable to upadte and the data is roll back.
+ 
+ 
+::ACID : atomicity , consisitency , isolation and durability.
+
+roll back means undo those things .
+
+Atomicity : transaction should be all or nothing . if one part of the trasanction fails the entire transaction is failed . 
+
+consistency : it ensures that any transactions will bring the database from one state to another.
+
+isolation : transactions update in the serial order one by one . 
+
+durability : once the transaction is commited it will show in the database even if the power loss crashes or more. 
+
+//1 example - Simple transaction
+Begin transaction
+update table 
+set cost = 1 where name = "uday"
+commit tranasaction
+
+--@@error = it wil give you the error number of the last executed statement . 0 means success. and non zero means error . 
+
+Declare @errorresult varchar(40)
+
+Begin transaction 
+insert into table values(1,2,'uda');
+
+
+
+Set @errorresult = @@Error 
+
+If(@errorresult=0)
+Begin 
+print 'successful'
+commit transaction 
+end
+
+but if the statemenet didnt succeed.
+
+Else begin 
+print 'falied transaction '
+roolback transaction 
+end 
+
+
+--Custom error message . 
+Using the upper same code . 
+
+Declare @errorresult varchar(40)
+
+Begin transaction 
+insert into table values(1,2,'uda');
+
+
+
+Set @errorresult = @@Error 
+
+If(@errorresult=0)
+Begin 
+print 'successful'
+commit transaction 
+end
+
+but if the statemenet didnt succeed.
+
+Else begin 
+RAISEERROR('STATEMENET FAILED - THIS IS MY CUSTOME MESSAGE ' , 16 , 1) 
+//INBUILD FUNCTION THAT ACCEPTS PARAMETER
+roolback transaction 
+end 
+
+
+
+--TRY AND CATCH : why not to use if and else , because this is the error whcih is actually shown in the ui , it actually throw as an error . With try and catch you can actually handle this error and dont let the user know that error has occured.
+
+
+Declare @errorresult varchar(40)
+
+Begin try 
+Begin transaction 
+insert into table values(1,2,'uda');
+Commit transaction 
+
+End try 
+
+Begin catch 
+Print 'catch statemenet enter'
+rollback transaction 
+
+ans - there is no error here thrown in the ui but actually it does not store the value . 
+
+
+ 
+:Grouping sets : agr maan lo aapka boss bol rha h ki muje 2 column chahiye tabel ke name and id . so you write this 
+select name , id from table . 
+
+ab wo bol rha h ki nhi 3 chahiye : 
+select name , id , family from tabel ;
+
+ab wo bo rha h ki nhi 4 chchiye :
+select name , id , sex , family form tabel .
+
+//bhai aa toh pagal ho jayoge aur agr usne bol diya ki sbko merge krdo toh aap bologe ki unpossible . iske liye grouping sets hote h.
+
+select name , sex from table 
+group by grouping sets 
+(
+	(name), 
+	(name , sex),
+	(name , sex , family)
+)
+
+toh in sbka union all aa jayega and baaki jagah null aa jayega means teeno table jud gyi aapas m . 
+
+
+--Ranking functions .
+--if you want to give ranking to a table with salary or any other column .
+
+rank repeat bhi ho skti h like 5 bnko ki 500 rs h toh 5,5,5,5,5 rank show ho . 
+
+select 	salary ,
+row_number() over (order by salary) as row 
+rank() over (order by salary ) as rank , //gives 1 ,2 3 4 , 
+dense_rank() over (order by salary ) as dense rank , //gives 111,222 ,33
+from table ; 
+
+
+
+
+
+
+
+
+
+-XML : xtensible markup language . 
+
+
+NOT IN SQL ::
+
+1 - Where combine with not :
+SELECT * FROM Customers
+WHERE NOT Country = 'Germany';
+
+2 - In with not 
+SELECT * FROM Customers
+WHERE Country NOT IN ('Germany', 'France', 'UK');
+ 
+3 - Like with not 
+SELECT * FROM Customers
+WHERE CustomerName NOT LIKE 'a%';
+ 
+
+
+select CategoryName, IsActive as quantity into
+ [dbo].[newtable] from uday.dbo.tbl_Product_Category;
+
+Create a new table and insert the data from the existing table . It is a permanent table which is stored in the current database . 
+
+select CategoryName, IsActive as quantity into #temptable from uday.dbo.tbl_Product_Category;
+
+#temptabe means it is a temporary table and it is visible only for you , if you just close the window this table is just vanished , only valid to a session 
+
+Views : does not create a table but actually created a window and shows the necesaary columns that you need .
+
+Query : 
+Create View MyCustomerView 
+as 
+select * from table where country = 'India';
+
+Execute:
+select * from MyCustomerView ;
+
+
+TRIGGERS: We doing something when some sort of things happened . Like if the donation is greater than 1000 million then send a mail , if the donation is 5m then send error and as well as save this in the log . and these actions are some sort of sql statement sequence .
+
+So triggers are statemenets that are automatically updated or run when some sort of an insert /update/delete happens in your table . you can write your own code for run . we can call this automated checks or sort of scripts that get executed when some event or activity happens in your table . 
+
+So : trigger is a stored program that automatically executes when certain events occur. Triggers can execute in response to.
+
+query :
+:This is the pattern 
+Create trigger demo(trigger name) on(which table do you want to fire trigger ) table 
+AFTER?BEFORE  INSERT/UPDATE/DELETE 
+AS 
+BEGIN 
+PRINT 'INSERT IS NOT ALLOWED '
+ROLLBACK Transaction  
+END 
+GO 
+
+
+original query :
+Create trigger Hi on mytable
+AFTER INSERT
+AS 
+BEGIN 
+PRINT 'INSERT IS NOT ALLOWED '
+ROLLBACK Transaction  
+END 
+GO 
+
+
+TEST THE TRIGGER : 
+INSERT INTO MYTABLE (1,2323,UDAY);
+
+ANS : 'INSERT IS NOT ALLOWED 'is PRINTED ;
+
+CHECK :  SELECT * FROM MYtable ; You will not seen any row inserted . Trigger was automatically fired .
+
+But the thing is that it is the table level beacuse we try to something in the table level and your statement get executed 
+. What is when you do not create a trigger at the table level .
+
+When you something want something at the database level , because we don't have to write trigger for every table. 
+
+
+
+At database level :->
+
+create trigger trig on databse 
+after create_table 
+AS
+begin 
+Print 'creation of new table is not allowed '
+roolback  transaction 
+end 
+go 
+
+
+
+IF YOU TRY TO CREATE A TABLE OVER HERE 
+CREATE TABLE MYDEMO ; TRIGGER FIRE AND DOEST ALLOW TO MAKE TABLE .
+
+
+
+STORED PROCEDURE : 
+
+IS A SET OF SQL STATEMENTS THAT ARE STORED IN THE DATABASE . 
+
+Query : 
+
+create procedure MytestProc 
+As
+Set nocount on --this will not show how many rows are affected
+select * from table ; 
+
+
+Execute stored procedure : 
+
+Execute MytestProc ;
+
+Another stored proc : 
+
+create procedure MytestProc2 
+As
+Set NOCOUNT off // this will show how many rows are affected
+select * from table ; 
+
+Execute  MytestProc2 or exec MytestProc2  ;
+
+DROP PROC MytestProc2; //drop the procedure 
+
+//Parameterised stored procedure : 
+
+
+Create procedure Myfirstparaproc
+@ParamName varchar(30)
+as 
+Set Nocount on
+select * from table where productname = @paramname ; 
+
+
+call that proc :
+exec myFirstPARAPROC @ParamName = 'warner' or 
+exec MyfristParamproc 'warner '  // values are passed must be in the same order //
+exec MyFirstParamProc  // and you not pass any parameter then it shows error ;  
+
+//so to overcome that problem that paramter is missing . then make the same procedure but slightly different way.
+
+Create procedure Myfirstparaproc
+@ParamName varchar(30) = 'defaultname'
+as 
+Set Nocount on
+select * from table where productname = @paramname ; 
+
+exec Myfirstparaproc ; //running normal 
+
+
+--Output Parameter :
+
+Create proc myoutputProc 
+@topshift varchar(30) output //I dont want this value from user , this is the output parameter 
+Set @topshift = (select top 1 id  from table) ;
+
+//declare the procdure 
+Declare @outputResult vachar(50);
+
+//execute the proc
+Exec myoutputProc @outputResult output ; // getting a single value 5 
+
+
+
+//If you want a stored procedure should do something and return a value. 
+
+--Returning values from stored procdure  
+
+Create proc myfirstReturnProc
+As
+Return 12 
+
+
+Declare @returnvalue int ;
+
+Exec @returnvalue = myfirstReturnProc;
+select @returnvalue // value should be 12 ; 
+
+
+
+
+UDF = USER DEFINE FUNCTION :
+
+tHREE TYPES OF FUNCTIONS ; 
+1 - SCALAR FUNCTIONS : RETURN A SINGLE DATA VALUE IN RETURN CLAUSE .
+2 - TABLED VALUED FUNCTIONS : RETURN A TABLE DATA TYPE.
+3 - SYSTEM FUNCTIONS : THESE ARE SYSTEM FUNCTIONS THAT CANNOT BE MODIFIED ND THAT PERFORM SOME SPECIFIC FUNCTIONS .
+
+select * from table ; 
+
+
+1 scalar based :
+
+create function sales ()
+return money
+AS 
+Begin 
+Declare @ytsales Money 
+select @ytsales = sum(salesintable) from table 
+return  @ytsales
+
+Exec; 
+Declare @ytresult money(type)
+select @ytresult = sales(); 
+print @ytresult 
+
+
+--Paramertized functions 
+
+
+
+create function sales (@group varchar(20))
+return money
+AS 
+Begin 
+Declare @ytsales as Money 
+select @ytsales = sum(salesintable) from table where group = @group ; 
+return  @ytsales
+
+Declare @ytresult money(type)
+select @ytresult = sales('north America'); 
+print @ytresult 
+
+
+--function returning table ; 
+
+
+create function tbl 
+@id int 
+return table 
+as 
+begin 
+select * from table where id = @id ; 
+
+
+select * from tbl(7);
+or if you wnat paramters ; 
+select name , id from tbl(7);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
