@@ -1,0 +1,46 @@
+// one class serve as parent class (like a tree structure)
+// a -> b , c 
+// b->d , e 
+// c-> f,g
+
+#include<iostream>
+using namespace std ; 
+
+class A{
+    public:
+    void func1(){
+        cout<<"I am function A"<<endl;
+    }
+};
+
+class B : public A{
+    public:
+     void func2(){
+        cout<<"I am function B"<<endl;
+    }
+    
+};
+class C : public A{
+    public:
+     void func3(){
+        cout<<"I am function C"<<endl;
+    }
+};
+int main(){
+    A obj1; 
+    obj1.func1();
+    cout<<endl;
+
+    B obj2;
+    obj2.func2();
+    obj2.func1();
+
+    cout<<endl;
+
+    C obj3;
+    obj3.func1();
+    obj3.func3();
+
+    
+    return 0 ; 
+}
