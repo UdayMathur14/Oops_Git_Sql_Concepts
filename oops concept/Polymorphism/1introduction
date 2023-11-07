@@ -1,0 +1,20 @@
+polymorphism = existing in multiple forms 
+
+like father example 
+
+2 types of polymorphism:
+
+a) compile time polymorphism = static polyphorism
+b) Run time polymorphism = dynamic polyphorism
+
+a) complie time = phele hi error pta chl jata h 
+two types:
+
+1- function overloading = same function name but with different parameters
+2 - operator overloading = +operator use ho toh print kre hello babbar
+
+
+b) run time polymorphism 👍
+method ovverriding in run time 
+
+hota kya h : ek class ne inherit kiya ek function but usko wo nhi chahiye toh usne whi function apni class m define kr diya toh purana function jo wo inherit kr rha tha uski jagah toh ab nya wala function jo same class m likha hoga toh wo chlaega 

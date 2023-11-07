@@ -1,0 +1,18 @@
+Encapsulation = wrapping up data members and functions ; 
+Encapsulation = Information hiding or Data hiding 
+
+data members is also known as = Properies or state 
+functions is also known as = Methods or Behaviour 
+
+
+fully encapsulated class = all data members are Private 
+
+private 
+int name ; 
+int age ;
+
+
+Advantages :
+1 - data hide = security increases 
+2 - mark read only 
+3 - unit testing 

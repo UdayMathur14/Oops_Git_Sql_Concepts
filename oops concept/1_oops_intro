@@ -1,0 +1,16 @@
+oops : object oriented programming System
+
+class = Class is a blueprint which defines some properties and behaviors.
+
+object : An object is an instance of a class which has those properties and behaviours .
+or 
+object is an entity which holds properties and behaviour .
+
+why oops 👍
+To solve Real world problems through coding .
+
+Adavantages :
+1-increases readiability 
+2- easily manage 
+
+//empty class have sizeof(object) = 1 

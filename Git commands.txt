@@ -1,0 +1,34 @@
+Git some common terms : 
+
+1 - working directory = jha aap kaam kr rhe ho na ussi ko bolte h owrking directory .
+2 - staging area = jb aap git add kr dete h toh usko staging area bolte h . ya toh jo aapko finally commit krna h .
+
+Commands : 
+1 - git config --global user.email 'udaymathur14@gmail.com' -- to set the email 
+2 - git config --global user.name udaymathur14  -- to set the user name 
+
+** git init - initialise the local git repository 
+
+3 - git config --global user.email to get the current email 
+4 - git config --global user.email to get the current name
+
+5 - Git add -A or git add . --add all the files in the staging area .
+
+6 - git commit -m "message" 
+
+7 - git reset filename -- staging se usko wapas se working m daal dega .
+
+8 - git checkout -f -- works after the first commit , ab chahiye aap working m ho ja toh aapne kuch staging m daal rakho ho yeh kroge toh purane waale commit p paunch jaoge , hanges saare discard kr dega and purane waale p pauch jayega .
+
+9 - git branch to see the branches . *refers as the current branch 
+
+10 - git branch -a  --to see all the local nd remote branches 
+
+11 - git branch branchname -- create a branch 
+
+12 - git checkout branchname --go to that branch , if you have some changes that are not commited then they also goes to that branch . 
+
+13 - git checkout -b branchname --refers to the new branch this will take all the changes whether in the working directory or not it takes all the data into a new branch which you make.
+
+
+

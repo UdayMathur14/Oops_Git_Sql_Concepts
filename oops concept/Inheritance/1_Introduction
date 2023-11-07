@@ -1,0 +1,2 @@
+Inheritance = inherit properties or any method from the base class 
+Example = Human ->then male and female inherit the properties of human  
