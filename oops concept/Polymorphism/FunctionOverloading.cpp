@@ -12,7 +12,7 @@ class A{
         cout<<"Hello "<<name<<endl;
     }
 
-    //agr tum soch rhe hoge ki void ki jagah string daal do toh chl jaye but phir bhi same problem hi hogi , parameters different hone chahye chachye function kaisa bhi ho 
+    //agr tum soch rhe hoge ki void ki jagah string daal do toh chl jaye but phir bhi same problem hi hogi , parameters different hone chahye chahiye function kaisa bhi ho 
 
     // string sayHello(string name ){
     //     cout<<"Hello "<<name<<endl;
