@@ -23,15 +23,15 @@ so the question is who is fetch the videoo file???
 ans  = database management system ;
 -----------------------------------------------------------------------------
 
-columns in the table of a database called as attributes , fields also .
+columns in the table of a database called as attributes , fields also . 
 rows are known as tuple, record .
 
 Advantages of database:
-1 - sharing is easy. ex = like fb we stored the profile photo and anybody seen it .
-2- avoid data duplicay ex = 2 baar ashish likh dunga table m toh same data store ho jayega wo m nhi chahata toh yeh usko rokta h . by use of primary key toh usse nhi hogi duplicay.
-3-data consistent = suppose 4 table h and sbme ashish naam h but hme kuch change krna h toh wo sbke ander hona chahiye.
-4 - confedential = alag alag logo ke liye alag alag view ho skta h like teacher ke liye alag and uske students ke liye alag.
-5 - highly securable.
+1 - Sharing is easy. ex = like fb we stored the profile photo and anybody seen it .
+2- Avoid data duplicay ex = 2 baar ashish likh dunga table m toh same data store ho jayega wo m nhi chahata toh yeh usko rokta h . by use of primary key toh usse nhi hogi duplicay.
+3 - Data consistent = suppose 4 table h and sbme ashish naam h but hme kuch change krna h toh wo sbke ander hona chahiye.
+4 - Confedential = alag alag logo ke liye alag alag view ho skta h like teacher ke liye alag and uske students ke liye alag.
+5 - Highly securable.
 
 
 DATA MODEL : used to represent the structure in the database :
@@ -54,10 +54,10 @@ sql commands are used to communicate with the database to perform specific task.
 SQL COMMANDS are group into major 4 catogries depending on thier functionality :
 
  
-1 - DDL(data defination language) = data defination language = we generally create database and alter , truncate , drop in the database . 
+1 - DDL(data defination language) = data defination language = we generally create database and alter , truncate , drop , COMMENT in the database . 
 
 2 - DML(data manipulation language ) = DATA manipulation language : after creation of database , then we work on the data is called data manipulation . Mainly 3 
-Update , Insert and delete.
+Update , Insert and delete , SELECT.
 
 3 - DCL(data control language)  = grant and revoke use 
 
