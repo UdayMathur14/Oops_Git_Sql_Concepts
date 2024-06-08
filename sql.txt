@@ -87,11 +87,11 @@ relational algebra is a theoryritical language and sql is a practical language.
 we are not write relational algebra language in computer .
 sql is derived from the relational algebra , both are exactly same , equally powerful , means same thing is done with sql as in relational algebra.
 
-------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
 
 How to create a table in mysql , we can use both small alphabet or capital alphabets there is basically no difference in  that . Sql in not a case sensitive language .
 
-------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
 CREATE TABLE:
 
 query == create table employee . (name of the table is employee)
@@ -175,7 +175,7 @@ create table employee( eid int  ,
           this is the better approach and all databases uses this syntax .
 
 what is primary keyyy ?
-ans - which helps us to uniquely identifies each row .and must contain unique values.
+ans - which helps us to uniquely identifies each row and must contain unique values.
 which may consist of single attribute or multiple attribute together.
 
 it is a key which have gives property like it should be unique and not null . if we  do not write primary key in the upper syntax then we can easily give duplicate or null values to the eid and ename . if we do so then it throws error . 
@@ -342,7 +342,32 @@ ON table1.column_name = table2.column_name;
 4)FULL (OUTER) JOIN: Returns all records when there is a match in either left or right table.and if no matches then print all the rows . 
 
 #tip = agr match hoga toh wo 1 baar print ho jayegi hr ek join ke ander aur usko hm common maan lenge aur agr match nhi hui like left , right aur full ke ander toh sb same as it is same print ho jayega .
-------------------------------------------------------------------------------------------
+
+employees table:
+
+emp_id	emp_name	dept_id
+1	John	10
+2	Jane	20
+3	Mike	30
+4	Alice	NULL
+
+departments table:
+
+dept_id	dept_name
+10	HR
+20	IT
+30	Finance
+40	Marketing
+
+Output:
+
+emp_id	emp_name	dept_id	dept_name
+1	         John	  10	      HR
+2	         Jane	  20	      IT
+3	         Mike	  30	    Finance
+4	         Alice	  NULL	  NULL
+NULL	       NULL	   40	    Marketing
+----------------------------------------------------------------------------------------
 
 
 ALAISING in SQL :
@@ -558,7 +583,7 @@ answer : the in() query will give those names where there is male and we can see
 
 
 select Dname from department where dno in (100 , 102); 
------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
 
 GROUP BY CLAUSE in sql :
 
@@ -608,10 +633,7 @@ yeh count batega customer id ka ki wo country kitni baar aa rakhi h
 1         finland 
 5         london
 
-iska mtb h ki 3baar iran aa rakhi h table m ,2 baar asia and so on toh wo table ko choti kr deta h and repeation avoid krta h and uski =jagah ek saath likh deta h .
-
-------------------------------------------------------------------------------------------
-
+----------------------------------------------------------------------------------------
 
 select ID , min(sal) from employee group by ID ;  -- yeh hme minimum salary bta degi apne apne id ki ki sabse jyada minimum salary kitni h particular id ki . 
 
@@ -634,7 +656,7 @@ sex      count(*)
 M          4    
 F          4
 
-------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
 
 //some concepts also needed : 
 
@@ -656,13 +678,9 @@ if you want to delete the data in the table then yo use it like this:
 
 DELETE FROM Customers WHERE CustomerName='Alfreds Futterkiste';
 
-delete krna h customertable se jha p coustor name ha alfed ..
+delete krna h customertable se jha p customer name ha alfed ..
 
-
-
-
-
-------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
 
 Joins Started :
 
@@ -696,9 +714,6 @@ table1 has 3 query so it multipy with itself hence total no of rows will be 9 , 
 
 
 3 - Inner Join = Results common rows between both the tables on the basic of On query which we wright , Mandatory to write the on query in inner join . 
-
-query : select * from table1 inner join table2 on Name = UserId Or
-select * from table1 inner join table2 // direct inner join lga dega ;
 
 if both the column names matches then it shows in the result .
 
@@ -786,7 +801,7 @@ SELECT * FROM table2;
 	
 ::The UNION operator selects only distinct values by default. To allow duplicate values, use UNION ALL
 
-------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
 Some tips and functions:
 
 SELECT * FROM Customers
@@ -795,7 +810,7 @@ WHERE CustomerName LIKE 'a%';
 ans ? 
 :: real m yeh Capital A wala bhi customer de rha h iska mtb h ki like statement ke ander jo likhte h wo case insensitive h . A is equals to small a .
 
-questio =  like operator vs equals to operator 
+question =  like operator vs equals to operator 
 
 
 SELECT * FROM Customers
@@ -803,12 +818,11 @@ WHERE CustomerName = 'alpha;
 
 yeh case sensitive h , a ka mtb chota a hi h . so it matches the exact values .
 
-
 -------------------------------------------------------------------------------------
+
 Date concepts:
 
-
-:SELECT NAME, LISTPRICE, LISTPRICE + 10 AS ADJUSTED_LIST_PRICE  INTO newtable FROM [Production].[Product].
+SELECT NAME, LISTPRICE, LISTPRICE + 10 AS ADJUSTED_LIST_PRICE  INTO newtable FROM [Production].[Product].
 
 //new table bna dega and phir usko name , listprice and listprice+10 uske ander aa jayenge from products table.
 
@@ -889,7 +903,7 @@ SELECT LTRIM('   MyText    ') : delete left side of spaces.
 SELECT RTRIM('   MyText    ') : delete right side of spaces.
 SELECT RTRIM(LTRIM('   MyText    ')): both sides of spaces.
 
------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
 --Advanced Level Concepts of SQL 
 
 //Add a data to a new table .
@@ -917,12 +931,12 @@ select * from table where country = 'India';
 Execute:
 select * from MyCustomerView ;
 
------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
 TRIGGERS :
 
 We doing something when some sort of things happened . Like if the donation is greater than 1000 million then send a mail , if the donation is 5m then send error and as well as save this in the log . and these actions are some sort of sql statement sequence .
 
-So triggers are statemenets that are automatically updated or run when some sort of an insert /update/delete happens in your table . you can write your own code for run . we can call this automated checks or sort of scripts that get executed when some event or activity happens in your table . 
+So triggers are statemnets that are automatically updated or run when some sort of an insert /update/delete happens in your table . you can write your own code for run . we can call this automated checks or sort of scripts that get executed when some event or activity happens in your table . 
 
 
 query :
@@ -978,8 +992,7 @@ go
 IF YOU TRY TO CREATE A TABLE OVER HERE 
 CREATE TABLE MYDEMO ; TRIGGER FIRE AND DOEST ALLOW TO MAKE TABLE .
 
-------------------------------------------------------------------------------------------
-
+----------------------------------------------------------------------------------------
 STORED PROCEDURE : 
 
 IS A SET OF SQL STATEMENTS THAT ARE STORED IN THE DATABASE . 
@@ -1219,7 +1232,7 @@ rollback transaction
 
 ans - there is no error here thrown in the ui but actually it does not store the value . 
 
-------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
  
 :Grouping sets : agr maan lo aapka boss bol rha h ki muje 2 column chahiye tabel ke name and id . so you write this 
 select name , id from table . 
@@ -1255,16 +1268,7 @@ dense_rank() over (order by salary ) as dense rank , //gives 111,222 ,33
 from table ; 
 
 
-
-
-
-
-------------------------------------------------------------------------------------------
-
-
--XML : xtensible markup language . 
-
-
+----------------------------------------------------------------------------------------
 NOT IN SQL ::
 
 1 - Where combine with not :
@@ -1506,30 +1510,4 @@ select name , id from tbl(7);
 
 
 
------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
+----------------------------------------------------------------------------------------
