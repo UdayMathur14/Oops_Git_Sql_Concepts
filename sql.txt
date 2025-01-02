@@ -845,13 +845,14 @@ SELECT ORDERNUMBER, ORDERNAME, CONCAT(ORDERNAME, ' ' , ORDERNAME) AS CONCATENATE
 SELECT ORDERNUMBER, ORDERNAME, CONCAT(ORDERNAME, ' ' , RAND(5)) AS CONCATENATEDTEXT FROM MYORDER
 
 --LEFT : take characters from left which is 5 .
-SELECT ORDERNUMBER, ORDERNAME, LEFT(ORDERNAME, 5) FROM MYORDER
+SELECT ORDERNUMBER, ORDERNAME, LEFT(ORDERNAME, 5) FROM MYORDER --measn left se 5 utha lo 
 
 --RIGHT: take characters from right which is 5 .
-SELECT ORDERNUMBER, ORDERNAME, RIGHT(ORDERNAME, 5) FROM MYORDER
+SELECT ORDERNUMBER, ORDERNAME, RIGHT(ORDERNAME, 5) FROM MYORDER -- right se 5 utha lo bs normal hi dikhana is case m last 5 ho gye jo output ayega 
 
 --SUBSTRING :1 se start ho rha h index no . 2 se start hoga aur 5th index tk krega 
-SELECT ORDERNUMBER, ORDERNAME, SUBSTRING(ORDERNAME, 2, 5) FROM MYORDER
+SELECT ORDERNUMBER, ORDERNAME, SUBSTRING(ORDERNAME, 2, 5) FROM MYORDER --SUBSTRING(Title, 1, 5) extracts the first 5 characters of the Title column.
+1 is the starting point , first alpha is 1
 
 --LOWERCASE
 SELECT ORDERNUMBER, ORDERNAME, LOWER(ORDERNAME) FROM MYORDER
@@ -863,7 +864,7 @@ SELECT ORDERNUMBER, ORDERNAME, LEN(ORDERNAME) FROM MYORDER
 SELECT ORDERNUMBER, ORDERNAME, CONCAT(UPPER(LEFT(ORDERNAME, 1)), LOWER(SUBSTRING(ORDERNAME, 2, LEN(ORDERNAME)))) FROM MYORDER
 ---------------------------------------------------------------------------------------
 --TRIM 
-SELECT '   MyText    '
+SELECT = '   MyText    '
 
 SELECT LTRIM('   MyText    ') : delete left side of spaces.
 SELECT RTRIM('   MyText    ') : delete right side of spaces.
@@ -883,7 +884,7 @@ Create a new table and insert the data from the existing table . It is a permane
 //TEMPORARY TABLE 
 select CategoryName, IsActive as quantity into #temptable from uday.dbo.tbl_Product_Category;
 
-#temptabe means it is a temporary table and it is visible only for you , if you just close the window this table is just vanished , only valid to a session 
+#temptabe means it is a temporary table and it is visible only for you , if you just close the window or current tab this table is just vanished , only valid to a session 
 
 
 //VIEWS IN SQL 
@@ -899,11 +900,9 @@ select * from MyCustomerView ;
 
 ----------------------------------------------------------------------------------------
 TRIGGERS :
+We doing something when some sort of things happened . Like if the donation is greater than 1000 million then send a mail , if the donation is 5rupees then send error and as well as save this in the log . and these actions are some sort of sql statement sequence .
 
-We doing something when some sort of things happened . Like if the donation is greater than 1000 million then send a mail , if the donation is 5m then send error and as well as save this in the log . and these actions are some sort of sql statement sequence .
-
-So triggers are statemnets that are automatically updated or run when some sort of an insert /update/delete happens in your table . you can write your own code for run . we can call this automated checks or sort of scripts that get executed when some event or activity happens in your table . 
-
+So triggers are statements that are automatically updated or run when some sort of an insert/update/delete happens in your table . you can write your own code for run . we can call this automated checks or sort of scripts that get executed when some event or activity happens in your table . 
 
 query :
 :This is the pattern 
@@ -935,12 +934,10 @@ ANS : 'INSERT IS NOT ALLOWED 'is PRINTED ;
 
 CHECK :  SELECT * FROM MYtable ; You will not seen any row inserted . Trigger was automatically fired .
 
-But the thing is that it is the table level beacuse we try to something in the table level and your statement get executed 
-. What is when you do not create a trigger at the table level .
+But the thing is that it is the table level because we try to something in the table level and your statement get executed 
+. What's happened when you do not create a trigger at the table level .
 
 When you something want something at the database level , because we don't have to write trigger for every table. 
-
-
 
 At database level :->
 
@@ -953,10 +950,8 @@ roolback  transaction
 end 
 go 
 
-
-
 IF YOU TRY TO CREATE A TABLE OVER HERE 
-CREATE TABLE MYDEMO ; TRIGGER FIRE AND DOEST ALLOW TO MAKE TABLE .
+CREATE TABLE MYDEMO ; TRIGGER FIRE AND DOES'T ALLOW TO MAKE TABLE .
 
 ----------------------------------------------------------------------------------------
 STORED PROCEDURE : 
