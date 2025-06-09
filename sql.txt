@@ -23,8 +23,8 @@ so the question is who is fetch the videoo file???
 ans  = database management system ;
 -----------------------------------------------------------------------------
 
-columns in the table of a database called as attributes , fields also . 
-rows are known as tuple, record .
+Columns in the table of a database called as attributes , fields also . 
+Rows are known as tuple, record .
 
 Advantages of database:
 1 - Sharing is easy. ex = like fb we stored the profile photo and anybody seen it .
@@ -36,7 +36,7 @@ Advantages of database:
 
 DATA MODEL : used to represent the structure in the database :
 
-1) er model = diagramitic reprentation 
+1) er model = diagramitic representation 
 eg : like table called employee : it has some fields like name , moblie no , sex :
 then the system shows only table name and how many columns contain by that table .
 
@@ -189,7 +189,7 @@ It is a column or a set of columns in a table that establishes a link or relatio
 
 Are the coulmns of a table that points to the primary key of another table.
 
-if we have to connect two tables in which one is employye information and the other is the department in which he was working . the foriegn key of employee table is refferring to the diD of the department table . 
+if we have to connect two tables in which one is employye information and the other is the department in which he was working . the foriegn key of department table is refferring to the depId of the Employee table . 
 
 employee table                              department table 
 
@@ -199,26 +199,20 @@ eid      ename    depID                     dID           dname
                                             5002            HR 
 
 
-for employee table 
- create table employee( eid int  ,
-                    ename varchar(5) , 
-                    depID int   , 
-                    primary key(eid) );
-
-for department table 
- create table employee( dID int  , 
+for department table -- This one is the parent table 
+ create table department( dID int  , 
                     dname varchar(20)   , 
                     primary key(diD));
 
 to connect employee table to department table that both data can connect to each other .
-for employee table 
+for employee table -- This one is the child table 
 create table employee( eid int  ,
                     ename varchar(5) , 
                     depID int   , 
                     primary key(eid),
-                    foriegn key(depID) references department(dID) );
+                    FOREIGN  key(depID) references department(dID) );
 
-we have to ensure that all the depid are present in the department table because a person works in the company must have some department name in the department table .
+we have to ensure that all the depid are present in the department table because a person works in the company must have some department name in the department table . -- mtb yeh h ki employee ke ander agr m koi id daalunga toh wo present hogi hi hogi departmnet m .
 
 5 ) check constraints :
 
@@ -291,7 +285,7 @@ eid      ename    age    sex    dpno                    dno           dname
 A JOIN clause is used to combine rows from two or more tables, based on a related column between them.
 
 Types of joins are :
-1)(INNER) JOIN: Returns records that have matching values in both tables.
+1 - (INNER) JOIN: Returns records that have matching values in both tables.
  
 
 question - display the names of all the person who work for hr department by using where .
@@ -318,7 +312,7 @@ FROM Orders
 INNER JOIN Customers
 ON Orders.CustomerID=Customers.CustomerID;
 ----------------------------------------------------------------------------------------
-2) LEFT JOIN : In some databases LEFT JOIN is called LEFT OUTER JOIN.
+2-  LEFT JOIN : In some databases LEFT JOIN is called LEFT OUTER JOIN.
 The LEFT JOIN keyword returns all records from the left table (table1), and the matching records from the right table (table2). The result is 0 records from the right side, if there is no match.
 
 iska mtb yeh h ki wo all left table ke records ko print krega and agar right table m bhi 
@@ -331,9 +325,9 @@ FROM table1
 LEFT JOIN table2
 ON table1.column_name = table2.column_name;
 -------------------------------------------------------------------------------------------
-3)RIGHT (OUTER) JOIN: Returns all records from the right table, and the matched records from the left table.
+3 - RIGHT (OUTER) JOIN: Returns all records from the right table, and the matched records from the left table.
 ------------------------------------------------------------------------------------------
-4)FULL (OUTER) JOIN: Returns all records when there is a match in either left or right table.and if no matches then print all the rows . 
+4 - FULL (OUTER) JOIN: Returns all records when there is a match in either left or right table.and if no matches then print all the rows . 
 
 employees table:
 
@@ -368,7 +362,7 @@ so we have to do like this
 
 select ename
 from employee , department 
-where employee.dpno = department.dno ;
+where employee.dno = department.dno ;
 
 but by writing the table name again and again we use aliasng like this :
 
@@ -385,14 +379,40 @@ from employee ;
    union 
 select dname 
 from employee ;
+
+OR 
+
+SELECT column_name(s) FROM table1
+UNION
+SELECT column_name(s) FROM table2;
    
+Rules : 
+Every SELECT statement within UNION must have the same number of columns
+The columns must also have similar data types
+The columns in every SELECT statement must also be in the same order
+
 
 ->THIS WILL GIVE ALL the name in the table and union means it does not repeat the name .
 The UNION operator selects only distinct values by default. To allow duplicate values, use UNION ALL:	
- 
-->same as intersect in which it shows only the common names in the tables .
 
-->same as except in which it shows those names which contain only in one table and does have in another table.  
+
+----------------------------------------------------------------------------------------------------------
+
+🧠 Simple Analogy:
+Let’s say:
+
+A = {1, 2, 2, 3}
+
+B = {2, 3, 4}
+
+Then:
+
+A UNION ALL B = {1, 2, 2, 3, 2, 3, 4} → All values from A and B, including duplicates.
+
+A INTERSECT B = {2, 3} → Only values that exist in both A and B.
+-> intersect in which it shows only the common names from both the tables. 
+
+->except in which it shows those names which contain only in one table and does have in another table.  
 ---------------------------------------------------------------------------------------
 
 LIKE OPERATOR 
@@ -402,6 +422,7 @@ LIKE OPERATOR
 select from employee where ename like 'A%';
 like jo ename A start honge wo aa jayenge isme .
 
+---------------------------------------------------------------------------------------------------
 CONCATINATION(||) IN SQL :
 
 
@@ -435,7 +456,7 @@ select ename from employee where ename between 'b' and 'c' . ( this will sort ac
 
 Order by : generally sort the table according to the order. 
 
-select ename , eid from employee order by age, salary desc(it means according to descending)
+select ename , eid from employee order by age, salary desc(it means according to descending, but age in asc )
  
 naturally it does ascending in order if you nothing write at the end  .
 
@@ -493,8 +514,6 @@ in basically refers as or .
 so the output of this is only sam and ram . 
 
 query : select ename from employee where sex in (F , T); == this will tell me that we have to choose only transgender and female from the table. 
-
-it shows nothing because all the persons present in that table are male .
 
 -----------------------------------------------------------------------------------------
 select ename from employee where eid not in (100 , 101);
@@ -602,7 +621,7 @@ toh yeh 2 column degi ek ke ander avg salary aur dusre ke ander uski ID iss quer
 
 another eg:
 
-SELECT COUNT(CustomerID), Country
+SELECT COUNT(Country), Country
 FROM Customers
 GROUP BY Country;
 
@@ -757,20 +776,7 @@ ON CUSTOMERS.ID = ORDERS.CUSTOMER_ID;
 +------+----------+--------+---------------------+
 
 pura data aa gya left and right ka jiski value match nhi kr rhi thi uske ander null aa gya bs .
-
-----------------------------------------------------------------------------------------
-
-7 - UNION = The UNION operator is used to combine the result-set of two or more SELECT statements.
--select statement hongi tbhi chlega yeh , select jo krenge wo same hone chahiye with datatype. 
-
-query : 
-SELECT * FROM table1
-UNION
-SELECT * FROM table2;
-	
-::The UNION operator selects only distinct values by default. To allow duplicate values, use UNION ALL
-
-----------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
 Some tips and functions:
 
 SELECT * FROM Customers
@@ -786,9 +792,9 @@ WHERE CustomerName = 'alpha';
 
 yeh bhi case sensitive nhi h , a ka mtb chota ya bda A bhi h . so it matches the capital 'ALPHA';
 
--------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
 
-Date concepts:
+Data Concept transfer 
 
 SELECT NAME, LISTPRICE, LISTPRICE + 10 AS ADJUSTED_LIST_PRICE  INTO newtable FROM [Production].[Product].
 
@@ -801,22 +807,23 @@ SELECT NAME, LISTPRICE, LISTPRICE + 10 AS ADJUSTED_LIST_PRICE  INTO newtable FRO
 
 query:
  SELECT NAME, LISTPRICE, LISTPRICE + 10 AS ADJUSTED_LIST_PRICE  INTO #tmpname FROM [Production].[Product]
-
+--------------------------------------------------------------------------------------------------------------
 ::Dates concepts :
 
 --DATES
 
-SELECT GETDATE()
+SELECT GETDATE()  //current date with time 
 
-SELECT GETDATE() - 2
+SELECT GETDATE() - 2 //current date - 2 days 
 
 --DATEPART
 
-SELECT DATEPART(yyyy, GETDATE())
+SELECT DATEPART(yyyy, GETDATE()) //year  2025
 
-SELECT DATEPART(dd, GETDATE())
+SELECT DATEPART(dd, GETDATE())  // day aa jayega 5 
 
-SELECT DATEPART(mm, GETDATE())
+SELECT DATEPART(mm, GETDATE())  //get monthe 
+
 
 --DATEADD
 
@@ -825,8 +832,7 @@ SELECT DATEADD(month, 4, GETDATE())
 SELECT DATEADD(year, 4, GETDATE())
 
 --DATEDIFF
-SELECT DATEDIFF(day, '6/1/2015', GETDATE())
-SELECT DATEDIFF(month, '6/1/2015', GETDATE())
+SELECT DATEDIFF(day, '6/1/2015', GETDATE())  //'6/1/2015', moth , day and then year 
 
 SELECT DATEDIFF(month, '4/1/2015', GETDATE())
 
@@ -836,8 +842,7 @@ SELECT DATEDIFF(year, '6/1/2014', GETDATE())
 SELECT (DATEADD(dd, -(DATEPART(day, GETDATE()) - 1), GETDATE()))
 -----------------------------------------------------------------------------------------
 
-::Strings functions ::
---STRING FUNCTIONS
+::Strings functions
 
 SELECT ORDERNUMBER, ORDERNAME, CONCAT(ORDERNAME, ' ' , ORDERNAME) AS CONCATENATEDTEXT FROM MYORDER
 
