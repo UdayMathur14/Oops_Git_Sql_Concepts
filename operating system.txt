@@ -1,0 +1,901 @@
+//	Operating System 1 .
+
+what is computer system : combination of hardware(means cpu and memory ) , software (or programs both are same) and data which are used to solve problems of human biengs .
+
+memory means basically ram , hardisk , cache , resitors .
+we stored the program inside the memory .
+
+if you are using ms word , now microsoft should have written a program for ms word and that program is stored inside your hardisk and for execuation the program it is moved from hardisk to ram and the cpu will fetch the program line by line and it will executed as a result of which we can use the software we are using today . 
+
+any program that cpu wants to execute has to be present inside the ram .
+
+without a data our software is useless beacuse if you are using video editor you should have some video to edit it otherwise there is no work of the software , video is the data .
+
+hardisk ke ander data stored hota h permanent and ram ke ander temporarly hota h stored , agr light chli gyi toh data bhi chla jata h , disadvantage of ram and advantage for hardisk .
+
+access time of ram is faster .
+
+cpu hmara bhoot time leta h hardisk se koi bhi software run krne ke liye tbhi hm ram ka istemaal krte h , wo time bhoot km leta h , then cpu bhoot jldi se data fetch kr leta h ram se , hardisk se data copy ho rha h ram m and then ram se copy ho rha h cpu m , cut paste nhi ho rha , copy paste ho rha h  , aur aisa isliye hota h kyuki agr maan lo data lost ho jaaye ram se but hardisk m toh rhe .
+
+
+high level program - the program which we write like c language program or any other language program . helloworld.c cannot be placed directly in the hardisk , why we write program because hme pta h ki kisi time yeh hme chahiye hoga toh hm use kr lenge , our cpu is not able to understand the high level program like ( c, java , pytoh or else) , cpu only understand 1 and 0 , compiler code converted the high level code into the machine code , then this code only be 1 and 0 in it (exe code , or low level prog) , compiler is also a program or softaware which convert high level prog into the machine code , then we place the machine code in the hardisk of the computer .
+
+how cpu will execute the program?
+
+cpu only access the ram directly not hardisk , hardisk is very cheap and ram is costly , we cannot placed all the program inside the ram why ? because the size of hardisk is very large and size of ram is very small as compared to hardisk, agr cpu ko koi program ram m nhi milta then wo hardisk ke pass jayega uski ek copy banegi and then wo ram ke ander jayega and then wo dono ka use krke hmra software run kr jayega , hardisk is very slow ..
+
+what is operating system ?
+
+suppose kro ki hmari hardisk ke ander 500 program h , but ram ke ander bs 50 hi aa skte h toh wo konse 50 honge ? wo 50 wo ho skte h jo ki cpu maangega jo ki hm maangeneg  , wo predict krega but wo perfect nhi hoga hr baar , hm kya kr rhe h toh hm jo hmare 500 h usme se 50 choose kr rhe h to hm resource manage ( resourse allocation) kr rhe h , resourse ka mtb h ram because 500 prog are trying to access the ram which is resourse now it is the operating system which is deciding which 50 prog should access the ram , so os is clearly it basically done resourse management (resourse is noting but ram  , means ram ko manage krna ) . os ke ander bhoot saare functions ha jo ki resourse manage kr rhe h jaise maan lo ek ram ke ander 2 prog h p1 and p2 and dono ko execute hona h toh phela konsa jayega yeh thoda sa confusing ha but iske liye h os ke ander functions bna rhenege and yeh uske according hi chalega jo function ke ander likhe hue honge . jo ki ek algorithm hoga basically , woh kuch bhi ho skta h jaise ki jo prog bda hoga wo phele ayega and so on aap kuch bhi likh skte ho , ya toh jo phele ram m aaya wo cpu m aaya kuch bhi ho skta h .
+
+main defination of operating system:
+
+main function of os is resourse manager or resource management , so operating sysytem is a code which will have lot of functions and the main functionality of os is nothing but resourse allocation or resourse management . 
+
+
+
+
+jb bhi computer on krte h toh yeh operating sytem apne aap hi ram m load ho jata h  and wo ram m hi rheta h forever , and yeh code space le rha hoga ram m and uss space ka koi address bhi hoga and uss space ko hm os space bolte h and jo baaki space hoti h wo programs ke liye hoti ha , cpu jb program execute kr leta h tb ram m wo program gayab ho jaata h , removed ho jata h completed and space is free because kisi aur ko bhi chahiye ho skti h wo space .
+
+how mouse ,keyboard  monitor and all input devices can communicate with the cpu ?
+
+jo bhi hmare input device hote h usme ek buffer hota h , mtb space hoti h yeh sb m hota h keyboard , printer , monitor sb m .
+
+lets see how calculator app works in our computer : 
+
+hmne 2+3 keyboard se diya and 5 hmar print ho rha h monitor m , whenever i enter 2 in the keyboard so 2 is written in binary format like this 1 and 0 , yeh buffer ke ander chla jayega aur hme pta hi h ki computer binary hi smjhta h then yeh ram ke ander jayega 010 ram ke ander place ho jayega and when i give 3 from keyboard the buffer removes the 2 value and convert 3 in the binary form in the buffer 011 then yeh bhi ram ke ander chla jayega , ab ram m present calculator h , 2binary m h , and 3 bhi ram ke ander h , at this time maine calculator open nhi kra and mujhe yeh bhi pta h ki cpu ke pass bhi registors of buffer hote h shayd 2  yeh uske ander values lega 2 and 3 ki values fetch kr lega ram se and operation mtb addition and uska output wo kisi bhi registor m daal dega , overwritten kr dega kisi bhi ek m and then wo value phir se ram ke pass bhej dega , then hm 101 ko monitor ke buffer m daal denege and wo screen p aa jayega . toh yeh sara kaam hmare cpu ne kra h kaise , ALU ki help se arthematic logic unit yeh saare kaam krat h add, sub , mul , and bhoot saare .
+
+
+hardisk can be a input device or can be an output device , keyboard is input , monitor is output device we cannot give value to monitor , agr hm keyboard se value na de toh wo ek waiting time khelata h , agr maan lo hm ek program ko call krte h 1 bje and usko 3 bje value dete ha tb wo time turn around time khelayega .
+
+PROGRAM VS PROCESS :
+PROGRAM : anything that you type is called a program , like company google have developed a software through the program that is present in our hardisk in .exe format but whenever this program is opened in my computer a new copy of this program is created and this is the mean by process . 
+
+eg: jaise hm google chrome 2, 3 new window khol skte h toh wo 2, 3 window hi process h uss program ke . and then the process is moved in the ram . 
+
+for single program multiple process can be created.
+
+for any program it undergoes through various stages :
+like started as a source prog then compiled then machine code(exe) then it placed inside the hardisk , then in ram and then in cpu . 
+
+STATES OF A PROCESS : 
+
+1-new state : jb bhi hmara ek new process banega tb hm usse new state process bolte ha. and jb nya bnta h tb wo hardisk ke ander rheta h . 
+
+2- ready state : jb process bn jata h hardisk ke ander and jb wo ram me copy ho jaat h and kisi input ka wait krat h tb hm usse ready state khete ha . ya toh yeh process input lene ke liye wait kr rha h , ya phir execute hone wala h cpu ke through . 
+
+3- running state = jb hmara process cpu ke through execute ho rha hoga tb hm usse running state khete ha .
+
+4 - i/o state (input or ouput) = either reading of writing from i/o devices the it is called io state also called block state . 
+
+5 - terminate state = process complete ho gya mtb usko cpu ne fetch kr liya then wo termainate ho jayega ram se . 
+
+
+DEGREE OF MULTIPROGRAMMING : MEANS maximum no of processes which can be placed in the ram in our computer .
+
+suppose our ram can have atmost 3 procceses , kyuki hmari ram ke pass capacity hoti h like 3 or 4gb .
+
+suppose ki size of ram is 4gb and size of each process is 4kb ha toh 
+maximum no of processes in my ram is == size of ram / size of a single process :
+2^32B / 2^12B == 2^20 process in my ram atmost 
+
+1KB = 2^10 BYTES 
+1MB = 2^20 BYTES 
+1GB = 2^30 BYTES 
+1TB = 2^40 BYTES 
+
+1 BYTE = 8 BITS 
+
+4 GB = 4X 2^30 BYTES : (2^2)X(2^30):  2^32 BYTES IS THE ANSWER :
+4KB = 4X2^10 : (2^2)X(2^10) : 2^12 BYTES 
+
+2^32/2^12 = 2^20 BYTES AISA AAYA THA HMARA ANSWER 
+
+TYPES OF OPERATING SYSTEM :
+1- batch OS = it is not used today , it means the degree of multiprogramming is always 1 , it means at max we have only 1 process present in our ram at a time . jb hmara ek process ram m aa jyeag uske khtm hone ke baad hi hm dusra process chla skte h . 
+
+disadvantage : CPU efficiency jo ki h  = useful time of cpu / total time of cpu .
+agr maan lo iski effiency ha 100 iska mtb h ki hm koi bhi time waste nhi kr rhe h cpu ka wo 24 gnhte kaam kr rha h . iska mtb h ki wo rest nhi le rha toh isse hmara kaam kaafi fast ho jaata h . jyada process chl payege ek time pr and fast kaam hoga . 
+
+
+
+                                             1st , 2nd , 3rd
+: maan lo ki hmari ram m 3 process present ha p1 , p2 , p3 . p1 abhi cpu dwara execute ho rha h and p2 abhi io state m h mtb usko khi se input chahiye , then hmara p3 process run kr jayega wo p2 ke liye ruka nhi rhega.
+
+2 - MULTIPROGRAMMING OPERATING SYSTEM : WE CAN MORE THAN 1 PROCESS INSIDE THE RAM . it means i am not allowing the cpu to remain at rest . 
+advantage : improve cpu effiency  , computer beacomes fast .
+
+3- MULTI PROCESSING OPERATING SYSTEM : so far we have seen in upper both two we seen that there is only 1 cpu , but in this we have more than 1 cpu in our computer . what will happen then that 1 process is executed by 1 cpu and another process is executed by another cpu , we are doing parallel processing here . means we are executing more than one process at the same time . 
+In multi progrmaing os we are doing concurrent processing means if we have 1 cpu and keep on changing the process and keep on executing then it is called concurrent processing . 
+Parallel processing is definately faster than the concurrent processing but the disadvantage of parallel is the system cost is increasse . beacuse we have more than 1 cpu and and the cost of processor is very high today . 
+
+we are currently using the multiprocessing os ,  we heard that quad core processor it means that we have 4 processor or cpu which are placed in our computer , octa means we have 8 processor . 
+
+
+now note that aage hm mutiprocessing os h pdne waale ha it means there is only one cpu inside our computer and our ram can have more than 1 process at a time . 
+
+
+whenever a user opens a program a process will be created , if a user opens a program 3 times 3 process will be created for the same program . then this program is also called as passive entity , the process which is created is called as active entity , active means user usko use kr rha h , and passive means wo bs pda hua h .
+
+PCB:
+
+the process will definately contain the program kuyki wo usse hi bna h but program ke alawa aur bhi cheeze conatin krta h process , hmara jo prog uske ander bhoot saare functions h and jo functions h wo saare ke dusre ko call bhi kr rhe h apne ander se like nested loops , just to keep the track of the function calls we have a stack . wo hme pta h ki kya hota h ki f1 , then ,f2 and keep going . pop hoga then blah blah . toh functions call ke liye hm stack use krte ha and saath m process ke ander dynamic memory allocation bhi hta h like malloc and callock are actually used to dynamically allocate memory . toh wha p heap space bhi present hoti h ,  lekin fixed space nhi hota h stack and heap ka ek process ke ander , and local variable and static variabe bhi bnte h program m toh uske liye bhi alag se jagah hoti h . different prog ke ander different hota h stack and heap ki spaces kyuki kisi k ander jyada function and toh kis ke ander km h , kisi ke ander stack jyada  h and heap km ha , toh space is not equally divided between heap and stack . yeh pura program p depened rheta h . YEH PURA PROCESS CONTROL BLOCK BHI KHELATA H (pcb) , if we have 10 processes then we have to 10 pcb . 
+
+
+PROCESS ATTRIBUTES : 
+
+1 - process id = unique no  , ek particular process ko ek unique id di jaati h .
+
+2- maa lo ki ram m 3 process h and theeno ready state m h ki wo cpu ke through execute hona chahte h , toh in teeno m se kisko cpu le jayega , toh jaisa hm jaante h ki os bhoot bda code hota h toh uske ander 1 particular jagah m ek function likha hoga ki konsa use hoga iss time p , toh uss function ko bolte h scheduler .
+
+scheduler is nothing but a program which is part of the os program and it conatins a code and say that one process needs the cpu then which among the cpu executed the first .
+sbko cpu mil jayega but konse order m yeh h main and wo decide krega scheduler . first come and first serve yeh code likha ho skta h scheduler ke ander , toh yeh choose krega ki jo first ram m aaya h usko hi first cpu milega . bhoot saare scheduling algorithm hote h os ke ander , ek dusra bhi scheduler ho skat h jo ki bolta h ki jiska time km hoga execute hone ka wo phele ayega .
+
+2 - program counter : maan lo ki hmara scheduler yeh kaam kr rha hi ki jiska time execute hone ka sbse km h usko hi cpu lega and p1, p2 p3 m se sbse km h p3 ka jo ki ha 4s , jaisi hi isko cpu leta h uske 1 sec ke baad h hi p4 ko process ko call krdete h and p4 process hmara ram m aata h tb hm dekhte h ki bhai p4 toh bs 2 sec m execute ho jaata h , tbhi hm forcefully p3 ko rok denge jha tk wo hua hoga and then p4 ko run kreneg jb p4 pura run ho jayega tb hm jaake p3 ko whi se contuine kr denege. but hme yeh kasie pta chalega ki hmne p3 ko kah choda tha toh iske liye hm use krte h program counter . yeh hmara instruction no uss line ko pakad lega jha se hme continue krna h p3 ko , toh yeh program counter ka kaam ha . program counter ek register hota h , general purpose registors bhi hote h jo ki process ke code ki line no 5,6,7 ko store krke rakhte h taaki jb wo contiune ho toh useka aage ki bhi line hmare pass ho.
+
+
+context of a process: the pcb and attributes of the process together is called as context of a process.
+
+scheduler is nothing but a program which is part of the os program and it conatins a code and say that one process needs the cpu then which among the cpu executed the first .
+
+we know that scheduer is basically a function or a program present in the os code and it gives instructions to ur problems facing in the ram operations . 
+
+there are 3 types of scheduler in the os code :
+ 
+1 - long term scheduler = among the lots of processes in the hardisk which process is go into the ram and how many process moved into the ram is bieng decided by long term scheduler . 
+
+2- short term scheduler : once the processes placed into the ram which process should access the cpu first is bieng decided by short term scheduler .
+
+3 - medium term scheduler : maan lo ki ram puri bhr gyi and hm ek aur process called krte h jiski priority hmare ram ke sbhi process se jyada h but ram m toh space hi nhi h toh hm ram m se ek process ko hardisk ke ander bhej denge , So Medium-term scheduling is a part of swapping. It removes the processes from the memory. .
+
+jb hm swap krenege tb wo process jitna hua hoga utna hi rhe jayega and forcefully stopped ho jayega and jiski jyada priorty hogi phele wo execute hoga and then hmara previous wala continue ho jayega . so jo force stop hua h hme uska context pura ka pura khi store krke rakhna padega ussi ko contuinue krne ke liye , toh issi ko khete ha context switching . 
+
+
+VARIOUS TIMES IN A PROCESS :
+
+EG: agr maan lo aap apne office pauche 1 pm p and aap leave kr gte 3 pm p toh 1 and 3 pm ko bolenege point in time , his working time is 2hr and 2hr is called duration in time . 
+
+1 - arrival time : jb ek process hardisk se ram p aaya toh wo kis time aaya uss time ko khete h arrival time . eg like 2pm is the arrival time . 
+
+2 - completion time : it is also a point in time means at what time it completed or execute by the cpu , maan ko ki ek process 2pm p aaya and wo jaake 3 pm p pura execute hua toh 3pm is the completion time .
+
+3 - turn around time : wo process 2pm p aaya and 3 pm p jaake totally execute ho gya toh duration thi 1 pm ki toh uss duration ko bolenege turn around time . mtb yeh h ki total time jb wo process inside the ram tha usko khenge turn around time . 
+formula = completion time - arrival time .
+
+4 - waiting time : maan lo ki wo program 2pm p aaya and wo jaise hi execute ho rha tha tbhi achank ek aur process aa gya usse bhi higher priority ka then wo stop ho jayega and higher waala complete hoga , aise hi maan lo 2,ya 3 process aa gye higher waale toh jitna time unhe lga khtm hone m total tb tk hmare main waale ko wait krna pda wo aadha chlta tbhi ek aur aa jata toh usse wahi force fully stop ho jaana pdta toh total time jo usne wait kra use bolte h waiting time.
+
+5 - i/o time : mtb jb wo ram m aaya toh usko input lene m , ya output krne m jitna time lga usse hm i/o time khete ha . 
+
+
+Cpu scheduling alorithm :
+
+1) preemptive scheduling alogorithm : yeh neeche waale ke opposite h . 
+
+2) non- preemptive scheduling alogrithm :
+ suppose maan lo ki ram m 3 processes h p1. p2. p3 and p1 hmara running state m h mtb p1 ko cpu read kr rha h , tbhi p4 aata h and p4 ki priority higher ha p1 se , but this time it does not force the p1 to stop , this will tell that first p1 should be completed then i check in the ram again , and if you are the higher priority then i take you . but agr maine p1 ko start kr diya h toh m usko beech m nhi rokunga. khtm hone ke baad aap aa jana.
+
+
+we know that whenever our process is present in the ram it would be in ready state , running state or i/o state . 
+
+question : hmare ram m 4 process h p1,p2,p3,p4 , ready state = p2,p3 : running : p1  , and i/o : (input and oupt state m h yeh ) = p4 and we are having non preemptive schelduing algo . and priority of p4>p2and p3.
+
+ans : currently p1 is currently bieng executed by cpu so koi chance nhi h ki hm p1 ko rok ske kyuki non prmeetive scheduling h , farak nhi pdta kis ki priority jyada ya km h lekin agr koi execute ho rha h toh usko rok nhi skte .
+and then assume that p1 is completed , hme pta h jb bhi koi process completed ho jayega cpu se toh woh ram se bhi delete ho jayega completely . 
+
+que is :ki ab hmare scheduling algorith ko koi ek process cpu ko dena padega , then which process will our scheduler schedule to the cpu , mtb ab in teeno m se konsa jayega execute hone ke liye ?
+
+ans : hmne phele bola tha ki jiski priority jyada h wo schedule hoga phele toh answer simple h ki p4 jayega ab cpu m , but that is actually is not correct why ? see process p4 is in i/o state in order to contiune the execution of p4 we might do some i/o means process p4 needs some data to be read from some of the i/o devices , toh p4 ko kuch read krna padega ksii bhi i/o devices se and jb usko wo mil jayega tb hi wo execution ke liye jaa skta h , then wo p2 ya p3 m se select krega jiki jyada proiority hogi .
+
+conclusion is : cpu scheduling algo are applied only to processes which are in ready state .
+and process which are in i/o state will be blocked and so those processes will not be consider by the scheduling algo until it take the input or ouput from i/o devices . 
+
+Types of scheduling algo :
+
+NON Preempitive scheduling:
+
+1) SHORTEST JOB FIRST SCHEDULING ALGORITHM (sjf) : among the arrived processes ,process with the least burst time(execution time) will be given preference. It is a non preeptive scheduiling algo and also it is a priority based algo . why ? because the process with the shortest burst time give the first priority .  
+
+meaning of TAT(turn around time) :=once the process is arrived in the ram we switch on the timer as along as the process is completed we switch of the timer . in simple words we can say that the time spend by a process inside a ram . 
+
+TAT  = completion time - arrival time .  
+
+TURN AROUND TIME :THE total time spend by the process inside the ram .
+
+2)First come first served scheduling algrithm(fcfs) :
+
+a)the process which has the least arrival time will be schedule first .
+b)it is an non-preemptive scheduling algorithm .
+c) it is not a priority based scheduling algorithm .
+
+context switching : switching the context between of two processes .
+
+p1|p2|p3|p4|p5   this is random gunt chart and | means context switching . hm isko yeh maan ke chllte h iska time h 0sec . for our problem . 
+
+3)LJF scheduling alo : Longest job first algo 
+among all the arrived processes , process with the largest burst time will be schedule first by the cpu . It is the priority based algo .
+
+Disadvantage : starvation problem , convoy effect throughput is ver less , practically ut is very difficult .  
+
+ 
+
+preemptive scheduling :
+1)SRTF (shortest remaining time first scheduling algorithm)
+preemptive mtb h ek process agr cpu ke through execute ho rha hoga toh wo ruk jayega beechm agr koi dusra process aa gya usse chota time ka.
+
+srtf is a version of sjf : when all the process arrived in the gunnt chart then it is act like sjf. 
+
+2)LRTF scheduling algo (longest remaining time first ): Among all arrived processes , process with a longest burst time will be schedule first . it is a preemptive scheduling algorithm . 
+
+same disadvantages with LJF.
+
+3)round robin sceduling algo (rr) : (combination of time quantum + FCFS)  
+time quantam : maximum allowable time a process can run without getting preempted . (without any disturbance ) . eg = time quantam 2 so we can run a process only for 2 sec at a time.
+
+*it works on the basic of a particular quantam .
+*uses queue data structure .
+*very popular and used in most of the operating sysytem today .
+
+advantages of round robin :
+1- no starvation problem : beacuse the process 1 came into the ram will get the first cpu .
+koi yha p wait nhi kr rha h , kyuki yeh priority based nhi h yeh arrival p depend h jaise hi ayega tb execute ho jayega .
+
+2 - no convoy effect problem =  even if a bigger process come first it does not fully execute because of the quantam no , so it is not run for a long time .
+
+3 - it can be practically implementable it is not based on the burst time . like sjf and srtf . 
+
+limitation :
+troughput is good but not good as sjf and srtf .
+
+
+PRIORITY BASED SCHEDULING ALGORITHM = it is both preemptive and non -preemptive .
+we have already seen some priority based ago like sjf , srtf , ljf , lrtf .
+
+in this they gave us a another column in which they give us the priority no . and one of them is written as highest priority . eg 12 is the largest no it means the greater the no is the higher priority . it can be given also opposite of it . 
+
+there are two versions of priority based scheduling algo :
+1 - non preemptive priority based .
+2 - preemptive priority based . 
+
+aasaan h dono priority ke based p hi rakhne h preemptive m process change hote rhenege nad non preemptive m pura priority based chalega uske baad dusra priority jo next hoga wo pura chalega .
+
+
+waiting indefinately : means agr aap kisi event ke liye ruke hue ho and wo event keeps changing his time , aapko fest m jaana h but fest delay hote ja rha h kbhi 1 din , then 2 din ,1week , 1 month but aap wait kr rhe ho isko bolte h waiting indefinately .
+
+Responsive time : for every process we have a respons time . it means waiting time of that process until it gets the cpu for the first time . 
+RS TIME = time at which the process get cpu first time - first arrival time .
+  
+
+practical implemention of these 3 scheduling algo :
+
+ans : SJF AND SRTF has a better throughput , higher the througput higher the computer , both are good algo . but practically implementing is very diffcult why ? it really depends on burst time of any process , i need to know the burst time of every process . because depending on the burst time our algo schedule the process . but exactly knowing the burst time of every process is very diffiuclt , it depends on lots of factor like system power and capactity or at a particulat time . so it is very difficult to implement both . 
+
+FCFS : simply placed a clock and simply check the arrival time , so it is easy to implement . 
+
+
+Starvation problem in os:
+
+maan lo ram m h 2 processes p1 and p2 , p1 ka execution time h 2sec and p2 ka h 20sec then p2 ko indefinately wait krna hi padega uske pass koi chara nhi ha . kyuki phele p1 hi jayega according to the priority , jaisi hi p1 kthm hoga tb p2 jayega kyuki aur koi process nhi h ram m . aur agr maan lo execution khtm ho gya h p1 ka but tbhi 1 aur process aa gya p3 jiska execution time h 10 sec tb p3 process ko priority milegi than p2 se toh p2 ko wait krna padega , and aise hi chlte ja rha h , kyuki hmara computer toh infinite processes call krta h uski koi limit nhi h . jo bhi priority based scheduling algo honge wo starvation problem se gujrenge . and isi process ko starvation khte h ki process ko wait krna pd rha h bhooot jyada (waiting indefinately ). hm jaante h ki process p3 execute hoga zarir but yeh nhi jaante ki kb hoga , but hoga wo infinity state m nhi ja rha .
+
+SJF = yes it suffers starvation problem . 
+SRTF = yes 
+FCFS = no 
+
+An algo suffers from starvation problem if there is a chance for a process in the ready state to wait indefinately to get the cpu . is called a starvation problem . 
+
+convoy effect (another problem in os) : maa lo ek process p1 ka time h 100 sec and p2 ka time h 1sec but fcfs(first comes first schedule) ke ander phele hm p1 ko hi priority denge usko boleneg phele tu ja pura ho ja then p2 ko bhej deneg , but bhai p1 bolega yaar baat toh shi h ki tu phele aaya h but mereko bs 1 sec hi lagega but p1 nhi maanta , toh isko bolte h convoy effect , ek bde process ka khtm hone ka wait kr rha h ek smaller process .
+
+A smaller process (process with very small execution time ) waiting for one big process to get off(release) the cpu . 
+an algo with convoy effect problem my lead to higher waithg time and TAT time . 
+
+throughput : number of processes executed per unit time is called throughput . 
+
+kbhi bhi 5gb , 6gb ram exists nhi krti , kyuki yeh saari ram bit m hoti h jiska basse hota h 2^something , tbhi 2gb , 4, 8, 16, 32 gb ram hoti h . 
+
+process daigram :
+
+MEMORY ALLOCATION :
+
+whenever we use memory it means ram . it we used the word disk it means hardisk . registors are closest to the cpu , they are also a type of memory . 
+
+why do we need registors : cpu uses registors in order to take some value or take some word from the ram . Registors are the fastest memory in our computer . because it is very close to cpu , when cpu coping a process from ram , it actually copy in the registors because they are very fast and close to cpu , and then cpu executed the process . 
+
+SIZE OF 1 REGISTOR IS ONE WORD 
+what is the meaning of word : hmari jo ram h wo words se divided h jaisi ki process likhte samah hm banate ha , within a word we can place an instruction or we can place data .
+
+in our computer memory we used only two things one is instruction , what is instruction , it is the part of the program or a line of a program . and the second thing we store is called data . everything which is placed in ram it is only in 1 and 0 , whether is a sentence , number , image , or video . kaise kyuki hmne dekah ki program phele compile hota h compiler ke through then uske baad jaake store hota h disk m . size of ram is in power of 2 , then a singke word lenght or memory is in the power of 2 . hence size of a registor is also a power of 2 . har ek word ka address hota h ram ke ander ya process a maan lo and wo address bhi binary m hota h.
+
+maan lo hmare ek word ka address h 4 , toh usko binary m hm 100bhi likh skte h , 0100 , 00100 , 000100 bhi likh skte h toh konsa likhe ? how many bits will the  address of a word in the ram will be ? 
+ans :  the answer is it is mainly depend on the size of the ram . 
+cpu is acutally ask a word from the ram , how will it ask iis by using addresses , it a cpu needs a particular word , (cpu always ask for a word it never asked for a process or anything like data or something ), then cpu gives the address of a word which ne needed and ram uss word ki copy de dega registors ko , then cpu le lega and process kr dega . 
+
+now one question in my head is ki kaise cpu request krta h ek word ke liye using the address ? how will the cpu request the word and as well as how is data moved into the registor?
+
+ans : so the answer is BUS . bus is a collection of voice , which are used to connect all the devices of our computer , so consider as my register and ram is connected by a wire , agr cpu ko word cahahiye hota h tb wo it sends the addresss by using the address bus , it is the main part of computer organisation and arctiture , one wire is used to sending the address wo resister se cpu m jaa rhi hand then ek data bus hogi jo ki ram se data legar register ko de degi .
+
+
+MAIN: 
+
+address space : it means it is a collection of address or set of addresses is called an adddress space , so ram is nothing but collection of addresses and uss address ko hm physical address space bolenege . inside our ram we placed processes . toh isse pta chlta h ki ram se toh hr ek space m addresses hote h , but ek process ek bhi apne addresses hote h and uss process ke addresses ko logical adddress space . 
+
+we are trying to place processes inside our ram  , that is what mean by allocation .
+places the processes inside our ram is called allocation , so there are two types of allocation : 1 is contiginous allocation and 2nd is non contiginous allocation .
+
+contigious allocation : hmare process ka address ha and ram ke bhi set of addesss ha then hm apne process ko leke jayenge and place kr denge inside our ram , toh jaise hmne p1 process ko placed kra ram ke ander toh hmne ussko contigious address m store kiya h ram ke ander . maan lo ki hmare process ke address ha 0,1,2,3,4 and hmne isko ram ke 4, 5,6 address p jaake store kr diya . toh isko bolte h contigious allocation.
+
+non contigious allocation : upar waale ka oppsoite ho jaega jb hmne aadhe process ko 4, 5,6 ram ke address m store kra and aadhe ko 12 ,13, 14 ram ke address p toh yeh non contigious ho gya.
+
+Types of contigious allocation : 
+1 - fixed partitioning : also called static partioning. 
+2 - variable partitioning : also called dynamic partioning. 
+
+1 - static : hm ram ko sizes m divide kr dete ha like 2mb , 1 mb , 1mb , 3 mb and yeh fixed hoti h , irrespective of our size of process , it has so many disadvantages , and it is not used also .
+
+disadvantages :
+* internal fragmentation problem exists.
+* process size is limited by the size of the largest partition.
+* degree of multiprogramming is limited by the no of partitions.
+* cannot placed more then one process inside a single partion . 
+* process can be placed in one partion.
+
+disadvantages : agr maan lo ki koi process 0.5mb ka h toh hmne uska 1 size waale portion m daal diya and ab 0.5 mb kaali h 1 mb waali m then ,single parition can hold only one process m uss khali 0.5mb m ek aur nhi daal skta because one processes already there agr mere 4 portions h toh mere bas 4 hi process honge , hence we are not utilising the space in ram properly . this problem is known as internal fragementation . 
+
+2 - variable : the partion size hi highly variable , agr koi 3 mb ka h toh wo 3 mb ki jagah le lega and agr ek aur aata h 10 mb ka then wo 3 ke baad placed ho jayega . 
+problem : 3 processes h ram m , the middle waal process phele process ho gya according to the prioriy then 2 process ke beech m space aa gyi toh hm uske bolte h holes , then maan lo un dono ke beech 3 mb ki space thi and maan lo hmne ek aur process ko bulaya jo ki 10 mb ka h then hm usse 3 mb waale portion m toh daal nhi skte kyuki hm contigious memeory m apne program ko daalna chahte h and 3 mn ki space toh bhoot choti h 10 mb se so toh wo memeory waste ho gyi then isko hm external fragmentation bolte h .
+
+advantages:
+*No internal fragmentation problem occur . 
+*degree of multiprogramming is not limited .
+
+disadvantage:
+* suffers from the external fragmentation .
+
+
+WE are using ram with the variable partioning : ki ek process ram ke ander h and dursa kuch gap free chod rkahi h and then ek aur process aa rha h . and jha pr kuch nhi h process ke beech p toh unko hm bolte h holes in the ram . holes are called vacant spaces . jb bhi ek process ayega hardisk se toh hm uski space dekhenge ki vo holes ke ander aa skta h kya .jo usko occpy kr le . like 10 mb process ka size h toh space ho 11 mb . bhoot holes h ram h khi khi p  and bhoot saare usko lene ko tyaar h ,more than 1 possiblity ki wo aa jayega , but hm kaise decide krenege , for that we use an algorithm . 
+
+first fit algo : m starting se start krung jaise hi hole milega jo mere process ko le skta hoga then wo usme aa jayega. iske ander worst case hoga ki hme last tk travel krna pda uss process ko daalne ke liye and best case m wo phele hi aa jayega , isse time bachega . 
+
+next fit : starting se hi start krenge jaise hi ek hole mil jayega jo ki usko le skta hoga then wo usme aa jayega nd jaise hi agle process hardisk se ayega then wo uss process ke baad waale hole se dhundha start krega . 
+
+best fit algo : phele pure ram ko traverse krnege uske holes ke size dekh lenge and size dekne ke baad jiska sbse chota size hoga jo uss process ko le skta hoga usko de denge .
+
+
+
+jo beech m holes the wo kaise aaye kyuki ram m toh ek ke baad dusra aa jata h , kuch aisa  hua hoga ki phlee ram m 5 processes the , but maan lo ki process p2 , and p4 cpu ne execute kr diye toh wha p holes bn gye . 
+
+so abhi tk hmne memory location m kya pda latest m :
+
+                                      Partioning 
+static or fixed partioning                 |                  variable or dynamic partioning 
+
+1 - static type with equal sized partioning :    |      yeh kheta h ki tumhe isko fixed 
+before placing any prcess in the ram we divide the |    partioning ki koi zarurat nhi h 
+ram in equal partion  whenever a process comes          it means whenever our process comes 
+it takes the portion which he is able to fit .          into the ram and its size is 3 kb , 
+                                                        now it exactly take 5 kb in the ram . 
+2 - static partioning with unequal sizing :       |     
+if this case if i take unequal partion in         |    agr koi process agla 7 kb ka h toh wo                                                       7kb hi 
+the ram like one size is of 2 kb , 3kb ,          |  space lega ram ke ander . so ye problem 
+10 kb then it is called static unequal .             jo ki staic m thi internal fragmentaion
+this is basicaaly opposite of the equal.           |  wo nhi hogi , kyuki wo apne same size
+                                                     ki hi space le rha h and koi bhi space 
+iske ander problem yeh aayi ki agr koi process       waste nhi ho rhi .
+1kb ka h toh wo 2 kb ke fixed     size m             |
+toh chla gya but uske ander 1 kb size toh  bekaar hi |  but isne bhi ek new disadvantage 
+rhe gyi uska toh koi use hi kra , toh iss            | create kr di , jb ek 5 process ram 
+problem ko naam diya hmne internal fragmentation        m the and wo execute ho gye , tb 
+problem , beacuse we are not using the ram              jo unki space thi wo ram m khali h                                                            rhe gyi do process ke beech m 
+efficiently .                                       | kyuki konsa process run hoga aur kah p 
+so to overcome this problem we create a dymaic         hoga yeh hme nhi pta . toh iss problem
+partioning . go up                                   |ko bola external fragmentation problem.
+                                                     
+                                                     | kyuki agr maan lo koi nya process aata                                                      |                                                                                             | h ram m and uska size h 5 kb and hmare                                                      |holes m ek jagah 2kb ha and ek m h 3 kb ,                                                    |space toh h aane ki mgr yeh aa nhi paya                                                      | kyuki wo saath m nhi h alag alag ha .
+
+
+so the ques is can we overcome exertnal fragmentation : kyuki yeh jyada dangerous h internal se because some space is wasted in internal frag but in external frag there is a high change that lot of space is wasted because size bhoot jyada bhi ho skta h beech waale process ka 4gb or 5 gb , so yeh nhi aa payega and decrease kr dega hmare computer ki performance .
+
+
+so the main answer is we can use compaction and pagging :
+
+compaction meaning : abhi ram m process aa rha h then holes and then process and so on aise hi chl rha h , so yeh kya krega ek shift kr dega saare process ko ek saath and saare holes ko ek saath toh ab agr koi process ayega then wo holes m chla jayega assani se . but iski bhi ek disadvantage h , yeh kasie ho rha h yeh copy kr rha h process ko and usko upar puch kr rha h dusre process ke neeche toh yeh copy kon kreaga and copy krne m bhoot time bhi jaat h , toh yeh kaam cpu ko krna hoga upar shift then paste the processs , but agr maan lo m game khel rha hu aur mera cpu game nhi chla rha balki isko copy and paste pr rha toh kya hi hoga mera , so cpu hmara game hi nhi chla payega uss time  p , kyuki wo isko execute kr rha hoga uss time p . hmara main kaam h ki hme we dont want to copy any data from one place to another we simply want to run a application or game . so to avoid this compaction problem we used pagging .
+
+
+PAGGING : hmara exertnal fragmentation isliye aa rha tha ki wo beech m spaces de rha h but hmare process ko toh continious space chaiye jo ram k pass nhi h , but agr mera process non contigious location lene lg jaaye toh yeh kaam asaan ho skta h so , yeh kaam hmara pagging krta h , pagging non contigiuos m store kra deta h hmare process ko , ki aadha process 2 kb  ke hole m daal do  and aada 3 kb m daal do toh process aa jayega hmara . 
+
+
+basic of binary number system :
+1- decimal no system (0-9) base 10 or radix 10 .
+2- octal no system (0-7) base 8 
+3- hexa decmal (0-15) base 16 , 0 to 9 , then A to F .
+4 - binary number(0-1) base 2 .
+
+size of a ram is not 5gb , or 6 gb we having only power of 2 .
+
+we store 2 thing in our memory or hardisk or registors 1 - instruction = part of a program or line of a prog , 2- data =  it can be a no , a letter , sentence , audio or video file all is present in 1's and 0 , why because we compile it and stored in the hardisk . 
+
+insruction is also called a program because a prog is a collection of instruction . 
+
+jo ram ke ander address hote h usse kaise represnt krte h , binary m krte h h yeh pta h but agr m 2 likhta hu binary m toh 001 bhi 2 ha and 00000001 bhi 2 ha toh konsa likhna h , yeh depend krta h hmari ram pr . cpu asks for a word to the ram by using addresses . it will never asked for data , it will ask for a single word . 
+
+address space = collection of addresess. 
+
+Ram is having a collection of address and it is called a physical address space . inside our ram we placed processes or data , and process also contain collection of addresses and these addresses are called logical adddress space . 
+
+suppose we have to divided into 4 partions , every partition having 4 bytes , every byte is given a unique address . so ther are total 16 bytes of data kaise 1 par m 4 ha toh 4 part m 16 ho jayenge . so every byte is given a unique address , in order to give address to 16 bytes we have to give a 4 bits to it .
+
+why ? abe kyuki 16 address chahiye 4*4 krunga toh 16 mil jayega iska mtb h ki 0 ko hm 4 bit m likhenge toh combination ke anusaar hme 16 tk likh skte h combination.  so iska shotcut bhi h ki hme 2^4 = 16 address chahiye toh jo 2 ki power h 4 , hme utne hi bits chahiye . so 0001 and goes on to 16 like that . and it goes on to 1111 that is 16 . 
+
+lekin hmne toh ram ko bhi 4 parts m divide kra tha whoch is 2^2 so we need 2 bits to give address to each partion . 
+
+toh agr maan lo ki mereko kisi logical address m jana h program ke toh m waise toh direct 0001 or 0011 krke kis bhi position m jaa skta hu but yeh time leta h jyada , toh hm phele 2 no ko bit ke ander partition bta denge ki hme konse partition m jaana h and agle 2 bit m no de denge , kyuki hm jaante h ki ek partion ke ander 4 addresses ha and usko reperesnt krne ke liye hme minimum 2 bits chahiye toh hm uss 4 m se phele 2 bit partition no batenge and agle 2 batayenge address konsa chahiye un 4 m se . 
+
+for eg: 0011 it means 00 means partition which is first partion and 11 means 4 address chahiye . kyuki wo adddreses 0 se start h toh 11 means hota h 3 which is 3 toh wo 4 hi ha . like array .
+
+
+Q = ram size = 4gb = 2^2 * 2^30 bytes = 2^32 bytes .
+ram is divided into 64 partitions equal and fixed  .
+
+so m isse dekhle khe skta hu ki mujhe 32 bits chahiye 0 ko represent krne ke liye . 
+
+2^32/64 = 2^32 / 2^6 = 2^26 bytes / partition.
+
+can we overcome the problem of external fragmentation problem (lots of holes can be made) (degree of multi prog will come down) (efficiency become low) .
+1 = compaction  upar bta rakha h ki wo saare holes ko ek saath le aata h and saare occupy spaces ko ek saath , but ye copy kr rha h process 1 jagah se dusri jagah m ram m , then yeh kaise hoga cpu kuch code geneterate krega taaki wo move ho jaaye but hm apna process run kr rhe h and cpu uska run nhi krke yeh sb kr rha h toh wo cpu does not able to execute our code , the effiency is decreased . 
+
+2 = pagging : you dont need to allocate the process in continous manner  you simply place the prog where is the space is vacant . 
+
+advantage of contigious allocation :
+
+cpu can easily execute the code kaise , wo jayega ram m address dekhega uss prog ka then uske ander ke 0 address of program run kr dega and saare run kr dega , usko bs physical address chahiye tha ram ka jha p wo process ha,  wo milne ke baad wo uske ander jo logical address h kisi program ka usko le leta h and simply addition krte hue pura execute kr deta h . cpu base register ke ander physical address store krta h starting of the process ka then kisi aur register ke ander logical address rakh keta h and with the help of ALU (arthimatic logic unit ) ki help se simply and fast prog ko run kr deta h . 
+
+so pagging means you can store the prog in the memory in non contigious allocation but there is a problem cpu will not be able to execute a process by simple means of addition . it is difficult for cpu to track all the position of the process by using simple adddition .
+
+to overecome this pagging problem we have something called as page table . 
+we have 2 things pagesize and framesize , we divided the ram with some fixed sizes called framesize and also we divided our process with fixed page is called a pagesize . 
+and more importat thing is page size is equal to the frame size .
+
+
+ram:
+                            
+0|
+1|
+2|
+3|
+4|
+5|
+6|
+7|
+8|
+9|
+
+program:
+
+0|
+1|
+2|
+3|
+4|
+5|
+
+bhoot mushkil h kyuki process ko run krne ke liye cpu ko har ek location mtb phyical address pta hona chahiye ram ke ander jo uss prog ke pages h . so to overcome this prob we have something called as page table . it is a table which contain all the information of the pages contain in a particular frame .
+
+like page 0 is in frame 2
+     page 1 is in frame 7
+     page 2 is in frame 8 
+     page 3 is in frame 13.
+
+and this table is stored in the ram and then cpu goes to that table and he will get all the information of the process and then he can easily execute it . and this table also has the address and it is stored somewhere in the frame of the ram . it is a particular frame which we dont know but cpu knows it . 
+
+ques = process size or logical address space = 16B
+     ram size or physical address size = 64 B 
+     pageisze = framesize = 4B
+     
+find no of frames and no of pages . 
+
+ans = no fo frames = total size / size of each frame
+convert it into 2 ki power the calculate this is random calculation by me .
+ 
+                     64 /4 = 16 frames present in the ram 
+
+      no of pages = total size / size of each pagesize
+                    16 / 4 = 4 no of pages are present 
+
+means ram is divided into 16 frames and process is divided into 4 pages . then this pages are inserting inside the ram depending upon the space avilable in the frame . and also a page table . if 10 process are present then there will be 10 page table.
+
+in pagging there is also internal fragmentation but it is very rare and very less . process is of 3 bytes and then framesize is divided into 2 bits then 1 bit is full but another bit is not full because it has a vacant space for 1 byte and also if the page table size is also less then the frame size there there will be a chance for the internal fragmentation . 
+
+
+so far we see that our ram is divided into the frames and the pages were inserted in the frame . so the question is whether all the pages of a process should be present inside our ram ? some pages of p1 is in the ram and some pages are not it is possible ?
+so the answer is yes . suppose we have 5 pages in the prog , i have decide that i have page no 0 and 1 inside the ram , we know that all the 5 pages will definately present inside our harddisk.
+
+but main question is why we are doing this thing ?
+
+1. principle of locality : says that at any time a process will require only few pages and these set of pages will gradually change overtime . 
+
+let us assume that cpu is executing a process , will cpu need the complete process at a any given time? ans is no . cpu simply fetch a byte then only after completing it ,  fetch another byte , then why we have to maintain a complete process ranther simply maintian some pages of a process inside the ram and also maintain some other pages of an another process . 
+
+if all the pages of a process is present inside the ram , ram size will get reduced and i cannot maintain  another pages of another process , then the degree of multiprogramming is decreases and computer become slow. 
+
+now by having few pages of a process , i will be able to maintain more no of processes inside a ram , the degree of multi increase , so we are given more choices to cpu to pick up . 
+
+kyuki maan lo ki jo hmne pura process daal rakh h ram m and wo i/o state m chla gya the cpu kuch bhi nhi kr payega . we cannot execute all the pages at a same time . 
+
+VIRTUAL MEMORY : we maintain only few pages of our process in the ram . such a memory is called a virtual memory and set of addresses which are inside the ram is also called as virtual address space . 
+
+ADVANTAGES of virtual memory : 
+1- degree of multi programming is higher 
+2- we will be able to execute even more processes whose size is larger than the size of ram by the help of virtual memory .
+
+
+//OPERATING SYSTEM 2 
+
+concept of shared memory :
+
+assume we have 2 processes in our ram , it may be in contigious or non contigious . we know that every process has its process control block(pcb) like p1 and p2 . pcb will have stack segment , heap segment and code segment . code segment is nothing but the program of the process . operating system will always ensure protection between the processes means p1 cannot access the code segent or variable or anything of p2 process . any process cannot access the other process . 
+
+but because of this there is a problem sometime or everytime we need communication between the processes means suppose p1 ke ander bhoot sara code and and wo ek int c ki value nikaal rha h jo ki h ek variable and c ki value upate ho rhi h by running the process . and maan lo p2 c ko as a input le rha h like int d = c*2. for this code we need the value of c . so inorder to execute the process p2 we have to execute the process p1 . but how to tell that what is the value of c to p2 because they cannot share information and c is only present in the process p1 and p2 can't access to it because of protection .
+
+c ki value share krne ke liye hm use krenge concept of SHARED MEMORY , means we know that they somehow related to each other , they will agree to share some common space in the ram . suppose we have an address 100 and they both agree to use the 100 space address , mtb value of c is written at the address in the ram like c = 5 . then p2 will get the data of c by this address . wo shared memeory ke through kr rha h toh communication is possible. communication is nothing but either given data or take data .
+
+we have made the assumption that jb hamra p1 process run hoga tb wo update kr dega c ki value then uske baad p2 process run hoga and wo c ki value use kr lega , but aisa reality m nhi hota kyuoki yeh non preemptive lg rha h hme but preempitive hoga toh dikhat ayegi , agr maan lo koi in dono m se process i/o state m chla gya toh phir p2 ko toh wait krna padega kyuki c ki value toh h hi nhi shared memory m toh yeh ek disadvnatage h . non preemptive m yeh ok ha . 
+
+case 1: 
+eg : suppose 2 process ha p1 and p2 dono ke ander codes likhe hue h p1 kr rha h increment agr koi bnda market m aata h and p2 kr rha decrement agr wo bnda chla jata h market se .
+toh agr non preemitive hoga tb toh shi h kyuki wo bnda aaya tb +1 ho gya and jb wo bnda gya toh -1 ho gya kyuki phele p1 run kra then p2 totally , wo beech m nhi ruka . ek aadmi aaya and ek aadmi gya toh count ki value honi chahiye 0 wo hi ha toh yeh shi h .
+
+case:2
+
+then suppose kro ki ab hmne p1 process ko run kra kyuki 1 bnda aaya toh isne code ko run krna start kra means intruction run hui p1 process ki  1 ,2,3,4, 5 abhi yeh count++ nhi hua tha tbhi jaisi hi 5 run hui due to priority based p2 aa gya and usne apni instruction run kregi and usme toh likha hua h ki count ko -1 krdo toh abhi toh count ke ander 0 tha bnda aaya toh tha mgr process pura run nhi hua due toh preemptive algo and p2 ko run hona pda toh count m aa gya -1 . but -1 ka mtb toh kuch h hi nhi , kyuki market m bnde 0 honge ya toh 1 2,3,4,5 but -1 ka mtb toh pta nhi kya h toh yeh error ha .
+
+non preempituve ke ander yeh kaam kr skta h ko dikhat nhi h but efficiency reduced ho jaati h agr ki i/o state m chla gya . 
+
+dono process ke ander kuch critical line h jo ki count++ and count-- h kyuki iski wajah se hi count ki value update ho rhi h toh isse khete h critical value . 
+apart from the critical section the code is called as the remainder section . 
+problem comes because our cpu access both the critical section at the same time .
+
+then we learn something new which is called synchronization mechanism we can overcome this problem :
+
+so hm ek code likhte h jo ki hota h entry section and exit section hmare critical section ke upar and neeche ,  critical section ke upar and neeche dono process m taaki hme pta lg jaaye ki agr ek process apne critical  h toh khi dusra bhi toh nhi h . yeh h synchronization ka concept . 
+
+
+there are many schronization mechanism or we can say ways:
+then how to know that which is the better synchonization mechanism ?
+that judgement is based on 3 parameters:
+1- mutual exclusion 
+2- progress
+3- bounded waiting 
+
+if synchromnization satify all these 3 parameters then we say that this is the best mechanism 
+ 
+1 = MUTUAL EXCLUSION : 
+a way of making sure that if one process is executing the CS(critical section) then other process cannot enter the cs until the executing process comes out of the cs .
+not more than one process in under the cs section so it is called a mutual exclusion .
+
+2= PROGRESS:
+A way of making sure that if a process is not inside the cs(critical section ) (ie . it is in the non critical section , then it will not block other processes from entering the cs . 
+
+3: BOUNDED WAITING :
+a way of making sure that there exist a bound (or limit) on the no of times other processes are allowed to enter the cs after a process has made a request to enter the cs and before that request is granted .
+
+
+DEADLOCK :
+
+Resource : any physical or virtual component in a computer is called resource . it is avilable in limited quantity . for eg : printer , keyboard , mouse ect they are physical component .
+
+processes will be competiting in order to accurire that resource . supppose a computer having a printer f1 and we have 3processes p1 , p2 , p3 these 3 processes are competing with the printer . 
+
+resource limited m rhete h kisi bhi computer m kyuki ek hi keyboard hoga ek computer m .
+
+what is deadlock : A sistuation in which two or more processes are unable to proceed because each of them is waiting for one of the others to do something . or circular waiting of processes is called deadlock .
+
+suppose we have 2 processes p1 and p2 and we have also 2 resource r1 and r2 and p1 need both these resources to complete execuation and same for p2 . maan lo ki yeh printers h resource r1 and r2 . process p1 ne accquire kr liya r1 and jaise hi p1 r2 ko lene waala that tabhi p2 process ne r2 ko le liya. ab p1 ko complete hone ke liye r2 chahiye toh yeh koshish krega ki isko r2 resource mil jaaye , but yeh toh p2 ke pass h toh yeh block state m chla jayega .and same for p2 it needs r1 but r1 already accquire by p1 , hence p2 will also be in blocking state .
+
+so both these processes unable to complete its execution p1 wait kr rha h ki p2 r2 reource ko chor de toh m usko lelu and same for p2 . so both are waiting in a circular manner .
+so there is a deadlock problem . 
+
+a process is requesting a resource toh wo kaise krta suppose p1 request kr rha h kisi resource ka toh wo request bhejega os ko ki resouce h ki nhi agr resource khaali hoga toh wo usse de dega and agr wo khali nhi hoga toh wo process ko blocking state m daal dega .
+and jb resoure khaali ho jaega tb wo p1 ko de dega.
+
+
+NECESSARY CONDITION FOR DEADLOCK (deadlock hone ke liye condition h yeh ):
+
+ki  mtb yeh yeh saari condition follow hongi tbhi deadlock hoga khi bhi : agr in 4ro m se ek bhi condition follow nhi ho rhi toh phir yeh deadlock nhi khelayega .
+
+1- mutual exclusion : = upar wala hi same example h ki p1 ne r1 ko le liya and p2 ne r2 ko and p1 needs both 2 resource to fully execute , p1 r2 ko request krega then wo block state m and aise hi p2 bhi . yha p mutual exclusion ho rhi h . mutual exclusion means 2 processes should not use the same resource at a same time . yha p agr p1 r1 ko and r2 ko lele toh phir toh deadlock hoga hi nhi , kyuki yeh 1 se jyada resource le skte honge , agr yeh mutual exclusion ko follow nhi krte . toh mutual exclusion hona chahiye agr yeh follow hoga tbhi deadlock hoga ki ek se jyada process aap use nhi kr skte ek time p . means same time p pe bhi r2 ko use kr rha h and p1 bhi r2 ko use kr rha h .
+
+2- hold and wait = p1 process hold the r1 resource and p2 hold the r2 resource and p1 resource is waiting for resource r2 and same for p2 is holding r2 and wait for r1 resource . if you say that a process is not hold and wait for an resoure then deadlock is not happend .
+so wait and hold condition honi zaruri h , agr nhi hogi toh phir resource assani se execute ho jayenge . kyuki agr wo hold nhi kreneg toh ko i bhi use kr lega and agr wo wait hi nhi kr rhe toh wo direct execute hi ho jayega . tbhi yeh zaruri h .
+
+3 - no preemption of resource : = if a process is holding a resourse , this holding of process cannot be forcefully preempted or stop , until the completion of the process . 
+in case if i dont follow this rule deadlock will not happened . agr maan lo ki p2>p1 process in case of pripority the p1 ko beech m rukna padega then wo r1 resource ka hold tut jayega and then p2 process can easily access the r1 resource and hence deadlock is not gonna be happen . toh preemption of resource or process should not be happend then we can have a deadlock condition .
+
+4- circular wait : circular process hona chahiye deadlock m , kyuki eg- circukar nhi hoga tb last wala complete ho gya then saare ho jayenge , isliye loop of circular should be present .
+
+RESOURCES are of 2 types :
+1- single instance resource 
+2 - multiple instance resource
+
+assume computer is  having only 1 printer then it is called single instance and if 3 or 4 printers are connected in the computer then it is called multiple instance resource . same as for cpu one cpu is present then it is called single instance and in multiprocessing batch system it has more than one cpu the it is called multiple instance resource . 
+
+que = a system is having 4 user process each required 2 instance of resource r . what is the minimum no of units of resource such that no deadlock will occur ?
+
+ans = suppose we have p1 , p2 , p3 , p4 processes
+if i give 8 instances means resource to each process  then deadlock will not happen because every process has thier own resource so no need to wait of hold . 
+
+so the naswer is 8 no it is true that deadlock will not happen in 8 resource but is the not the minumm no . 
+
+for this you have to follow this algo to find the minimum resource :
+
+1) algo 1 == step 1 = give (n-1) resource to every process , where n is the no of resouce required a process to complete its execuation . this will give the maximum no resource needed such that deadlock will happen . kyu mtb 4 diye toh yeh maximmun ha ki deadlock hoga hi .
+
+2) algo 2 == step 2 = give one more resource overall this will give the minimum no of resource needed such that deadlock will not happen . 
+
+ans = 4 process ha p1,p2,p3,p4 by 1 algo give n-1 to each process , so minimum requires by each process is 2 , the (2-1) = 1 resource give to each process . 
+
+then r1, r2,r3,r4 given toh the process p1,p2,p3,p4 in the same order . ab p1 ko 2 chahiye toh wo p2 se request krega and block state m chla jayega and aise hi saare chle jayenge block state m .
+
+2 algo ke anusar we give 1 extra resoure overall means 1 extra de denge pure ques  resource , toh ab koi na koi toh apna kaam pura kr skta h kyuki sbko 2 chahiye sbke pass 1 toh h and 1 hmne apni taraf se de diya extra toh koi bhi usko le skta h . toh hm assume krte h ki process p4 ne le liya r5 resource jo hmne diya tha , so p4 will be able to complete the execution , once execution is done it will release all its resource , then r4 and r5 are free then p3 ne r4 ko le liya nd p2 ne r5 ko then wo bhi complete ho gye and aise hi p1 bhi ho gye then all resource execute ho gye .
+
+so the final answer of this question is 5 , 4 resource to each process and 1 extra . 
+hm chahiye toh kitne bhi resource de skte h free m but we need to decrease the system cost .
+if you give 100 resource then cost is increased . 
+
+toh yeh final h ki isse km m nhi skta toh answer hoga ki ho skta h but guranteed nhi h ki deadlock pura clear hoga ki nhi . maan lo kisi bhi trah p1 process ne r1 nad r2 accquire kr liye toh yeh saare apne aap hi chl jayenge but guranteed nhi h ki aisa hoga and hoga toh deadlock remove hi ho jayega .
+
+
+que = 5 processes each process needs 4 instances of resource . find the minimum no if resource that deadlock will not happen .
+
+ans = give (n-1) to each means 3 to all 5 which is become 15 and then give 1 extra so the answer is 16 .
+
+so by this we come across a formula minimum no of resource = P(N-1) +1 ;by the help of algo and by doing questions . P = total no of processes , n = no of resource required by each process . 
+and iska hi sam eyeh ho jayega ki no of resorces >= p(n-1)+1then no deadlock will happen .
+
+
+
+que = there are 5 units of resource and if each process pi requires 2 units of resource to finish execution . what is the maximim no of process that can be in the system so that there will be no deadlock ?
+
+ans = we have 5 resource name them r1,r2,r3,r4,r5 , and the question is what is the maximum process can be executed in the 5 resource and each process requires 2 units . 
+
+so if each required 2 units then according to the first algo (n-1) means 1 toh hr ek ko chahiye and one extra resource toh hm dete h toh hm r5 ko hta denge , and jitne resource bache h unke har ek process ko de denge so we give r1,r2,r3,r4 to p1,p2,p3,p4 and one resource is extra to prevent deadlock , so the maximum no of processes are 4 in the 5 resource .
+
+
+
+DEADLOCK HANDLING MECHANISM (various ways to handle deadlock):
+
+1-deadlock prevention = deadlock will never happen , if we will stop deadlock from happening before it happens , yha p deadlock kbhi hoga hi nhi. how to do that we already know 4 necessary condition of deadlock like mutual exclusion , circular loop ,no prremption of resource , hold and wait if you disable one of the 4 things then deadlock will never happen . 
+
+2-deadlock avoidance = we will be looking at the future , and we will see whether deadlock will happen or not . we check one by one and try to avoid the deadlock . we cannot find out the future ki hme nhi pta ki hmara process kaise resource ko bulega ya ask krega konse order m .
+ 
+3-deadlock ignorance = if deadlock happens we will simply ignore him . for eg : if our computer hang then we simply switch off the computer and run again my computer so we simply ignore it . used by all the operation system today .
+
+4-deadlock detection and recovery = deadlock will happen and once deadlock has happend we detect the deadlock and remove the deadlock . 
+
+for implementing there upper 3 we have to write some code in the os , and they are not easy to implement . and so size code is become very large sometime so my memory is wasted . and in order to execute these 3 prog our cpu uses some timiming . hm check ki maan ko hr nano second m hm check kr rhe h ki deadlock h ki nhi . so inse bachne ke liye company seedhe bolti h ki hm isse acha to deadlock ignorance use kr rhe h simply usko ingone krke . for this we dont need to write any program in the operating system . and also time and memory is saved. efficiency is increased . and the main point is deadlock is happen very rarely , eg: how many times our system hang in the day ? kbhi kbhi mushkil se . 
+
+DEADLOCK PREVENTION METHOD:
+disable one or more necessary condition of deadlock . necessay condition are : mutual exculsion , hold and wait and circular wait .
+
+it you disable one of the 4 condition deadlock will not happen .
+suppose we are disabling mutual exclusion so we can say that at one time more than 2 process can use the same resource . p1 can use both r1 and r2 and same for p2 then deadlock will not happen . one process is execute at a time . so this will have an disadvnatge they lead to inconsistency , we see that in earlier if they can both goes to critcial section at the same time then answer is geting is wrong . so it is not a good approach .
+
+
+then try to disable hold and wait , yes this is possible to disable how ?
+suppose we having a rule that a process can either accquire all the resouces or it should not accuire any resource . it cannot take some resources and wait for another resoucres it should not happen . when p1 has to run it has to check whether it has all the rsouces to be executed if yes then it will execute , if not then wait . agr maan lo ek ek resource nhi h uske pass toh wo saare resource ko free kr dega . mgr iska bhi ek disadvantage h it is practically not implementable why see before execution process can never say that i need 5 resources or 6 , ie i need 3 printers or 2 i/o devices it can never say that . only during execution it will know that i needed this or that resource . inconsistency nhi dekhi hme but yeh practically implemnted krna bhoot mushkil ha . 
+
+
+
+try to disable no preemption :  higher priority proceess will stop the lower one ,then it will take the other resource . deadlock toh nhi hoga phir . mgr yeh bhi inconsistency provide krega why ? suppose maan lo ki process p2 ha aur isne r1 and r2 ko le liya and yeh 30% complete ho gya h maan lo ki ab p1 beech m aa gya and then wo isko rok dega then incositency happen  kyuki ek hi time p p1 bhi phir r1 and r3 ko use krega , then hmara mutual exclusion violate ho rha h isme . wo concurrent use kr rhe h process ko hmne maan lo p2 ko rok diay but p2 toh abhi critical section m tha toh ho gya na inconsistent , mutual exclusion ko voilate kr gya because both cannot be in the critical section at the same time .
+
+best techique among 4 
+try to disable circular wait ? how ? we number all the process and resource and then we made the statement that a process can access the increasing resource only . 
+
+p1 p2 p3 
+r1 r2 r3
+
+1 rule no all the processes and resources and have a condition that a process occur resources only in increasing order , p1 process r2 ya r3 ko le skta h , p1 never tried to occur r1 resouce , kyu kyuki agr p1 ko r2 mil gya nd ab wo r1 ko lena chahta h to wo decresing order m ja rha h that should not happen that our rule is . process never occur resource in decreasing order , backward m krega toh deadlock problem happen hogi agr w try hi nhi kr payega decreasing order m lene ko resource then deadlock hoga hi nhi . agr wo aage se resource nhi le payega toh it releases all the resources currently it have . then it will agin recieving the resource in increasing order . eg: p1 ke pass phele se h r1 and it needed r2 but r2 is accquire by p2 , p2 needed r1 but it cannot take or demand beacuse it only demand with the increasing one . so p2 release all the resources and p1 get the r2 resource then after completion of p1 it realeases r1 and r2 and then p2 execute freely .
+
+
+DEADLOCK avoidance : it can achieve by banker's problem .
+
+que: 
+
+    alocation          maximum  
+    x   y    z    | x    y    z
+po  0   0    1    | 8    4    3
+p1  3   2    0    | 6    2    0
+p2  2   1    1    | 3    3    3
+
+available : (x, y ,z) = (3 , 2, 2)
+
+there are 3 types of resources in our computer and there are also 3 process . 
+allocation means is no of resources x,y,z which are allocated to process (p0,p1,p2) at this point of time. eg : at this time for po ,  0 instance of  x resource is avilable to po  , 0 resour of y and 1 instance of z is allocated to po. 
+
+meaning of maximum = maximium no of resources which are necessary for po in order to complete its execuation . it may be say total no of resources to compelete , this is called maximum because this is predicted beacuse no body knows how many instances of a resource will a process make while execuation , we cannot tell exactly as future , so we done prediction . we prdect that at a max case we need 8 instances of x , 4 of y and 3 of z for process po.
+
+available means these are the no of resources that are currently available for a particular resource . means no process is actually using it 
+
+this whole thing in table called as a state of the system at this point of time .
+
+we done this question or make table properly because to avoid the deadlock . 
+how ? 
+ by this allocation and maximum table we can calculate the no of resoure that are necesarry to need a process to complete its execution . 
+
+       future table
+     x   y    z
+po  8    4    1 == it needed these no of resource for execuation. given by  (max-current) 
+p1  3    0    0 
+p2  1    2    2 == necesaary needed this resource to get executed. same (max-curr)
+
+for process po = abhi po ke pass x ha 0 and usko max chahiye 8 so isko 8 chahiye honge , y ha iske pass 0 and isko chahiye 4 toh isko 4 chahiye , z h iske pass phele se 1 aur isko max chahiye 2 toh isko bs 1 hi chahiye fully execute hone ke liye toh hm yeh details daal denge future table m .
+
+
+
+for p1 = 6-3 =  3 for x , 2-2 = 0 , 0-0 = 0 .
+
+ab hm different sequence try krenge to avoid deadlock .
+wo krega hmara banker algo kaise . 
+
+ab hme yeh dekhna h ki hamre pass available h x ke 3 ke y ke 2  ke and 2 z ke toh iss table ko dekhge ki available jo h agr hm uss process ko dede toh wo kya execute ho skta h ya nhi .
+
+check kra hmne dekah toh po ko toch chahiye 8x , 4y and 1 z ab hmen avilable dekhe toh z toh hm de skte h aur wo pura ho jayega but x and y itne nhi h ki wo chl jaye toh hm po ko nhi select krenge .
+
+then hmne dekha p1 ko isko chahiye 3 , 0 , 0 hmare pass 3 x ha 2y and 2 z h but isko 3 x hi hchaiye hmare toh isse jyada h y and z ha and 3 bhi x h jisko deke yeh execute ho skat h toh isko de denge and yeh execute ho jayega . 
+jb yeh execute ho jayega then yeh apne saare resource ko release kr dega , then hmare pass 
+6x ke free resource aa jayenge . kaise ? 3 uske pass already the , 3 hmne diye the taaki uske pass 6 ho jaaye toh wo execute ho jaaye toh usne whi saare release kr diye toh 6 aa gye x ke , 2y , 2 y ke bhi aa gye kyuki uske pass already 2 y ke bhi the ,  and z ke uske pass the bhi nhi and usko chahiye bhi nhi the as we can see in the future table . then available resources are present 6x 4y 2z .
+
+ab hmne dekha ki abhi bhi po nhi ho payega kyuki usko 8 x hahaiye aur hmare pass toh sir 6 hi ha tb hm aage bde .
+ 
+hmne p2 ko dekha usko chahiye the 1x ka 2y and 2z , and hmare pass wo the available toh hmne usko de diye and then usne execute hone ke baad saare release kr diye jitne bhi uske pas the , ab total available rhe h hmare pass wo ha then usne hme 3 de diye x ke kyuki hmne usko 1 diya hmare pass ho gye 5 , 4 diye 4 ke toh hmare pass rhe gye 0 and z ka 1 diya toh uske pass ho gye 2 then ab po execute ho gya an usne phor saaare release kr diye .
+
+hence p1->p2-po this is the sequence , this sequence is satisfy  . this sequence is called as safe sequence .beacuse if this follow sequence and deadlock is avoid . po-p1-p2 it is not the safe sequence if we are exectuing po first we have lesser resources and this cannot satisfy thsi resource .
+
+if there is one safe sequence then we called as the system is in safe state .at least 1 sequence is find which satisfy the resource management off all the process . if not then the systen is in called unsafe sequence .
+
+but how we avoid deadlock ? 
+
+abhi tk hmne bs banker algo smjha h but how deadlock is avoided , We will be trying to doing all the sequences , process are trying to take the resource and hence deadlock is happened , hm saare sequence check kreneg and dekhenge ki deadlock ho rha h ki nhi , agr maine safe sequence found kra mtb deadlock will not happend there . they execute easily and deadlock is not happend . 
+
+
+we will be trying out every single sequence if 3 process then 6 sequence  by (3!) , and check kreneg ki yeh safe ha ki nhi. agr hme unsafe milta h toh hm avoid krenge sequence . safe sequence mil gya then usko follow krenege . 
+
+BUT IT HAS ITS disadvantage :
+
+we cannot find the maximum data , because it is not practically possible . suppose in order to compelete the process a process take 10 nano second , after going in i sec we know that i need i/o device , we can only know the resources are required at the time of running , but this algo is saying that before execution of the processes means at the starting time we know the maximum no of resource required which is not possible . it is good algo to avoid deadlock , but it is not practically implementable . 
+
+
+que = 
+    current              max
+    r1  r2  r3        r1   r2  r3
+p1   1   0   2        4    1    2
+p2   0   3   1        1    5    1
+p3   1   0   2        1    2    3
+  
+available = r1,r2,r3 = 2,2,0
+
+dikh rha h starting m p1 nhi ho skta , p2 ho skta h toh usko free de diye and the execute hone ke baad aa gye 2 , 5 , 1. then p3 ko de diye 3 , 5 , 3 and then p1 run ho gya .
+toh safe sequence bna p2->p3->p1.
+
+if the system is in safe state it should be deadlock free . if the system is in unsafe state then it may lead to deadlock . it may , it is not guranteed that it will be in deadlock sistuation .
+
+yeh confuse kr rha h iskamtb toh yeh hua ki agr wo unsafe h tb bhi hm deadlock se bach skte h  :
+
+process   current      max
+   po        2          5
+   p1        1          5
+
+SYSTEM ONLY HAVE 5 PRINTERS . 2 po ke passs h and 1 p1 ke pass h iska mtb 2 free ya available ha , dono ko 5 printers chahiye .
+
+assume 1 :p0 ko 3 chahiye printers and p1 ko 4 chahiye . que hi nhi ho skta , galat ? kaise?
+system is leading to deadlock 2 printers available h naam de diya f1 and f2 . maan lo po ne f1 ko le liya and p1 ne f2 ko po tery krage ki usko ek aur mil jaaye kyuki usko toh bs 3 hi chahiye but f2 toh p1 ne le liya toh yeh block state m chla jayega and deadlock ho jayega ..
+
+hueee . 
+
+assume :ek aise bhi example ho skta h jisme deadlock na ho ? ab yeh kasie iski maa ki ?
+we can escape from deadlock kaise agr hmne dono printers f1 and f2 ko de diye phir bhi usko 1 chahiye wo kaise hi lega , p1 toh waise hi nhi ho skat kyuki usko 4 chahiye , but ek cheez hmne phele boli thi ki a process can demand a resource at any time and also release the resource at any time .  hmne assume kr liya ki p1 ne apna 1 resource release kr diya , wo bo ldega ki maine apna kaam kr liya pane reosurce se toh ab po ne lega and execute hone ke baad apne saare resource release kr deag and then p1 le lega and execute ho jayega .
+
+
+if a system is safe then it is deadlock free and if a system is unsafe the deadlock may happen or not or it is unsafe . 
+
+FILE SYSTEM :
+
+what is file = any data or program which is present in your computer is called file , it has to be definately present in your harddisk . Any data which is present in the harddisk is called file . files can be of various format it can be audio , image , text , source code .
+
+structure of harddisk :
+harddisk is divided into fixed size blocks , all the block size is of same size . size of a block ? depedent on you computer . suppose hardisk size is 512 gb , block size of harddisk 512 , how many blocks present in the hardisk 
+
+no of blocks in hardisk = hardisk size/ block size . 
+512gb / 512b = 2^39 b / 2^9 b = 2^30 blocks inside the harddisk . 
+
+depending of the format size is vary .
+
+how file is stored in hardisk ?
+
+suppose we have a file size which is 2048 BYTES  , and we know that our size of the single block in hardisk is 512 . so we divide the file in blocks where size of a single file block is equal to the size of the single harddisk block . (size of file ko divide kr dete h size of hardisk single block ) . so yha p hardisk block ka size h 512 , so we divide the 2048 by 512 so we get 4 parts of the file block . which is the no of file blocks . 
+we can have lots of file in the hardisk but we talk about a single file . 
+
+then m file ka block 1 lunga 4 part m se and usko hardisk ke 1 block m daal dunga then dusra block lunga file ka and usko daal dunga hardisk m and so on . but zaroori nhi h ki m block contious location m daalu hardisk ke , ya toh non contious m daalu , it is really depend , but in todays world we place it in non contigious block . 
+
+
+toh suppose kro ki hmari fie jiska size tha 2048 yeh toh divide ho gyi 512 se , but agr iss file ka size hota 2049 then hme 5 block milte file ke and 1 block ka size hota 1byte jo ki last block hoti and jb hm isko kisi block ke ander daalte ha toh 511 b khali ho rheti h hardisk ke ek singe block ke ander , toh kya hm ek aur file daal skte h usme so answer ha nhi . ek block of hardisk ek ander sirf ek hi file ka block daal skte h chahe wo kitne ka bhi ho , but hardisk ke single block se km hona chahiye ya barabar bhi ho . so baaki space wasted ho jaati h . agr baad m size of the file expand hoti h toh shi h . jaise hm kisi file  m likte h toh size bdta h and delete krte h to size km ho jaata h . 
+
+
+WHAT DO YOU MEAN BY FILE SYSTEM ?
+ans = we have placed the file inside the hardisk (upar dekh liya hmne ki kaise placed krte ha ) then we need to access the file , either we have to read the file or write the file in he hardisk , ram ko kaise milegi file hardisk se  . suppose we have moved a file from hardisk to a ram , wo copy hoga hardisk se and paste ho gya pam m . suppose hme uss file ko wha ram se delete krna pad gya kyu suppose a high priority process is comes toh wo wha se chle jaati h , due to lack of memory of swapping hogi , toh jo ram m changes hue honge file ke saath wo reflect honi chahiye hardisk m bhi . agr ais enhi hota toh jo hmne changes kr rakhe h wo wasted ho jayenge . 
+
+so agr ram ko chahiye ha koi file toh wo read ya write krega from harddisk se .
+so we wanted to read a file from the hardisk or we want to write soemfiles inside the hardisk 
+so how will be do that .
+
+the modification which are done in the ram is bienge reflected inside the copy of the harddisk is called rightback .
+
+our oerating system is a big program or os code and it will have lot of functions , out of all the function one of the function is nothing but file system . 
+it will be responsible for either reading the data from the hardisk or reading of file from the hardisk  , or writing of file inside the hardisk . for both the job this file system function is responsible . 
+
+it also take care of other parameters which will make this reading and writting of files from the hardisk to be much more effieient . means suppose hmne ek file block ko kisi hardisk ke block ke ander daal diya random in case if i want to search for the file , then i will go to the every harddiks block and search for my file block , so ultimately i get the file block but it will take a lot of time to read or get this file , yeh krne se acha toh . app ram ke ander file system ke ander ek table maintain kr do which will actually point to the exact block where our file is present . so reading and writing the file from the harddisk is much more easier in terms of time .
+
+
+
+
+FILE ATTRIBUTES (these are attributes which will be maintain by your file system for any file you have in your coputer ):
+
+why we maintain or need this attribites because reading and writing of a file is become much more easier .
+
+ALL THIS ATTIBUTES IS MAINTAING OF EVERY FILE IN THE HARDISK .
+
+1- name of a file = every file will be given a name , every file you create in your computer should be given a name . only if you have a name of a file it will be easier to pick among the multipes files among the harddisk . 
+
+2 - type of a file - every file will be of different type audio , video etc , we maintain the typpe of file , so that our file system will instruct that what software should open the file . audio koi audio app kregi and image koi image wala software open krega and so on . 
+
+3 - location of a file - if you dont know the exact location of a file then we might have to check every block of teh harddisk which is very time consuming . location hogi to m direct block m chla jaunga yha p mera present hogi file .
+
+4 - size of a file - whether it is 4mb or 4 gb .
+5 - protection of a file - means maine ek site bna rkahi h server p , website is teh colllection of files , what i want it in case i am login the website i can read , write , delete or do anything but if a customer uses my website it should only read the file , i dont want to allow to write something in website either delete . 
+
+6 - time and size - for evey file we maintain a time and date .
+
+
+
+difference between logical block no and physical block number 
+
+harrsik is dived into block we have seen it and each block is given a no called as physical block no . 
+
+abe mere pass ek file ha , then we divide the file suppose in 4 parts and even these bock no contains a no isko khenge hm logical block no of the file . 
+
+then hm file blocks k disk block m daalte h . 
+agr m koi file ko access krna chahta hu toh mujhe physical block no chahiye hoga jo hardisk m hota h , file block 0 ko hardisk block ke 5 m dall rakha h , so we need to know the physical block no of the hardisk , logical agr pta bhi h toh uska kuch nhi kr skte kyuki wo toh physical block ke ander  ha .
+
+we also have bytes inside the phyical block and logical block mtb , dono blocks ko bhi divide kra jata h and uske each section ko byte bolte h . suppose hardisk ke block ka size ha 512 b , so there are 512 bytes in the 512 physical block . which is name as 0 ,1 ,2 and continue . 
+
+
+dono ke ander aisa h hi hota h isno khete h logical byte no jo file m ek block ke ander hote h and physical byte no usse khete h jo ki ek block of hardisk ke ander hote h . 
+
+
+HOW READING OF A FILE WILL HAPPEN :
+suppose hmere pass ek file ha usko 4 m todh diya phele block m gya toh mujhe 1phele block ki 2 byte no ko rad krna h , ab hardisk m 1 block kisi physical block hoga suppose mereko wo bhi pta chl gya ki 5no h uss phyical block ka jisme 0 block h file ka , ab mujhe bs uske ander jaake sirf byte 2 ko read the single byte , cpu hamesha 1 byte ke liye hi bolta h , but hm 5 m jaake single byte ko access nhi kr skte , in order to access the byte hmne 5 block ko pura ram ke ander laana padega and then m uss byte ko acces kr skta hu . so data transfer happen in terms of block we cannot access a byte or a bit from the harsik , we can move blocks . 
+
+
+HOW A FILE IS CREATED IN THE HARDISK OF THE COMPUTER 
+
+suppose maine ms word khola computer m and usme kuch likha then jb m save ka button dabaunga tb ek function call hoga create() naam ka and uske ander yeh file chle jayegi abhi yeh file hmari ram ke ander hi ha , jb tk m save button nhi dabata , hme iss file ko hardisk m daalna h , jb maine save dabaya yeh code mujhe os ke ander le gya then file system ke ander ek function call hua create() namm ka and uske ander yeh file ek parameter ki trah chli gyi , 
+then create function execute hoga in kernel mode , means premption of tyhe process nhi ho skta .
+
+first cheez kya hogi hmari file divide hogi into several blocks suppose contigious memory istemaal kr rhe h toh maan lo 0 file block is tored in the 2 hardisk block and so on , yeh saara function create ke ander likha hota h ki kaise store ho rha h . 
+
+once file is placed in the hardisk , the our file system code is creating a fcb(file control block ) for file f1 , fcb is nothing but containg the attributes of the files . and it is stored in the ram . beacuse our cpu cannot the access the hardisk directly . once file is saved in hardisk fcb is created in the ram . 
+
+our hardisk containing something called as directory , it is nothing but a table , it has the no of files and tabel ke ander location , size and aal attributes rhete h . it has the block no of the hardisk also where the file is stores , location ke ander 1st block jha p placed hoga  file ka ahardisk ke ander wo aajayega . diretcory is nothing but a collection of files where every record indicate the file of a system then fcb is removed. 
+directory bhi khi hne khi present hogi hardisk m kisi block m , then yeh puri table copy hogi ram m and fcb jo f1 ki h usko directory  add kr denge then directory ko removed kr deneg . 
+
+
+so the final answer is phele save p click krenege tb yeh os ke ander file system ke ander jayega , create naam ka function run hoga wo file ko divide krega nd placed kr dega hardisk ke ander then ram m hi fcb bhi create ho jayega , then directory ko copy krega ram kyuki usko uss file ki fcb uss directory m add krwani h , so dirctory ko ram ne copy kra fcb directory ke ander add ki then usko ram se remove kr diya  kyuki ram ke ander directory rakhna mtb memory waste krna . 
+ 
+
+
+
+
+
+
+
+
+
+ 
+
