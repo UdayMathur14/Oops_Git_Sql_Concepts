@@ -13,11 +13,11 @@ how we get data by your computer :
 
 server contains same cpu , ram and hardisk . 
 
-works : suppose a guy ram opens laptop and types facebook.com , then his request is sending to the facebook server , then in ram there is a server program it helps us because there is millions of client , some people asking of facebook webpage or something , it is the duty of server prog to give apprepiate webpage to the client .
+works : suppose a guy ram opens laptop and types facebook.com , then his request is sending to the Facebook server , then in ram there is a server program it helps us because there is millions of client , some people asking of facebook webpage or something , it is the duty of server prog to give apprepiate webpage to the client .
 
 suppose i want to make a server so i have to buy a hosting like go daddy or anyone in which i stored the data (proving hosting to client) .
 
-suppose i uploaded video files and photos in the server , then server hardisk has all the datafiles in it of my website , if a person tries to access my all videos and data files , then the apporiate video has to be fetch and that to be given to the server program , and then the server give it to the client ...
+suppose i uploaded video files and photos in the server , then server hardisk has all the datafiles in it of my website , if a person tries to access my all videos and data files , then the appropriate video has to be fetch and that to be given to the server program , and then the server give it to the client ...
 
 so the question is who is fetch the videoo file???
 ans  = database management system ;
@@ -48,18 +48,18 @@ eg: in this it shows column with all the information in a table .
 
 SQL (structured query language )
 
-A query language which is used to update or retrieve data in a realtional database .
+A query language which is used to update or retrieve data in a relational database .
 sql commands are used to communicate with the database to perform specific task.
 
-SQL COMMANDS are group into major 4 catogries depending on thier functionality :
+SQL COMMANDS are group into major 4 categories depending on their functionality :
  
-1 - DDL(data defination language) = we generally create database and alter , truncate , drop , COMMENT in the database . 
+1 - DDL(data definition language) = we generally create database and alter , truncate , drop , COMMENT in the database . 
 
 2 - DML(data manipulation language ) = after creation of database , then we work on the data is called data manipulation . Mainly 3 Update , Insert and delete , SELECT.
 
 3 - DCL(data control language)  = grant and revoke use 
 
-4 - TCL (transaction control language) = commit , rollback and savepoints commands are used in tcl 
+4 - TCL (transaction control language) = commit , rollback and save points commands are used in tcl .
 
 ------------------------------------------------------------------------------------------
 
@@ -106,7 +106,7 @@ what is the difference between char(5) and varchar (5)
 
 2 - if we write abc in the ename then 2 space is empty then our space is wasted , but in varchar if we write xyz its simply scan ename and then gives its space . 
 
-3 - we have used the char where we know specially what is that column required like in gender we have only three option whether its M(MALE) , F(FEMALE) , T(TRANS GENDER) , and we also know that it is only fill 1 alphabet in that like m or f . that means that char is usedful in that area , it also shows that varchar is basically complex and takes larger time to give space and stored the value because of scanning and character gives the particular space without scanning . 
+3 - we have used the char where we know specially what is that column required like in gender we have only three option whether its M(MALE) , F(FEMALE) , T(TRANS GENDER) , and we also know that it is only fill 1 alphabet in that like m or f . that means that char is useful in that area , it also shows that varchar is basically complex and takes larger time to give space and stored the value because of scanning and character gives the particular space without scanning . 
 
 ---------------------------------------------------------------------------------------
 INSERTING TUPLES TO THE TABLE :
@@ -140,13 +140,13 @@ create table employee( eid int ,
                     gender char(1) NOT NULL,(that means the gender value does not contain a null value is you give null to it then it shows error);
                      dob date);
 
-2 ) if we khow that in universe no two no. are same then we used unique constraits to it like : 
+2 ) if we khow that in universe no two no. are same then we used unique constraints to it like : 
 UNIQUE CONSTRAINT:
 
 create table employee( eid int ,
                     ename varchar(5) , 
                     gender char(1) NOT NULL  , 
-                     phoneno int UNIQUE (by writting unique if we write a duplicate                                          no then it shows error to that  );
+                     phoneno int UNIQUE (by writing unique if we write a duplicate no then it shows error to that  );
 
 
 3 ) primary key , question - can we create a table without the primary key ?
@@ -159,7 +159,7 @@ create table employee( eid int PRIMARY KEY  ,
                     gender char(1) NOT NULL  , 
                      phoneno int UNIQUE  );
 
-(one tabel can have only one primary key only )
+(one table can have only one primary key only )
 (runs perfect but we know that we can have more that one primary key in table , the  we cannot write primary key again in any attribute , rather than following this syntax we used this :
 
 create table employee( eid int  ,
@@ -167,7 +167,7 @@ create table employee( eid int  ,
                     gender char(1)   , 
                      phoneno int , 
                     primary key(eid , ename ) );
-			(In this both the keys together form a perimary key );
+			(In this both the keys together form a primary key );
 
           this is the better approach and all databases uses this syntax .
 
@@ -183,12 +183,12 @@ Composite key :A primary key having 2 or more attributes or columns is called co
 
 
 
-4 ) foriegn key :
+4 ) foreign key :
 It is a column or a set of columns in a table that establishes a link or relationship between two tables in a relational database.
 
-Are the coulmns of a table that points to the primary key of another table.
+Are the columns of a table that points to the primary key of another table.
 
-if we have to connect two tables in which one is employye information and the other is the department in which he was working . the foriegn key of department table is refferring to the depId of the Employee table . 
+if we have to connect two tables in which one is employee information and the other is the department in which he was working . the foriegn key of department table is refferring to the depId of the Employee table . 
 
 employee table                              department table 
 
@@ -226,7 +226,7 @@ for employee table :
 
 6 ) default constraints
 
-suppose we dont want to put null values in the table so we can use default value while making table that will set a permanent value in that column if we do not provide any information in that column .
+suppose we don't want to put null values in the table so we can use default value while making table that will set a permanent value in that column if we do not provide any information in that column .
 
 
 for department table 
@@ -240,41 +240,43 @@ so we have total 6 constraints
 1- not null
 2- unique - can have NULL Values . 
 3- primary key 
-4- foriegn key
+4- foreign key
 5- check
 6- default
 7 - Reference Constraint
 
+✅ In simple words:
+
+Primary Key = "Main ID of the row" (no duplicates, no nulls, only one).
+Unique Key = "Alternate unique identifier" (no duplicates, nulls allowed, can have many).
+
 : Constraint Can be Defined on two levels 
 1 - Column Level 
 2 - Table Level 
-conditions : 
 
 - Not NULL Constraint should be defined at column level .
-- Composite Key Should Be difined at Table level . 
+- Composite Key Should Be defined at Table level . 
 
 -----------------------------------------------------------------------------------------
 
 REFERALL TRIGGER ACTIONS (Cascade) : It is only done when two or more tables are join to each other .
 
- if in one table the department id is not present that it will give an error , to overcome that error we use CASCADE it means action in one table then also same action take in another table .
+if in one table the department id is not present that it will give an error , to overcome that error we use CASCADE it means action in one table then also same action take in another table .
 
 like foriegn key(deptid) references department(did) on delete cascade );
                                                       set null and set default	
-
-
 
 ------------------------------------------------------------------------------------------
 SELECT FROM WHERE EXPLAINED :
 
 select eid , ename from employee ; -- will show all the eid and enames in the table;
 
-select * from empoloyee ; -- gives all the information present at that table with columns (all);
+select * from employee ; -- gives all the information present at that table with columns (all);
 
 que :-  whether select ename from employee show duplicates values or not ;
 ans - it is not eliminate duplicates , it shows all the values ;
 
-select distinct enames from employee ; -- it eleminates all duplicates and show the ename table.
+select distinct enames from employee ; -- it eliminates all duplicates and show the ename table.
 
 select ename from employee where age = 28; -- it will only show names of that member whose have the age 28 ; 
 
@@ -372,7 +374,7 @@ select ename
 from employee , department 
 where employee.dno = department.dno ;
 
-but by writing the table name again and again we use aliasng like this :
+but by writing the table name again and again we use aliasing like this :
 
 select ename
 from employee as E , department as D  
@@ -413,7 +415,7 @@ A = {1, 2, 2, 3}
 
 B = {2, 3, 4}
 
-Then:
+A UNION B = {1, 2, 3, 4}
 
 A UNION ALL B = {1, 2, 2, 3, 2, 3, 4} → All values from A and B, including duplicates.
 
@@ -568,11 +570,14 @@ it means that we have to select those names whose ages are greater than 25 and 2
 if the value is unknown it is not consider . 
 
 
-ANY OR SOME are exactly same in thier work there is no difference in that . 
+ANY OR SOME are exactly same in their work there is no difference in that . 
 
 query :select ename from employee where age> some(25,26);
 
 if the age is greater than any of these single values then it will be count in the table.
+
+in case of query : select ename from employee where age> all(25,26 , null);
+NULL agar ALL list ke andar ho → pura condition fail ho jaata hai (result empty).
 
 ------------------------------------------------------------------------------------------
 NESTED SUBQUIRES in SQL :--> having a query inside a query .
@@ -588,7 +593,7 @@ eid      ename    age    sex                         dno           dname
 
 query : select Dname from department where dno in (select E.eid from employee E where E.sex='m'); 
 
-so we can clearly see this that there is also a query in IN statement and we cant go futher without solving it , so we first solve the inside query (subquery) then () query :
+so we can clearly see this that there is also a query in IN statement and we cant go further without solving it , so we first solve the inside query (subquery) then () query :
 
 answer : the in() query will give those names where there is male and we can see it 100 and 102 can are male :
 
@@ -706,13 +711,27 @@ COUNT(*) → includes NULLs
 
 COUNT(ColumnName) → excludes NULLs
 
+SELECT COUNT(DepartmentID)
+FROM (
+  VALUES (101), (102), (103), (NULL)
+) AS Dept(DepartmentID);
+👉 iska output 3 hoga, kyunki NULL ko ignore karega.
+
+
+SELECT COUNT(*)
+FROM (SELECT DepartmentID FROM Employees) AS DeptCount;
+COUNT(*) → har row ko ginta hai, chahe value NULL ho ya na ho., agr yha  3 null hote toh 
+
+Rows = 5
+👉 Output = 5
+
 
 
 SELECT Name FROM Employees
 WHERE Salary > ALL (
   SELECT Salary FROM Employees WHERE Department = 'HR'
 );
-Isme saalri salary select hogi hr waalo ki 
+Isme saari salary select hogi hr waalo ki , gr iske ander maan lo null aa gya inner ke ander toh ek bho row select nhi hogi 
 
 
 ----------------------------------------------------------------------------------------
@@ -822,8 +841,9 @@ WHERE CustomerName LIKE 'a%';
 
 ans ? 
 :: real m yeh Capital A wala bhi customer de rha h iska mtb h ki like statement ke ander jo likhte h wo case insensitive nhi h . A is equals to small a .
+Example: SQL_Latin1_General_CP1_CS_AS (CS = Case Sensitive). if you want to use sensitive.
 
-question =  like operator vs equals to operator 
+question =  like operator vs equals to operator , mtb lg bhag dono same hi h case insensitive
 
 SELECT * FROM Customers
 WHERE CustomerName = 'alpha';
@@ -846,7 +866,7 @@ SELECT NAME, LISTPRICE, LISTPRICE + 10 AS ADJUSTED_LIST_PRICE  INTO newtable FRO
 //so it done 2 works :- creates a new table and then enter tuples into it. 
 
 
-::Temporary table : jb aapko ek temporary table banani ho kisi kaam ke liye aise h . aur temproray h means kaam nhi h uska baad so . so jaise hi hm uss page se jayenge toh wo table apne aap hi delete ho jayegi . for temporary table we use #.
+::Temporary table : jb aapko ek temporary table banani ho kisi kaam ke liye aise h . aur temporary h means kaam nhi h uska baad so . so jaise hi hm uss page se jayenge toh wo table apne aap hi delete ho jayegi . for temporary table we use #.
 
 query:
  SELECT NAME, LISTPRICE, LISTPRICE + 10 AS ADJUSTED_LIST_PRICE  INTO #tmpname FROM [Production].[Product]
@@ -908,7 +928,7 @@ SELECT ORDERNUMBER, ORDERNAME, LOWER(ORDERNAME) FROM MYORDER
 --LENGHT OF STRING
 SELECT ORDERNUMBER, ORDERNAME, LEN(ORDERNAME) FROM MYORDER
 
-:first chacter should be capital and rest are small.
+:first character should be capital and rest are small.
 SELECT ORDERNUMBER, ORDERNAME, CONCAT(UPPER(LEFT(ORDERNAME, 1)), LOWER(SUBSTRING(ORDERNAME, 2, LEN(ORDERNAME)))) FROM MYORDER
 ---------------------------------------------------------------------------------------
 --TRIM 
@@ -936,7 +956,7 @@ select CategoryName, IsActive as quantity into #temptable from uday.dbo.tbl_Prod
 
 
 //VIEWS IN SQL 
-Views : does not create a table but actually created a window and shows the necesaary columns that you need .
+Views : does not create a table but actually created a window and shows the necessary columns that you need .
 
 Query : 
 Create View MyCustomerView 
@@ -1088,13 +1108,13 @@ select @returnvalue // value should be 12 ;
 
 UDF = USER DEFINE FUNCTION :
 
-tHREE TYPES OF FUNCTIONS ; 
+TYPES OF FUNCTIONS ; 
 1 - SCALAR FUNCTIONS : RETURN A SINGLE DATA VALUE IN RETURN CLAUSE .
 2 - TABLED VALUED FUNCTIONS : RETURN A TABLE DATA TYPE.
 3 - SYSTEM FUNCTIONS : THESE ARE SYSTEM FUNCTIONS THAT CANNOT BE MODIFIED ND THAT PERFORM SOME SPECIFIC FUNCTIONS .
 
 
-::user define functions: that accept parameter and perform an action such as a complex clculation and returned the result of an action.
+::user define functions: that accept parameter and perform an action such as a complex calculation and returned the result of an action.
 
 
 1 scalar based :
@@ -1113,9 +1133,7 @@ select @ytresult = sales();
 print @ytresult 
 
 
---Paramertized functions 
-
-
+--Parametrized functions 
 
 create function sales (@group varchar(20))
 return money
@@ -1140,29 +1158,39 @@ as
 begin 
 select * from table where id = @id ; 
 
-
 select * from tbl(7);
-or if you wnat paramters ; 
+or if you want parameters ; 
 select name , id from tbl(7);
+
+
+CREATE FUNCTION fnGetOrdersByCustomer(@CustomerID INT)
+RETURNS TABLE
+AS
+RETURN (
+    SELECT OrderID, OrderDate, Amount
+    FROM Orders
+    WHERE CustomerID = @CustomerID
+);
+
 
 ------------------------------------------------------------------------------------------
 
 TRANACTIONS IN SQL:
--if a transaction is succesful all the data modification are made during the transaction are commited and become the permanent part of the database.
--if the transaction is failed then unable to upadte and the data is roll back.
+-if a transaction is successful all the data modification are made during the transaction are committed and become the permanent part of the database.
+-if the transaction is failed then unable to update and the data is roll back.
  
  
-::ACID : atomicity , consisitency , isolation and durability.
+::ACID : atomicity , consistency , isolation and durability.
 
 roll back means undo those things .
 
-Atomicity : transaction should be all or nothing . if one part of the trasanction fails the entire transaction is failed . 
+Atomicity : transaction should be all or nothing . if one part of the transaction fails the entire transaction is failed . 
 
 consistency : it ensures that any transactions will bring the database from one state to another.
 
 isolation : transactions update in the serial order one by one . 
 
-durability : once the transaction is commited it will show in the database even if the power loss crashes or more. 
+durability : once the transaction is committed it will show in the database even if the power loss crashes or more. 
 
 //1 example - Simple transaction
 Begin transaction
@@ -1218,13 +1246,10 @@ but if the statemenet didnt succeed.
 Else begin 
 RAISEERROR('STATEMENET FAILED - THIS IS MY CUSTOME MESSAGE ' , 16 , 1) 
 //INBUILD FUNCTION THAT ACCEPTS PARAMETER
-roolback transaction 
+rollback transaction 
 end 
 
-
-
---TRY AND CATCH : why not to use if and else , because this is the error whcih is actually shown in the ui , it actually throw as an error . With try and catch you can actually handle this error and dont let the user know that error has occured.
-
+--TRY AND CATCH : why not to use if and else , because this is the error which is actually shown in the ui , it actually throw as an error . With try and catch you can actually handle this error and don't let the user know that error has occurred.
 
 Declare @errorresult varchar(40)
 
@@ -1243,14 +1268,14 @@ ans - there is no error here thrown in the ui but actually it does not store the
 
 ----------------------------------------------------------------------------------------
  
-:Grouping sets : agr maan lo aapka boss bol rha h ki muje 2 column chahiye tabel ke name and id . so you write this 
+:Grouping sets : agr maan lo aapka boss bol rha h ki muje 2 column chahye table ke name and id . so you write this 
 select name , id from table . 
 
 ab wo bol rha h ki nhi 3 chahiye : 
-select name , id , family from tabel ;
+select name , id , family from table ;
 
 ab wo bo rha h ki nhi 4 chchiye :
-select name , id , sex , family form tabel .
+select name , id , sex , family form table .
 
 //bhai aa toh pagal ho jayoge aur agr usne bol diya ki sbko merge krdo toh aap bologe ki unpossible . iske liye grouping sets hote h.
 
@@ -1261,6 +1286,18 @@ group by grouping sets
 	(name , sex),
 	(name , sex , family)
 )
+
+Output (conceptually)
+Name	Sex	Family	TotalSalary
+Ram	NULL	NULL	50000
+Sita	NULL	NULL	60000
+Mohan	NULL	NULL	55000
+Ram	M	NULL	50000
+Sita	F	NULL	60000
+Mohan	M	NULL	55000
+Ram	M	Sharma	50000
+Sita	F	Sharma	60000
+Mohan	M	Verma	55000
 
 toh in sbka union all aa jayega and baaki jagah null aa jayega means teeno table jud gyi aapas m . 
 
@@ -1276,7 +1313,14 @@ rank() over (order by salary ) as rank , //gives 1 ,2 3 4 ,
 dense_rank() over (order by salary ) as dense rank , //gives 111,222 ,33
 from table ; 
 
-
+🔹 Output
+Employee	Salary	RowNum	RankNum	DenseRankNum
+A	   	500	1	1	1
+B		500	2	1	1
+C		700	3	3	2
+D		800	4	4	3
+E		800	5	4	3
+F		900	6	6	4
 ----------------------------------------------------------------------------------------
 NOT IN SQL ::
 
@@ -1291,239 +1335,12 @@ WHERE Country NOT IN ('Germany', 'France', 'UK');
 3 - Like with not 
 SELECT * FROM Customers
 WHERE CustomerName NOT LIKE 'a%';
- 
 
-
-select CategoryName, IsActive as quantity into
- [dbo].[newtable] from uday.dbo.tbl_Product_Category;
-
-Create a new table and insert the data from the existing table . It is a permanent table which is stored in the current database . 
-
-select CategoryName, IsActive as quantity into #temptable from uday.dbo.tbl_Product_Category;
-
-#temptabe means it is a temporary table and it is visible only for you , if you just close the window this table is just vanished , only valid to a session 
-
-Views : does not create a table but actually created a window and shows the necesaary columns that you need .
-
-Query : 
-Create View MyCustomerView 
-as 
-select * from table where country = 'India';
-
-Execute:
-select * from MyCustomerView ;
-
-
-TRIGGERS: We doing something when some sort of things happened . Like if the donation is greater than 1000 million then send a mail , if the donation is 5m then send error and as well as save this in the log . and these actions are some sort of sql statement sequence .
-
-So triggers are statemenets that are automatically updated or run when some sort of an insert /update/delete happens in your table . you can write your own code for run . we can call this automated checks or sort of scripts that get executed when some event or activity happens in your table . 
-
-So : trigger is a stored program that automatically executes when certain events occur. Triggers can execute in response to.
-
-query :
-:This is the pattern 
-Create trigger demo(trigger name) on(which table do you want to fire trigger ) table 
-AFTER?BEFORE  INSERT/UPDATE/DELETE 
-AS 
-BEGIN 
-PRINT 'INSERT IS NOT ALLOWED '
-ROLLBACK Transaction  
-END 
-GO 
-
-
-original query :
-Create trigger Hi on mytable
-AFTER INSERT
-AS 
-BEGIN 
-PRINT 'INSERT IS NOT ALLOWED '
-ROLLBACK Transaction  
-END 
-GO 
-
-
-TEST THE TRIGGER : 
-INSERT INTO MYTABLE (1,2323,UDAY);
-
-ANS : 'INSERT IS NOT ALLOWED 'is PRINTED ;
-
-CHECK :  SELECT * FROM MYtable ; You will not seen any row inserted . Trigger was automatically fired .
-
-But the thing is that it is the table level beacuse we try to something in the table level and your statement get executed 
-. What is when you do not create a trigger at the table level .
-
-When you something want something at the database level , because we don't have to write trigger for every table. 
-
-
-
-At database level :->
-
-create trigger trig on databse 
-after create_table 
-AS
-begin 
-Print 'creation of new table is not allowed '
-roolback  transaction 
-end 
-go 
-
-
-
-IF YOU TRY TO CREATE A TABLE OVER HERE 
-CREATE TABLE MYDEMO ; TRIGGER FIRE AND DOEST ALLOW TO MAKE TABLE .
-
-
-
-STORED PROCEDURE : 
-
-IS A SET OF SQL STATEMENTS THAT ARE STORED IN THE DATABASE . 
-
-Query : 
-
-create procedure MytestProc 
-As
-Set nocount on --this will not show how many rows are affected
-select * from table ; 
-
-
-Execute stored procedure : 
-
-Execute MytestProc ;
-
-Another stored proc : 
-
-create procedure MytestProc2 
-As
-Set NOCOUNT off // this will show how many rows are affected
-select * from table ; 
-
-Execute  MytestProc2 or exec MytestProc2  ;
-
-DROP PROC MytestProc2; //drop the procedure 
-
-//Parameterised stored procedure : 
-
-
-Create procedure Myfirstparaproc
-@ParamName varchar(30)
-as 
-Set Nocount on
-select * from table where productname = @paramname ; 
-
-
-call that proc :
-exec myFirstPARAPROC @ParamName = 'warner' or 
-exec MyfristParamproc 'warner '  // values are passed must be in the same order //
-exec MyFirstParamProc  // and you not pass any parameter then it shows error ;  
-
-//so to overcome that problem that paramter is missing . then make the same procedure but slightly different way.
-
-Create procedure Myfirstparaproc
-@ParamName varchar(30) = 'defaultname'
-as 
-Set Nocount on
-select * from table where productname = @paramname ; 
-
-exec Myfirstparaproc ; //running normal 
-
-
---Output Parameter :
-
-Create proc myoutputProc 
-@topshift varchar(30) output //I dont want this value from user , this is the output parameter 
-Set @topshift = (select top 1 id  from table) ;
-
-//declare the procdure 
-Declare @outputResult vachar(50);
-
-//execute the proc
-Exec myoutputProc @outputResult output ; // getting a single value 5 
-
-
-
-//If you want a stored procedure should do something and return a value. 
-
---Returning values from stored procdure  
-
-Create proc myfirstReturnProc
-As
-Return 12 
-
-
-Declare @returnvalue int ;
-
-Exec @returnvalue = myfirstReturnProc;
-select @returnvalue // value should be 12 ; 
-
-
-
-
-UDF = USER DEFINE FUNCTION :
-
-tHREE TYPES OF FUNCTIONS ; 
-1 - SCALAR FUNCTIONS : RETURN A SINGLE DATA VALUE IN RETURN CLAUSE .
-2 - TABLED VALUED FUNCTIONS : RETURN A TABLE DATA TYPE.
-3 - SYSTEM FUNCTIONS : THESE ARE SYSTEM FUNCTIONS THAT CANNOT BE MODIFIED ND THAT PERFORM SOME SPECIFIC FUNCTIONS .
-
-select * from table ; 
-
-
-1 scalar based :
-
-create function sales ()
-return money
-AS 
-Begin 
-Declare @ytsales Money 
-select @ytsales = sum(salesintable) from table 
-return  @ytsales
-
-Exec; 
-Declare @ytresult money(type)
-select @ytresult = sales(); 
-print @ytresult 
-
-
---Paramertized functions 
-
-
-
-create function sales (@group varchar(20))
-return money
-AS 
-Begin 
-Declare @ytsales as Money 
-select @ytsales = sum(salesintable) from table where group = @group ; 
-return  @ytsales
-
-Declare @ytresult money(type)
-select @ytresult = sales('north America'); 
-print @ytresult 
-
-
---function returning table ; 
-
-
-create function tbl 
-@id int 
-return table 
-as 
-begin 
-select * from table where id = @id ; 
-
-
-select * from tbl(7);
-or if you wnat paramters ; 
-select name , id from tbl(7);
-
-
-
-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------
 
 E.F CODD , RAYMOND , DONALD PURPOSE SEQUEL : A structure English Query Language .
 Based on Relationship algebra . 
-You can move from one platform to another like oracle to MySQL or other so it is portabe . oracle give all the features purposed by SQL . 
+You can move from one platform to another like oracle to MySQL or other so it is portable . oracle give all the features purposed by SQL . 
 
 SCHEMA : grouping the logical Objects together . 
 Like ek company h use 3 department h finance , HR , Development 
@@ -1539,14 +1356,12 @@ if want table then .* replace it with table name .
 like % 
 
 if column contain 90% and you want to find the names of the students who got 90% but some of the column data contains 90 only not % is there .
-and if i write select name form table where percentage like '90%' ; so it takes % as the null or more characters which i dont need as teh outcome is wrong . 
+and if i write select name form table where percentage like '90%' ; so it takes % as the null or more characters which i don't need as the outcome is wrong . 
 
-so to overcome the issues we use 
+so to overcome the issues we use :
+
 select name form employee where percentage like '90\%' ; so now it does not take % as null or more characters . 
-same in this as select * from employee where email id is '%abc\_@%.' so  the output would be abc_ thats email i will get.
-
-
-	
+same in this as select * from employee where email id is '%abc\_@%.' so  the output would be abc_ that's email i will get.
 
 
 
