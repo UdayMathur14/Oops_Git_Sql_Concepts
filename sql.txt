@@ -1365,6 +1365,28 @@ same in this as select * from employee where email id is '%abc\_@%.' so  the out
 
 
 
+👉 Simple rule:
+
+Use Function when you need a reusable calculation / logic inside a query.
+
+Use Stored Procedure when you need to perform business logic, transactions, or modify data.
+
+					✅ Difference Between Function and Stored Procedure
+
+Point		Function	                          			       Stored Procedure
+Return Value	Must return a value (scalar or table)					May or may not return value
+Use in SELECT	Can be called inside SELECT, WHERE, JOIN				Cannot be used in SELECT
+DML Operations	Cannot perform INSERT, UPDATE, DELETE (only read)			Can perform INSERT, UPDATE, DELETE
+Error Handling	No TRY..CATCH								Supports TRY..CATCH
+Transactions	Not allowed							        Allowed
+Parameters	Only input parameters							Can have input & output parameters
+Execution	Called like SELECT dbo.fn_Name()					Called with EXEC or EXECUTE
+Performance	Good for reusable calculations						Better for complex logic and large operations
+
+	
+
+
+
 
 
 
