@@ -2,18 +2,18 @@ DATA = any fact that can be recorded or stored is called data.
 
 DATABASE = collection of data.
 
-DATABASE MANAGEMENT SYSTEM = a software which is used to construct or manipulate and retrieve data in the database.
+DATABASE MANAGEMENT SYSTEM = a software which is used to construct , manipulate and retrieve data in the database.
 --------------------------------------------------------------------------------
 
 how we get data by your computer :
 
 1)client -> we can say that the machine is client like laptop or pc OR the google chrome or any other browser which helps us to contacting to the server is called client . 
 
-2) server : machine is called server in which server prog is install in it . meaning os server program it is a software which is serving of client all over the world. eg facebook server . 
+2)server : machine is called server in which server prog is install in it . meaning os server program it is a software which is serving of client all over the world. eg facebook server . 
 
 server contains same cpu , ram and hardisk . 
 
-works : suppose a guy ram opens laptop and types facebook.com , then his request is sending to the Facebook server , then in ram there is a server program it helps us because there is millions of client , some people asking of facebook webpage or something , it is the duty of server prog to give apprepiate webpage to the client .
+works : suppose a guy ram opens laptop and types facebook.com , then this request is sending to the Facebook server , then in ram there is a server program it helps us because there is millions of client , some people asking of facebook webpage or something , it is the duty of server prog to give appropriate webpage to the client .
 
 suppose i want to make a server so i have to buy a hosting like go daddy or anyone in which i stored the data (proving hosting to client) .
 
@@ -28,15 +28,15 @@ Rows are known as tuple, record .
 
 Advantages of database:
 1 - Sharing is easy. ex = like fb we stored the profile photo and anybody seen it .
-2- Avoid data duplicay ex = 2 baar ashish likh dunga table m toh same data store ho jayega wo m nhi chahata toh yeh usko rokta h . by use of primary key toh usse nhi hogi duplicay.
+2 - Avoid data duplicon ex = 2 baar ashish likh dunga table m toh same data store ho jayega wo m nhi chahata toh yeh usko rokta h . by use of primary key toh usse nhi hogi duplicacy.
 3 - Data consistent = suppose 4 table h and sbme ashish naam h but hme kuch change krna h toh wo sbke ander hona chahiye.
-4 - Confedential = alag alag logo ke liye alag alag view ho skta h like teacher ke liye alag and uske students ke liye alag.
+4 - Confidential = alag alag logo ke liye alag alag view ho skta h like teacher ke liye alag and uske students ke liye alag.
 5 - Highly securable.
 
 
 DATA MODEL : used to represent the structure in the database :
 
-1) er model = diagramitic representation 
+1) er model = diagrammatic representation 
 eg : like table called employee : it has some fields like name , moblie no , sex :
 then the system shows only table name and how many columns contain by that table .
 
@@ -80,7 +80,7 @@ we stored all the files in server.
 front end core is basically a html file , the web page which we see is call a frontend which we interact in our screen , frontend means how it looks and backend means how it works. example car is frontend and backend is basically a engine .
 
 two types of language are there 1- relational algebra and second one is sql .
-relational algebra is a theoryritical language and sql is a practical language.
+relational algebra is a theoretical language and sql is a practical language.
 
 we are not write relational algebra language in computer .
 sql is derived from the relational algebra , both are exactly same , equally powerful , means same thing is done with sql as in relational algebra.
@@ -140,7 +140,7 @@ create table employee( eid int ,
                     gender char(1) NOT NULL,(that means the gender value does not contain a null value is you give null to it then it shows error);
                      dob date);
 
-2 ) if we khow that in universe no two no. are same then we used unique constraints to it like : 
+2 ) if we know that in universe no two no. are same then we used unique constraints to it like : 
 UNIQUE CONSTRAINT:
 
 create table employee( eid int ,
@@ -149,7 +149,7 @@ create table employee( eid int ,
                      phoneno int UNIQUE (by writing unique if we write a duplicate no then it shows error to that  );
 
 
-3 ) primary key , question - can we create a table without the primary key ?
+3 ) Primary key , question - can we create a table without the primary key ?
 ans - the answer is yes .
 
 we never create a table without primary key in general . 
@@ -181,9 +181,7 @@ so an attribute in default can accept the null values and also the duplicates va
 
 Composite key :A primary key having 2 or more attributes or columns is called composite key . 
 
-
-
-4 ) foreign key :
+4 )Foreign key :
 It is a column or a set of columns in a table that establishes a link or relationship between two tables in a relational database.
 
 Are the columns of a table that points to the primary key of another table.
@@ -211,6 +209,8 @@ create table employee( eid int  ,
                     primary key(eid),
                     FOREIGN  key(depID) references department(dID) );
 
+Yes, a foreign key can reference a non-primary key, but only if that column has a UNIQUE constraint.
+
 we have to ensure that all the depid are present in the department table because a person works in the company must have some department name in the department table . -- mtb yeh h ki employee ke ander agr m koi id daalunga toh wo present hogi hi hogi departmnet m .
 
 5 ) check constraints :
@@ -224,10 +224,12 @@ for employee table :
                     salary int CHECK (salary>50),( this will ensure that salary must be greater than 50 k , if not then it will throw an error )
                     primary key(eid) );
 
-6 ) default constraints
+In a CHECK constraint, the condition is only checked when the value is not NULL.
+If you insert NULL, the CHECK constraint does not fail unless you also add NOT NULL.
+
+6 ) Default constraints
 
 suppose we don't want to put null values in the table so we can use default value while making table that will set a permanent value in that column if we do not provide any information in that column .
-
 
 for department table 
  create table employee( dID int  , 
@@ -297,30 +299,18 @@ A JOIN clause is used to combine rows from two or more tables, based on a relate
 Types of joins are :
 1 - (INNER) JOIN: Returns records that have matching values in both tables.
  
-
 question - display the names of all the person who work for hr department by using where .
 
 how it works it match the 1 tuple to all the 3 tuple with the department name like sam with all 3 then , ram with all three , those names dpno matches with dno with hr department will show the results.
 
 to write query like this: 
-yeh jo query likh rhe h wo bina inner use ke likh rhe h , where ka use krke normally .
-
-select ename
-from employee , department 
-where dpno = dno and dname = 'hr';
-
-or 
+yeh jo query likh rhe h wo bina inner use ke likh rhe h , where ka use krke normally . 
 
 SELECT *
 FROM Orders
 INNER JOIN Customers
 ON Orders.CustomerID=Customers.CustomerID;
 
-
-SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
-FROM Orders
-INNER JOIN Customers
-ON Orders.CustomerID=Customers.CustomerID;
 ----------------------------------------------------------------------------------------
 2-  LEFT JOIN : In some databases LEFT JOIN is called LEFT OUTER JOIN.
 The LEFT JOIN keyword returns all records from the left table (table1), and the matching records from the right table (table2). The result is 0 records from the right side, if there is no match.
@@ -384,10 +374,10 @@ where E.dpno = D.dno ;   we created the shotcut of employee as e and department 
 
 HOW TO USE UNION :
 
-select ename
+select ename (empname}
 from employee ;
    union 
-select dname 
+select dname (deptname ) 
 from employee ;
 
 OR 
@@ -397,9 +387,11 @@ UNION
 SELECT column_name(s) FROM table2;
    
 Rules : 
-Every SELECT statement within UNION must have the same number of columns
-The columns must also have similar data types
-The columns in every SELECT statement must also be in the same order
+Columns count = same
+Datatype = compatible
+Column names = first query se aate hain
+
+Column names = first query se aate hain jaise ki iss query ke result m top pr column name ename hi ayega 
 
 
 ->THIS WILL GIVE ALL the name in the table and union means it does not repeat the name .
