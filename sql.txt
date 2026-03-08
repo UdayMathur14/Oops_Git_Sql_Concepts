@@ -586,9 +586,7 @@ eid      ename    age    sex                         dno           dname
 query : select Dname from department where dno in (select E.eid from employee E where E.sex='m'); 
 
 so we can clearly see this that there is also a query in IN statement and we cant go further without solving it , so we first solve the inside query (subquery) then () query :
-
 answer : the in() query will give those names where there is male and we can see it 100 and 102 can are male :
-
 
 select Dname from department where dno in (100 , 102); 
 ----------------------------------------------------------------------------------------
@@ -620,10 +618,6 @@ query : select EID , avg(sal) from employee group by EID ;(jo hm group by ke aag
 
 group by == yeh duplicates ko sirf ek baar hi likhta ha . 
 
-jaise maan lo 33 sal 5 bndo ki ha tb wo 5 count rakhlega ek saath and and un 5cho ki ek saath avg salary nikaal dega  
-
-toh yeh 2 column degi ek ke ander avg salary aur dusre ke ander uski ID iss query ke anusaar hmare pass 3 tuples ayenge and 3 avg salary .
-
 another eg:
 
 SELECT COUNT(Country), Country
@@ -637,7 +631,6 @@ yeh count batega customer id ka ki wo country kitni baar aa rakhi h
 2         india 
 1         finland 
 5         london
-
 ----------------------------------------------------------------------------------------
 
 select ID , min(sal) from employee group by ID ;  -- yeh hme minimum salary bta degi apne apne id ki ki sabse jyada minimum salary kitni h particular id ki . 
@@ -657,7 +650,6 @@ select sex , count(*) from employee group by sex; --this will give us both of ma
 sex      count(*)
 M          4    
 F          4
-
 ----------------------------------------------------------------------------------------
 
 //some concepts also needed : 
@@ -674,7 +666,6 @@ WHERE CustomerID=1;
 
 update krdo empolyee table ko , set krdo contact name ko  = alfed and city ko = frank.. , jha pr bhi id no 1 ha .
 
-
 2) Delete in Sql :
 if you want to delete the data in the table then yo use it like this:
 
@@ -683,7 +674,6 @@ DELETE FROM Customers WHERE CustomerName='Alfreds Futterkiste';
 delete krna h customertable se jha p customer name ha alfed ..
 
 ----------------------------------------------------------------------------------------
-
 SELECT COUNT(*) 
 FROM (SELECT DISTINCT DepartmentID FROM Employees) AS DeptCount;
 
@@ -717,21 +707,24 @@ COUNT(*) → har row ko ginta hai, chahe value NULL ho ya na ho., agr yha  3 nul
 Rows = 5
 👉 Output = 5
 
-
-
 SELECT Name FROM Employees
 WHERE Salary > ALL (
   SELECT Salary FROM Employees WHERE Department = 'HR'
 );
-Isme saari salary select hogi hr waalo ki , gr iske ander maan lo null aa gya inner ke ander toh ek bho row select nhi hogi 
+Isme saari salary select hogi hr waalo ki , gr iske ander maan lo null aa gya inner ke ander toh ek bho row select nhi hogi .
 
+| Query           | NULL ka behavior                    |
+| --------------- | ----------------------------------- |
+| `DISTINCT`      | NULL ko 1 value ki tarah rakhta hai |
+| `COUNT(column)` | NULL ignore karta hai               |
+| `COUNT(*)`      | NULL bhi count karta hai            |
 
 ----------------------------------------------------------------------------------------
 Joins Started :
 
 Use where clause without using Join:
 
-query : select * FROM table1 , table2 where Name = UserId ;
+query : select * FROM table1 , table2 where Name = 'uday' ;
 
 1 - Cross Join = Table1 , 3 rows
  	         Table2 , 2 rows
@@ -749,44 +742,13 @@ result : 3*2 = 6 total query where each row matches with the other two in table 
 2 - Self Join : Table Joins with itself . (square of the no of rows it have)
 
 Table1 have 3 rows
-query : select * from table1 as A inner join table1 as B;
+query :   select u.[Username],b.[Password]  from [Users] u , [Users] b; cross join ko hi use kiya h lekin self join ke liye
 
-table1 has 3 query so it multipy with itself hence total no of rows will be 9 , ie (3*3).
-
-
-3 - Inner Join = Results common rows between both the tables on the basic of On query which we wright , Mandatory to write the on query in inner join . 
-
-if both the column names matches then it shows in the result .
-
-4 - Left join = Give all the left tables list for sure , whether it matches or not matches with other table . and If some matches then the other table data is also there . 
-
-
-Table1 = 3 rows and Table2 has 3 rows 
-
-query = select * from table1 left join table2 on PHNO = UserId;
-
-
-output = all rows of the left table which is table1 has 3 rows :
-
-ie = 3+(if matches with the other table then it also adds up);
-
-
-5= right join = gives all the right rows of the table whether it is in the left table or not.
-
-Table1 = 3 rows and Table2 has 2 rows 
-
-query : select * from table1 right join table2 on PHNO = UserId;
-
-isme same h upar waale ki trah ki :
-
-left table is table1 and right table is table2 . 
-
-so all the data of table2 which is 2 and if matches with the on query then adds up.
-
+table1 has 3 query so it multipy with itself hence total no of row 3*3 = 9.
 
 6 - Full join :
 | ID | NAME     | AGE | ADDRESS   | SALARY   |
-+----+----------+-----+-----------+----------+
++----+----------+-----+-
 |  1 | Ramesh   |  32 | Ahmedabad |  2000.00 |
 |  2 | Khilan   |  25 | Delhi     |  1500.00 |
 |  3 | Kaushik  |  23 | Kota      |  2000.00 |
@@ -846,6 +808,8 @@ agr capital m hi chahiye toh same in where  :
 
 SELECT * FROM Customers
 WHERE CustomerName COLLATE Latin1_General_CS_AS LIKE 'A%';
+
+depend krta h waise db m agr wo colate state m h ki nhi .
 
 ------------------------------------------------------------------------------------------------
 
