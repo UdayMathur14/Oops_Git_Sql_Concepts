@@ -40,12 +40,10 @@ DATA MODEL : used to represent the structure in the database :
 eg : like table called employee : it has some fields like name , moblie no , sex :
 then the system shows only table name and how many columns contain by that table .
 
-
 2) relational  model = represented using collection of table . 
 eg: in this it shows column with all the information in a table . 
 
 -------------------------------------------------------------------------------
-
 SQL (structured query language )
 
 A query language which is used to update or retrieve data in a relational database .
@@ -280,6 +278,10 @@ ans - it is not eliminate duplicates , it shows all the values ;
 
 select distinct enames from employee ; -- it eliminates all duplicates and show the ename table.
 
+DISTINCT → duplicate values remove karta hai
+NULL ko ek value ki tarah treat karta hai
+Multiple NULL → result me sirf 1 NULL
+
 select ename from employee where age = 28; -- it will only show names of that member whose have the age 28 ; 
 
 ------------------------------------------------------------------------------------------
@@ -393,11 +395,8 @@ Column names = first query se aate hain
 
 Column names = first query se aate hain jaise ki iss query ke result m top pr column name ename hi ayega 
 
-
 ->THIS WILL GIVE ALL the name in the table and union means it does not repeat the name .
 The UNION operator selects only distinct values by default. To allow duplicate values, use UNION ALL:	
-
-
 ----------------------------------------------------------------------------------------------------------
 
 🧠 Simple Analogy:
@@ -414,7 +413,13 @@ A UNION ALL B = {1, 2, 2, 3, 2, 3, 4} → All values from A and B, including dup
 A INTERSECT B = {2, 3} → Only values that exist in both A and B.
 -> intersect in which it shows only the common names from both the tables. 
 
-->except in which it shows those names which contain only in one table and does have in another table.  
+->except in which it shows those names which contain only in one table and does have in another table.
+Table1 me jo values hain
+lekin Table2 me nahi hain
+
+Important Rule
+Dono queries me same number of columns hone chahiye
+Columns ka datatype compatible hona chahiye
 ---------------------------------------------------------------------------------------
 
 LIKE OPERATOR 
@@ -426,7 +431,6 @@ like jo ename A start honge wo aa jayenge isme .
 
 ---------------------------------------------------------------------------------------------------
 CONCATINATION(||) IN SQL :
-
 
 employee table 
 
@@ -541,7 +545,7 @@ eid      fname    age    sex    dpno   lname
 
 query select ename from employee where age not in (28 , 29);
 
-points : if there are null values present in the age then to find the age of those column are unknown . then we cant say tht it is 28 or 29 so we cant consider it . 
+points : if there are null values present in the age then to find the age of those column are unknown . then we cant say this it is 28 or 29 so we cant consider it . 
 
 ANS : it is sam only which is not 28 or 29.
 
@@ -561,7 +565,6 @@ all refers to and .
 it means that we have to select those names whose ages are greater than 25 and 26 :
 if the value is unknown it is not consider . 
 
-
 ANY OR SOME are exactly same in their work there is no difference in that . 
 
 query :select ename from employee where age> some(25,26);
@@ -570,7 +573,6 @@ if the age is greater than any of these single values then it will be count in t
 
 in case of query : select ename from employee where age> all(25,26 , null);
 NULL agar ALL list ke andar ho → pura condition fail ho jaata hai (result empty).
-
 ------------------------------------------------------------------------------------------
 NESTED SUBQUIRES in SQL :--> having a query inside a query .
 
@@ -615,7 +617,6 @@ question : to find the average salary of each department :
 for this answer we have to use the group by statement like this :
 
 query : select EID , avg(sal) from employee group by EID ;(jo hm group by ke aage likhenge wo same hme select m bhi likhna padega ).  
-
 group by == yeh duplicates ko sirf ek baar hi likhta ha . 
 
 another eg:
@@ -821,62 +822,46 @@ SELECT NAME, LISTPRICE, LISTPRICE + 10 AS ADJUSTED_LIST_PRICE  INTO newtable FRO
 
 //so it done 2 works :- creates a new table and then enter tuples into it. 
 
-
 ::Temporary table : jb aapko ek temporary table banani ho kisi kaam ke liye aise h . aur temporary h means kaam nhi h uska baad so . so jaise hi hm uss page se jayenge toh wo table apne aap hi delete ho jayegi . for temporary table we use #.
 
 query:
  SELECT NAME, LISTPRICE, LISTPRICE + 10 AS ADJUSTED_LIST_PRICE  INTO #tmpname FROM [Production].[Product]
 --------------------------------------------------------------------------------------------------------------
 ::Dates concepts :
-
 --DATES
-
 SELECT GETDATE()  //current date with time 
-
 SELECT GETDATE() - 2 //current date - 2 days 
 
 --DATEPART
-
 SELECT DATEPART(yyyy, GETDATE()) //year  2025
-
 SELECT DATEPART(dd, GETDATE())  // day aa jayega 5 
-
 SELECT DATEPART(mm, GETDATE())  //get monthe 
 
-
 --DATEADD
-
 SELECT DATEADD(day, 4, GETDATE())
 SELECT DATEADD(month, 4, GETDATE())
 SELECT DATEADD(year, 4, GETDATE())
 
 --DATEDIFF
-SELECT DATEDIFF(day, '6/1/2015', GETDATE())  //'6/1/2015', moth , day and then year 
-
 SELECT DATEDIFF(month, '4/1/2015', GETDATE())
-
 SELECT DATEDIFF(year, '6/1/2014', GETDATE())
-
---GET THE FIRST DAY OF THIS MONTH
-SELECT (DATEADD(dd, -(DATEPART(day, GETDATE()) - 1), GETDATE()))
 -----------------------------------------------------------------------------------------
 
 ::Strings functions
-
 SELECT ORDERNUMBER, ORDERNAME, CONCAT(ORDERNAME, ' ' , ORDERNAME) AS CONCATENATEDTEXT FROM MYORDER
 
---RAND(): generate random no 
+--RAND(): generate random no RAND() → 0 se 1 ke beech random number deta hai , 5 mans upto 5 decimal places
 SELECT ORDERNUMBER, ORDERNAME, CONCAT(ORDERNAME, ' ' , RAND(5)) AS CONCATENATEDTEXT FROM MYORDER
 
 --LEFT : take characters from left which is 5 .
-SELECT ORDERNUMBER, ORDERNAME, LEFT(ORDERNAME, 5) FROM MYORDER --measn left se 5 utha lo 
+SELECT ORDERNUMBER, ORDERNAME, LEFT(ORDERNAME, 5) FROM MYORDER --means left se 5 utha lo 
 
 --RIGHT: take characters from right which is 5 .
 SELECT ORDERNUMBER, ORDERNAME, RIGHT(ORDERNAME, 5) FROM MYORDER -- right se 5 utha lo bs normal hi dikhana is case m last 5 ho gye jo output ayega 
 
+SUBSTRING(column_name, start_position, length)
 --SUBSTRING :1 se start ho rha h index no . 2 se start hoga aur 5th index tk krega 
 SELECT ORDERNUMBER, ORDERNAME, SUBSTRING(ORDERNAME, 2, 5) FROM MYORDER --SUBSTRING(Title, 1, 5) extracts the first 5 characters of the Title column.
-1 is the starting point , first alpha is 1
 
 --LOWERCASE
 SELECT ORDERNUMBER, ORDERNAME, LOWER(ORDERNAME) FROM MYORDER
@@ -897,20 +882,6 @@ SELECT RTRIM(LTRIM('   MyText    ')): both sides of spaces.
 ----------------------------------------------------------------------------------------
 --Advanced Level Concepts of SQL 
 
-//Add a data to a new table .
-
-select CategoryName, IsActive as quantity into
- [dbo].[newtable] from uday.dbo.tbl_Product_Category;
-
-Create a new table and insert the data from the existing table . It is a permanent table which is stored in the current database . 
-
-
-//TEMPORARY TABLE 
-select CategoryName, IsActive as quantity into #temptable from uday.dbo.tbl_Product_Category;
-
-#temptabe means it is a temporary table and it is visible only for you , if you just close the window or current tab this table is just vanished , only valid to a session 
-
-
 //VIEWS IN SQL 
 Views : does not create a table but actually created a window and shows the necessary columns that you need .
 
@@ -924,7 +895,7 @@ select * from MyCustomerView ;
 
 ----------------------------------------------------------------------------------------
 TRIGGERS :
-We doing something when some sort of things happened . Like if the donation is greater than 1000 million then send a mail , if the donation is 5rupees then send error and as well as save this in the log . and these actions are some sort of sql statement sequence .
+We doing something when some sort of things happened . Like if the donation is greater than 1000 million then send a mail , if the donation is 5 rupees then send error and as well as save this in the log . and these actions are some sort of sql statement sequence 
 
 So triggers are statements that are automatically updated or run when some sort of an insert/update/delete happens in your table . you can write your own code for run . we can call this automated checks or sort of scripts that get executed when some event or activity happens in your table . 
 
@@ -939,7 +910,6 @@ ROLLBACK Transaction
 END 
 GO 
 
-
 original query :
 Create trigger Hi on mytable
 AFTER INSERT
@@ -949,7 +919,6 @@ PRINT 'INSERT IS NOT ALLOWED '
 ROLLBACK Transaction  
 END 
 GO 
-
 
 TEST THE TRIGGER : 
 INSERT INTO MYTABLE (1,2323,UDAY);
@@ -989,7 +958,6 @@ As
 Set nocount on --this will not show how many rows are affected
 select * from table ; 
 
-
 Execute stored procedure : 
 
 Execute MytestProc ;
@@ -1005,15 +973,12 @@ Execute  MytestProc2 or exec MytestProc2  ;
 
 DROP PROC MytestProc2; //drop the procedure 
 
-//Parameterised stored procedure : 
-
-
+//Parameterised stored procedure :
 Create procedure Myfirstparaproc
 @ParamName varchar(30)
 as 
 Set Nocount on
 select * from table where productname = @paramname ; 
-
 
 call that proc :
 exec myFirstPARAPROC @ParamName = 'warner' or 
@@ -1030,7 +995,6 @@ select * from table where productname = @paramname ;
 
 exec Myfirstparaproc ; //running normal 
 
-
 --Output Parameter :
 
 Create proc myoutputProc 
@@ -1043,8 +1007,6 @@ Declare @outputResult vachar(50);
 //execute the proc
 Exec myoutputProc @outputResult output ; // getting a single value 5 
 
-
-
 //If you want a stored procedure should do something and return a value. 
 
 --Returning values from stored procdure  
@@ -1053,14 +1015,10 @@ Create proc myfirstReturnProc
 As
 Return 12 
 
-
 Declare @returnvalue int ;
 
 Exec @returnvalue = myfirstReturnProc;
 select @returnvalue // value should be 12 ; 
-
-
-
 
 UDF = USER DEFINE FUNCTION :
 
@@ -1069,9 +1027,7 @@ TYPES OF FUNCTIONS ;
 2 - TABLED VALUED FUNCTIONS : RETURN A TABLE DATA TYPE.
 3 - SYSTEM FUNCTIONS : THESE ARE SYSTEM FUNCTIONS THAT CANNOT BE MODIFIED ND THAT PERFORM SOME SPECIFIC FUNCTIONS .
 
-
 ::user define functions: that accept parameter and perform an action such as a complex calculation and returned the result of an action.
-
 
 1 scalar based :
 
@@ -1103,10 +1059,7 @@ Declare @ytresult money(type)
 select @ytresult = sales('north America'); 
 print @ytresult 
 
-
 --function returning table ; 
-
-
 create function tbl 
 @id int 
 return table 
@@ -1127,14 +1080,11 @@ RETURN (
     FROM Orders
     WHERE CustomerID = @CustomerID
 );
-
-
 ------------------------------------------------------------------------------------------
 
 TRANACTIONS IN SQL:
 -if a transaction is successful all the data modification are made during the transaction are committed and become the permanent part of the database.
 -if the transaction is failed then unable to update and the data is roll back.
- 
  
 ::ACID : atomicity , consistency , isolation and durability.
 
