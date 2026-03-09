@@ -1111,8 +1111,6 @@ Declare @errorresult varchar(40)
 Begin transaction 
 insert into table values(1,2,'uda');
 
-
-
 Set @errorresult = @@Error 
 
 If(@errorresult=0)
@@ -1126,34 +1124,6 @@ but if the statemenet didnt succeed.
 Else begin 
 print 'falied transaction '
 roolback transaction 
-end 
-
-
---Custom error message . 
-Using the upper same code . 
-
-Declare @errorresult varchar(40)
-
-Begin transaction 
-insert into table values(1,2,'uda');
-
-
-
-Set @errorresult = @@Error 
-
-If(@errorresult=0)
-Begin 
-print 'successful'
-commit transaction 
-end
-
-but if the statemenet didnt succeed.
-
-Else begin 
-RAISEERROR('STATEMENET FAILED - THIS IS MY CUSTOME MESSAGE ' , 16 , 1) 
-//INBUILD FUNCTION THAT ACCEPTS PARAMETER
-rollback transaction 
-end 
 
 --TRY AND CATCH : why not to use if and else , because this is the error which is actually shown in the ui , it actually throw as an error . With try and catch you can actually handle this error and don't let the user know that error has occurred.
 
@@ -1171,7 +1141,6 @@ Print 'catch statemenet enter'
 rollback transaction 
 
 ans - there is no error here thrown in the ui but actually it does not store the value . 
-
 ----------------------------------------------------------------------------------------
  
 :Grouping sets : agr maan lo aapka boss bol rha h ki muje 2 column chahye table ke name and id . so you write this 
@@ -1194,19 +1163,18 @@ group by grouping sets
 )
 
 Output (conceptually)
-Name	Sex	Family	TotalSalary
-Ram	NULL	NULL	50000
+Name	Sex	   Family	TotalSalary
+Ram	    NULL	NULL	50000
 Sita	NULL	NULL	60000
 Mohan	NULL	NULL	55000
-Ram	M	NULL	50000
-Sita	F	NULL	60000
-Mohan	M	NULL	55000
-Ram	M	Sharma	50000
-Sita	F	Sharma	60000
-Mohan	M	Verma	55000
+Ram	    M	    NULL	50000
+Sita	F	    NULL	60000
+Mohan	M	    NULL	55000
+Ram	    M	   Sharma	50000
+Sita	F	   Sharma	60000
+Mohan	M	   Verma	55000
 
 toh in sbka union all aa jayega and baaki jagah null aa jayega means teeno table jud gyi aapas m . 
-
 
 --Ranking functions .
 --if you want to give ranking to a table with salary or any other column .
@@ -1215,18 +1183,18 @@ rank repeat bhi ho skti h like 5 bnko ki 500 rs h toh 5,5,5,5,5 rank show ho .
 
 select 	salary ,
 row_number() over (order by salary) as row 
-rank() over (order by salary ) as rank , //gives 1 ,2 3 4 , 
-dense_rank() over (order by salary ) as dense rank , //gives 111,222 ,33
+rank() over (order by salary ) as rank , //gives 1 ,2 , 3 , 4 , 
+dense_rank() over (order by salary ) as dense rank , //gives 1,2,2,3,3
 from table ; 
 
 🔹 Output
-Employee	Salary	RowNum	RankNum	DenseRankNum
-A	   	500	1	1	1
-B		500	2	1	1
-C		700	3	3	2
-D		800	4	4	3
-E		800	5	4	3
-F		900	6	6	4
+Employee	Salary	  RowNum	   RankNum	DenseRankNum
+A	   	     500	   1	          1	         1
+B		    500	       2	          1	         1
+C		    700	       3	          3	         2
+D		    800	       4	          4	         3
+E		    800	       5	          4	         3
+F		    900	       6	          6	         4
 ----------------------------------------------------------------------------------------
 NOT IN SQL ::
 
@@ -1256,8 +1224,7 @@ So i can specify that some people can access this part of schema and this part .
 Create schema Finance Authorization Ravi .
 Grant select on finance.* to user ; 
 
-
-if want table then .* replace it with table name . 
+if want table then (.*) replace it with table name . 
 
 like % 
 
@@ -1269,25 +1236,22 @@ so to overcome the issues we use :
 select name form employee where percentage like '90\%' ; so now it does not take % as null or more characters . 
 same in this as select * from employee where email id is '%abc\_@%.' so  the output would be abc_ that's email i will get.
 
-
-
 👉 Simple rule:
-
 Use Function when you need a reusable calculation / logic inside a query.
-
 Use Stored Procedure when you need to perform business logic, transactions, or modify data.
 
-					✅ Difference Between Function and Stored Procedure
+| **Point**                  | **Function**                                                               | **Stored Procedure**                               |
+| -------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------- |
+| **Return Value**           | Hamesha value return karta hai (scalar ya table)                           | Value return kar bhi sakta hai, nahi bhi           |
+| **Use in SELECT**          | `SELECT`, `WHERE`, `JOIN` ke andar use ho sakta hai                        | `SELECT` ke andar use nahi hota                    |
+| **DML Operations**         | Normally `INSERT`, `UPDATE`, `DELETE` perform nahi karta (read-only logic) | `INSERT`, `UPDATE`, `DELETE` perform kar sakta hai |
+| **Error Handling**         | Direct `TRY...CATCH` support nahi                                          | `TRY...CATCH` support karta hai                    |
+| **Transactions**           | Transactions use nahi kar sakta                                            | Transactions use kar sakta hai                     |
+| **Parameters**             | Sirf **input parameters**                                                  | **Input aur Output parameters** dono ho sakte hain |
+| **Execution**              | `SELECT dbo.FunctionName()`                                                | `EXEC ProcedureName`                               |
+| **Performance / Use Case** | Calculations, reusable logic                                               | Complex business logic, large operations           |
 
-Point		Function	                          			       Stored Procedure
-Return Value	Must return a value (scalar or table)					May or may not return value
-Use in SELECT	Can be called inside SELECT, WHERE, JOIN				Cannot be used in SELECT
-DML Operations	Cannot perform INSERT, UPDATE, DELETE (only read)			Can perform INSERT, UPDATE, DELETE
-Error Handling	No TRY..CATCH								Supports TRY..CATCH
-Transactions	Not allowed							        Allowed
-Parameters	Only input parameters							Can have input & output parameters
-Execution	Called like SELECT dbo.fn_Name()					Called with EXEC or EXECUTE
-Performance	Good for reusable calculations						Better for complex logic and large operations
+
 
 	
 
