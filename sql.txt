@@ -247,8 +247,7 @@ so we have total 6 constraints
 
 ✅ In simple words:
 
-Primary Key = "Main ID of the row" (no duplicates, no nulls, only one).
-Unique Key = "Alternate unique identifier" (no duplicates, nulls allowed, can have many).
+Unique Key = Alternate unique identifier, no duplicates allowed, NULL allowed (SQL Server me only 1 NULL), multiple UNIQUE constraints ho sakte hain.
 
 : Constraint Can be Defined on two levels 
 1 - Column Level 
@@ -716,7 +715,7 @@ Isme saari salary select hogi hr waalo ki , gr iske ander maan lo null aa gya in
 
 | Query           | NULL ka behavior                    |
 | --------------- | ----------------------------------- |
-| `DISTINCT`      | NULL ko 1 value ki tarah rakhta hai |
+| `DISTINCT`      | NULL ko 1 value ki tarah rakhta hai , chahiy 10 ho  |
 | `COUNT(column)` | NULL ignore karta hai               |
 | `COUNT(*)`      | NULL bhi count karta hai            |
 
