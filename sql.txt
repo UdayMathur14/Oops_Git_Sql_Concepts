@@ -972,53 +972,6 @@ Execute  MytestProc2 or exec MytestProc2  ;
 
 DROP PROC MytestProc2; //drop the procedure 
 
-//Parameterised stored procedure :
-Create procedure Myfirstparaproc
-@ParamName varchar(30)
-as 
-Set Nocount on
-select * from table where productname = @paramname ; 
-
-call that proc :
-exec myFirstPARAPROC @ParamName = 'warner' or 
-exec MyfristParamproc 'warner '  // values are passed must be in the same order //
-exec MyFirstParamProc  // and you not pass any parameter then it shows error ;  
-
-//so to overcome that problem that paramter is missing . then make the same procedure but slightly different way.
-
-Create procedure Myfirstparaproc
-@ParamName varchar(30) = 'defaultname'
-as 
-Set Nocount on
-select * from table where productname = @paramname ; 
-
-exec Myfirstparaproc ; //running normal 
-
---Output Parameter :
-
-Create proc myoutputProc 
-@topshift varchar(30) output //I dont want this value from user , this is the output parameter 
-Set @topshift = (select top 1 id  from table) ;
-
-//declare the procdure 
-Declare @outputResult vachar(50);
-
-//execute the proc
-Exec myoutputProc @outputResult output ; // getting a single value 5 
-
-//If you want a stored procedure should do something and return a value. 
-
---Returning values from stored procdure  
-
-Create proc myfirstReturnProc
-As
-Return 12 
-
-Declare @returnvalue int ;
-
-Exec @returnvalue = myfirstReturnProc;
-select @returnvalue // value should be 12 ; 
-
 UDF = USER DEFINE FUNCTION :
 
 TYPES OF FUNCTIONS ; 
@@ -1097,49 +1050,6 @@ isolation : transactions update in the serial order one by one .
 
 durability : once the transaction is committed it will show in the database even if the power loss crashes or more. 
 
-//1 example - Simple transaction
-Begin transaction
-update table 
-set cost = 1 where name = "uday"
-commit tranasaction
-
---@@error = it wil give you the error number of the last executed statement . 0 means success. and non zero means error . 
-
-Declare @errorresult varchar(40)
-
-Begin transaction 
-insert into table values(1,2,'uda');
-
-Set @errorresult = @@Error 
-
-If(@errorresult=0)
-Begin 
-print 'successful'
-commit transaction 
-end
-
-but if the statemenet didnt succeed.
-
-Else begin 
-print 'falied transaction '
-roolback transaction 
-
---TRY AND CATCH : why not to use if and else , because this is the error which is actually shown in the ui , it actually throw as an error . With try and catch you can actually handle this error and don't let the user know that error has occurred.
-
-Declare @errorresult varchar(40)
-
-Begin try 
-Begin transaction 
-insert into table values(1,2,'uda');
-Commit transaction 
-
-End try 
-
-Begin catch 
-Print 'catch statemenet enter'
-rollback transaction 
-
-ans - there is no error here thrown in the ui but actually it does not store the value . 
 ----------------------------------------------------------------------------------------
  
 :Grouping sets : agr maan lo aapka boss bol rha h ki muje 2 column chahye table ke name and id . so you write this 
@@ -1214,16 +1124,6 @@ WHERE CustomerName NOT LIKE 'a%';
 E.F CODD , RAYMOND , DONALD PURPOSE SEQUEL : A structure English Query Language .
 Based on Relationship algebra . 
 You can move from one platform to another like oracle to MySQL or other so it is portable . oracle give all the features purposed by SQL . 
-
-SCHEMA : grouping the logical Objects together . 
-Like ek company h use 3 department h finance , HR , Development 
-so i need to make schema , so group all the related data in one schema . 
-So i can specify that some people can access this part of schema and this part . 
-
-Create schema Finance Authorization Ravi .
-Grant select on finance.* to user ; 
-
-if want table then (.*) replace it with table name . 
 
 like % 
 
