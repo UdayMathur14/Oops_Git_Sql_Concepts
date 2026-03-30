@@ -1226,4 +1226,46 @@ INCLUDE: Ye wo extra columns hain jo index ke "Leaf Level" par chhupa diye gaye 
 
 4. Covering Index ke Fayde aur NuksanFayde (Pros)Nuksan (Cons)Super Fast: "Key Lookup" khatam ho jata hai, query milliseconds mein chalti hai.Disk Space: Index ka size badh jata hai kyunki aap data ki copy bana rahe ho.I/O Bachata hai: Disk se main table ke pages load nahi karne padte.Write Slow: Jab aap main table mein TotalAmount update karoge, toh index wala TotalAmount bhi update karna padega.
 
+SQL & Indexing Quick Revision Notes
+SQL Set Operators & Indexing Summary (GATE Focus)
+
+1.  Set Operators: Distinct vs. All
+    Default set operators in SQL (UNION, INTERSECT, EXCEPT) perform an implicit DISTINCT operation.
+
+  - UNION: Combines rows from both lists. If 'Uday' is in both, result has one 'Uday'.
+  - UNION ALL: Appends lists. If 'Uday' is in both, result has two 'Udays'. (Faster because no sorting/filtering).
+  - INTERSECT: Returns only unique rows present in both lists.
+  - INTERSECT ALL: Uses the Minimum Rule. If 'Uday' is 3 times in A and 2 times in B, result has 2 'Udays' (Min(3, 2)).
+  - EXCEPT ALL: Uses subtraction. If 'Uday' is 3 times in A and 2 times in B, result has 1 'Uday' (3 - 2).
+
+2.  Indexing Structures
+
+  - Hash Index:
+      - Logic: Room Number (Direct mapping).
+      - Best for: Equality (=) matches.
+      - Complexity: O(1) constant time.
+      - Weakness: Cannot do range scans.
+  - B+ Tree Index:
+      - Logic: Dictionary (Sorted pages).
+      - Best for: Range Queries and Sorting.
+      - Complexity: O(log n).
+      - Feature: Leaf nodes are linked for fast sequential reading.
+
+3.  Physical Organization (SQL Server)
+
+  - Clustered Index: The table is the index. Leaf nodes contain the actual data rows. Only one per table.
+  - Non-Clustered Index: A separate structure. Leaf nodes contain a pointer to the data.
+
+4.  Transaction Isolation & ACID
+
+  - Atomicity: All-or-nothing execution.
+  - Durability: Data survives crashes after COMMIT.
+  - Dirty Read: Reading uncommitted data from another transaction.
+  - Serializable: Strictest level; prevents all read anomalies.
+
+5.  Aggregate Functions
+
+  - COUNT(*): Counts every row, including NULLs.
+  - COUNT(Column): Only counts Non-NULL values.
+  - Empty Table: COUNT returns 0, while SUM/AVG return NULL.
 
