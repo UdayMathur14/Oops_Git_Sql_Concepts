@@ -60,8 +60,6 @@ SQL COMMANDS are group into major 4 categories depending on their functionality 
 4 - TCL (transaction control language) = commit , rollback and save points commands are used in tcl .
 
 ------------------------------------------------------------------------------------------
-
-
 two types of database :
 
 1 - relational database
@@ -265,6 +263,8 @@ if in one table the department id is not present that it will give an error , to
 like foriegn key(deptid) references department(did) on delete cascade );
                                                       set null and set default	
 
+Agar parent table (department) se koi row delete hui, toh child table ki related rows bhi automatically delete ho jayengi.
+
 ------------------------------------------------------------------------------------------
 SELECT FROM WHERE EXPLAINED :
 
@@ -311,6 +311,17 @@ SELECT *
 FROM Orders
 INNER JOIN Customers
 ON Orders.CustomerID=Customers.CustomerID;
+
+SELECT *
+FROM Orders
+INNER JOIN Customers
+where Orders.CustomerID=Customers.CustomerID;?
+yeh kya shi h?
+
+Nahi, yeh syntax technically galat mana jaata h because INNER JOIN ke baad ON expected hota h.
+SELECT *
+FROM Orders, Customers
+WHERE Orders.CustomerID = Customers.CustomerID;
 
 ----------------------------------------------------------------------------------------
 2-  LEFT JOIN : In some databases LEFT JOIN is called LEFT OUTER JOIN.
