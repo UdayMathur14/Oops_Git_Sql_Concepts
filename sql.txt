@@ -423,6 +423,10 @@ A UNION ALL B = {1, 2, 2, 3, 2, 3, 4} → All values from A and B, including dup
 A INTERSECT B = {2, 3} → Only values that exist in both A and B.
 -> intersect in which it shows only the common names from both the tables. 
 
+union and intersect counts only one time null.
+
+INTERSECT duplicates remove karta h aur distinct common values hi deta h.
+
 ->except in which it shows those names which contain only in one table and does have in another table.
 Table1 me jo values hain
 lekin Table2 me nahi hain
