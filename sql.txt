@@ -1035,6 +1035,19 @@ TYPES OF FUNCTIONS ;
 2 - TABLED VALUED FUNCTIONS : RETURN A TABLE DATA TYPE.
 3 - SYSTEM FUNCTIONS : THESE ARE SYSTEM FUNCTIONS THAT CANNOT BE MODIFIED ND THAT PERFORM SOME SPECIFIC FUNCTIONS .
 
+| Type                  | Meaning             |
+| --------------------- | ------------------- |
+| Scalar Function       | Single value return |
+| Table Valued Function | Table return        |
+
+| Procedure                    | Function                    |
+| ---------------------------- | --------------------------- |
+| EXEC se chalta               | SELECT me use hota          |
+| Value return optional        | Return mandatory            |
+| Multiple results             | Usually value/table         |
+| INSERT/UPDATE/DELETE allowed | Limited                     |
+| Business logic               | Calculations/Reusable logic |
+
 ::user define functions: that accept parameter and perform an action such as a complex calculation and returned the result of an action.
 
 1 scalar based :
