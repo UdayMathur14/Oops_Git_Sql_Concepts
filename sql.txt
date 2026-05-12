@@ -907,11 +907,44 @@ select * from table where country = 'India';
 Execute:
 select * from MyCustomerView ;
 
+| Point                                          | Meaning                |
+| ---------------------------------------------- | ---------------------- |
+| View data store nahi karti                     | Query store karti hai  |
+| View virtual hoti hai                          | Physical table nahi    |
+| Table update hoga toh view bhi updated dikhega | Dynamic hoti hai       |
+| Complex queries hide kar sakte hain            | Reusability            |
+| Security ke liye use hoti hai                  | Limited columns dikhao |
+| Reports me bahut use hoti hai                  | Dashboard/reporting    |
+| Joins simplify karti hai                       | Frontend easy          |
+
+| View Type                | INSERT       |
+| ------------------------ | ------------ |
+| Single table simple view | ✅ Mostly yes |
+| Join view                | ❌ Mostly no  |
+| GROUP BY view            | ❌ No         |
+| Aggregate view           | ❌ No         |
+
+| Trigger            | Procedure         |
+| ------------------ | ----------------- |
+| Control kam        | Full control      |
+| Hidden execution   | Visible execution |
+| Automatically fire | Explicit call     |
+
+
 ----------------------------------------------------------------------------------------
 TRIGGERS :
-We doing something when some sort of things happened . Like if the donation is greater than 1000 million then send a mail , if the donation is 5 rupees then send error and as well as save this in the log . and these actions are some sort of sql statement sequence 
+We doing something when some sort of things happened . Like if the donation is greater than 1000 million then send a mail , if the donation is 5 rupees then send error and as well as save this in the log . and these actions are some sort of sql statement sequence .
+
+Golden Line
+Trigger = Database ka automatic event listener
 
 So triggers are statements that are automatically updated or run when some sort of an insert/update/delete happens in your table . you can write your own code for run . we can call this automated checks or sort of scripts that get executed when some event or activity happens in your table . 
+
+| Trigger                | Stored Procedure           |
+| ---------------------- | -------------------------- |
+| Automatic chalta hai   | Manually chalani padti hai |
+| Event pe fire hota hai | `EXEC` se run hoti hai     |
+
 
 query :
 :This is the pattern 
@@ -959,6 +992,14 @@ go
 
 IF YOU TRY TO CREATE A TABLE OVER HERE 
 CREATE TABLE MYDEMO ; TRIGGER FIRE AND DOES'T ALLOW TO MAKE TABLE .
+
+| Trigger                 | Procedure        |
+| ----------------------- | ---------------- |
+| Automatic               | Manually call    |
+| Event pe chalta         | Explicit execute |
+| Hidden                  | Visible flow     |
+| Insert/update/delete pe | Jab chaho tab    |
+
 
 ----------------------------------------------------------------------------------------
 STORED PROCEDURE : 
