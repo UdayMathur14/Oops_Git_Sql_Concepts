@@ -9,8 +9,7 @@ how we get data by your computer :
 
 1)client -> we can say that the machine is client like laptop or pc OR the google chrome or any other browser which helps us to contacting to the server is called client . 
 
-2)server : machine is called server in which server prog is install in it . meaning os server program it is a software which is serving of client all over the world. eg facebook server . 
-
+2)server : machine is called server in which server prog is install in it . meaning os server program it is a software which is serving of client all over the world. eg facebook server.
 server contains same cpu , ram and hardisk . 
 
 works : suppose a guy ram opens laptop and types facebook.com , then this request is sending to the Facebook server , then in ram there is a server program it helps us because there is millions of client , some people asking of facebook webpage or something , it is the duty of server prog to give appropriate webpage to the client .
@@ -32,7 +31,6 @@ Advantages of database:
 3 - Data consistent = suppose 4 table h and sbme ashish naam h but hme kuch change krna h toh wo sbke ander hona chahiye.
 4 - Confidential = alag alag logo ke liye alag alag view ho skta h like teacher ke liye alag and uske students ke liye alag.
 5 - Highly securable.
-
 
 DATA MODEL : used to represent the structure in the database :
 
@@ -58,7 +56,6 @@ SQL COMMANDS are group into major 4 categories depending on their functionality 
 3 - DCL(data control language)  = grant and revoke use 
 
 4 - TCL (transaction control language) = commit , rollback and save points commands are used in tcl .
-
 ------------------------------------------------------------------------------------------
 two types of database :
 
@@ -66,7 +63,6 @@ two types of database :
 2 - non relational database . 
 
 sql is a language used to communicate relational database and we used no-sql language for non relational database .
-
 relational database = any data which is stored in the harddisk ,has to be in a form of table.
 
 why we use sql :
@@ -82,18 +78,14 @@ we are not write relational algebra language in computer .
 sql is derived from the relational algebra , both are exactly same , equally powerful , means same thing is done with sql as in relational algebra.
 
 ----------------------------------------------------------------------------------------
-
 How to create a table in mysql , we can use both small alphabet or capital alphabets there is basically no difference in  that . Sql in not a case sensitive language .
-
 ----------------------------------------------------------------------------------------
 CREATE TABLE:
-
 query == create table employee . (name of the table is employee)
 
 to add column in that table we have to do same first write the create table and then in( we have to write column name and its type .)
 
 like - create table employee( eid int , ename varchar(5) , gender char(1) , dob date);
-
 -------------------------------------------------------------------------------------
 
 what is the difference between char(5) and varchar (5)
@@ -106,7 +98,6 @@ what is the difference between char(5) and varchar (5)
 
 ---------------------------------------------------------------------------------------
 INSERTING TUPLES TO THE TABLE :
-
 create table employee( eid int , ename varchar(5) , gender char(1) , dob date);
 
 the table is created but there are no tuples is presesnt means no information in that table .
@@ -121,12 +112,8 @@ if we have to add only 2 attributes then we use like this
 
 insert into employee (eid , ename )   values ( 100 , 'sam');
  -- the remaining attributes in this will  get NULL values in it . 
-
 ------------------------------------------------------------------------------------------
-
-
 CONSTRAINTS IN SQL-: restriction or that prevents something from occurring.
-
 
 1 ) if you want that your table does not contains a null value in a particular column then we can write it as:
 NOT NULL constraint :
@@ -143,6 +130,15 @@ create table employee( eid int ,
                     ename varchar(5) , 
                     gender char(1) NOT NULL  , 
                      phoneno int UNIQUE (by writing unique if we write a duplicate no then it shows error to that  );
+
+Unique Key = Alternate unique identifier, no duplicates allowed, NULL allowed (SQL Server me only 1 NULL), multiple UNIQUE constraints ho sakte hain.
+
+: Constraint Can be Defined on two levels 
+1 - Column Level 
+2 - Table Level 
+
+- Not NULL Constraint should be defined at column level .
+- Composite Key Should Be defined at Table level . 
 
 
 3 ) Primary key , question - can we create a table without the primary key ?
@@ -243,16 +239,53 @@ so we have total 6 constraints
 6- default
 7 - Reference Constraint
 
-✅ In simple words:
+Q - kaise m agr composite key ho usse connect karunga dusri table se ?
 
-Unique Key = Alternate unique identifier, no duplicates allowed, NULL allowed (SQL Server me only 1 NULL), multiple UNIQUE constraints ho sakte hain.
+1. Composite Key ko Foreign Key kaise banate hain?
+Parent Table
+PRIMARY KEY (OrderID, ProductID)
+Data:
 
-: Constraint Can be Defined on two levels 
-1 - Column Level 
-2 - Table Level 
+OrderID	ProductID
+1	101
+1	102
 
-- Not NULL Constraint should be defined at column level .
-- Composite Key Should Be defined at Table level . 
+Child Table
+FOREIGN KEY (OrderID, ProductID)
+REFERENCES Orders(OrderID, ProductID)
+Understanding
+
+Kyuki parent table me unique combination:
+
+(OrderID, ProductID)
+
+hai, isliye child table me bhi dono columns chahiye exact row identify karne ke liye.
+
+2. Agar child table me sirf ek hi column ho toh?
+
+Example:
+
+FOREIGN KEY (OrderID)
+REFERENCES Orders(OrderID)
+
+❌ Ye tab error dega agar:
+
+OrderID repeat ho raha ho
+
+Jaise:
+
+OrderID	ProductID
+1	101
+1	102
+
+Ab SQL confuse ho jayega:
+
+OrderID=1 wali kaunsi row?
+(1,101) ya (1,102)
+Final Summary
+Composite Primary Key → Same Composite Foreign Key required
+
+Single column foreign key tabhi possible hai jab parent table ka woh column individually UNIQUE ho.
 
 -----------------------------------------------------------------------------------------
 
@@ -263,7 +296,29 @@ if in one table the department id is not present that it will give an error , to
 like foriegn key(deptid) references department(did) on delete cascade );
                                                       set null and set default	
 
+
+Cascade mostly:
+Parent → Child
+direction me kaam karta hai.
+
 Agar parent table (department) se koi row delete hui, toh child table ki related rows bhi automatically delete ho jayengi.
+
+Kya hoga?
+Agar parent table se:
+Department DID = 10
+
+delete kiya,
+toh child table me:
+DeptID = 10
+
+wali saari employee rows bhi automatically delete ho jayengi.
+
+| Option                  | Meaning                 |
+| ----------------------- | ----------------------- |
+| Default (`NO ACTION`)   | Parent delete pe error  |
+| `ON DELETE CASCADE`     | Child rows bhi delete   |
+| `ON DELETE SET NULL`    | Child FK NULL ho jayega |
+| `ON DELETE SET DEFAULT` | Default value set hogi  |
 
 ------------------------------------------------------------------------------------------
 SELECT FROM WHERE EXPLAINED :
@@ -284,7 +339,6 @@ Multiple NULL → result me sirf 1 NULL
 select ename from employee where age = 28; -- it will only show names of that member whose have the age 28 ; 
 
 ------------------------------------------------------------------------------------------
-
 inner join and join explained :
 
 employee table                                           department table 
@@ -316,9 +370,8 @@ SELECT *
 FROM Orders
 INNER JOIN Customers
 where Orders.CustomerID=Customers.CustomerID;?
-yeh kya shi h?
+yeh kya shi h?  Nahi, yeh syntax technically galat mana jaata h because INNER JOIN ke baad ON expected hota h. Kyu inner join likne ke baad yeh On expect krta h 
 
-Nahi, yeh syntax technically galat mana jaata h because INNER JOIN ke baad ON expected hota h.
 SELECT *
 FROM Orders, Customers
 WHERE Orders.CustomerID = Customers.CustomerID;
@@ -383,7 +436,6 @@ from employee as E , department as D
 where E.dpno = D.dno ;   we created the shotcut of employee as e and department as d and then use it . 
 
 ---------------------------------------------------------------------------------------
-
 HOW TO USE UNION :
 
 select ename (empname}
@@ -407,6 +459,8 @@ Column names = first query se aate hain jaise ki iss query ke result m top pr co
 
 ->THIS WILL GIVE ALL the name in the table and union means it does not repeat the name .
 The UNION operator selects only distinct values by default. To allow duplicate values, use UNION ALL:	
+
+Agar dono tables me multiple NULL hain: Output → sirf 1 NULL
 ----------------------------------------------------------------------------------------------------------
 
 🧠 Simple Analogy:
@@ -746,7 +800,6 @@ query : select * FROM table1 , table2 where Name = 'uday' ;
 (multiply both the rows of the two different table )
 
 Query : select * from table1 , table2 ; 
-
 OR 
 
 select * from table1 cross join table2;
