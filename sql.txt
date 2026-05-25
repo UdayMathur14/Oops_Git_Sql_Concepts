@@ -516,7 +516,6 @@ query : select 'full name is ' || fname || lname as full name from employee ;
 this will give you - full name is bob sheety , full name is ram sheety and so on , and the table name is changed with the use of alias as full name as used in previous once .
 
 ----------------------------------------------------------------------------------------
-
 Between use : 
 
 select ename from employee where age between 20 and 30 ;  --> (this will gives names of that peoples who age is between 20 and 30 . it includes 20 and 30 also in it) .  
@@ -527,19 +526,16 @@ select ename from employee where age >= 20 and age <= 30 ;
 select ename from employee where ename between 'b' and 'c' . ( this will sort according to the alphabatical order which taken stats with the alphabet name ). 
 
 -----------------------------------------------------------------------------------------
-
 Order by : generally sort the table according to the order. 
 
 select ename , eid from employee order by age, salary desc(it means according to descending, but age in asc )
  
 naturally it does ascending in order if you nothing write at the end  .
-
 ------------------------------------------------------------------------------------------
 ARTHEMATIC OPERATIONS IN SQL WHILE WRITING THE QUERY :
 select dname , age*10 (this will multiply the age by 10 and gives te result from employee );
  
 -----------------------------------------------------------------------------------------
-
 NULL CONCEPTS : 
 
 points 1 - if there is a null value is present in the age column and we multiply or divide it by something then we always get the null value in result .
@@ -561,14 +557,13 @@ AGGREGATE FUNCTIONS :
 
 query : select sum(age) from employee; == gives sum of all the ages 
 query : select avg(age) from employee; == gives average of ages 
-query : select min(age) from employee;== gives min value of age 
+query : select min(age) from employee; == gives min value of age 
 query : select max(age) from employee; == give maximum value of age 
 query : select count(age) from employee; == gives no of ages present in the table .
 
 point 1- if there are null values at that column that it simply ignores the null values.
 
 if there is 5 tuples there and two of them are null values then it shows 3 values .
-
 query : select count(*) from employee; //this will give 5 values because there is only 2 null values at the ages only not all values are null that why it gives count of 5;
 
 ------------------------------------------------------------------------------------------
@@ -927,7 +922,7 @@ SELECT ORDERNUMBER, ORDERNAME, LEFT(ORDERNAME, 5) FROM MYORDER --means left se 5
 SELECT ORDERNUMBER, ORDERNAME, RIGHT(ORDERNAME, 5) FROM MYORDER -- right se 5 utha lo bs normal hi dikhana is case m last 5 ho gye jo output ayega 
 
 SUBSTRING(column_name, start_position, length)
---SUBSTRING :1 se start ho rha h index no . 2 se start hoga aur 5th index tk krega 
+--SUBSTRING :1 se start ho rha h index no , -- 2nd position se start karke 5 characters lega.
 SELECT ORDERNUMBER, ORDERNAME, SUBSTRING(ORDERNAME, 2, 5) FROM MYORDER --SUBSTRING(Title, 1, 5) extracts the first 5 characters of the Title column.
 
 --LOWERCASE
@@ -1207,6 +1202,37 @@ Mohan	M	   Verma	55000
 
 toh in sbka union all aa jayega and baaki jagah null aa jayega means teeno table jud gyi aapas m . 
 
+Real Use Case
+
+Maan lo company chahti hai:
+
+Total salary by Name
+Total salary by Name + Sex
+Total salary by Name + Sex + Family
+
+Agar normal queries likho:
+
+SELECT Name, SUM(Salary)
+GROUP BY Name
+
+SELECT Name, Sex, SUM(Salary)
+GROUP BY Name, Sex
+
+SELECT Name, Sex, Family, SUM(Salary)
+GROUP BY Name, Sex, Family
+
+3 alag queries likhni padengi.
+
+GROUPING SETS kya karta hai?
+SELECT Name, Sex, Family, SUM(Salary)
+FROM Employee
+GROUP BY GROUPING SETS
+(
+    (Name),
+    (Name, Sex),
+    (Name, Sex, Family)
+);
+
 --Ranking functions .
 --if you want to give ranking to a table with salary or any other column .
 
@@ -1256,6 +1282,12 @@ so to overcome the issues we use :
 
 select name form employee where percentage like '90\%' ; so now it does not take % as null or more characters . 
 same in this as select * from employee where email id is '%abc\_@%.' so  the output would be abc_ that's email i will get.
+| Symbol | Meaning              |
+| ------ | -------------------- |
+| `%`    | 0 ya more characters |
+| `_`    | Exactly 1 character  |
+| `\%`   | Actual `%`           |
+| `\_`   | Actual `_`           |
 
 👉 Simple rule:
 Use Function when you need a reusable calculation / logic inside a query.
@@ -1356,9 +1388,9 @@ SQL Set Operators & Indexing Summary (GATE Focus)
 
   - UNION: Combines rows from both lists. If 'Uday' is in both, result has one 'Uday'.
   - UNION ALL: Appends lists. If 'Uday' is in both, result has two 'Udays'. (Faster because no sorting/filtering).
-  - INTERSECT: Returns only unique rows present in both lists.
-  - INTERSECT ALL: Uses the Minimum Rule. If 'Uday' is 3 times in A and 2 times in B, result has 2 'Udays' (Min(3, 2)).
-  - EXCEPT ALL: Uses subtraction. If 'Uday' is 3 times in A and 2 times in B, result has 1 'Uday' (3 - 2).
+  - INTERSECT: Returns only unique rows present in both lists with distinct , Sirf common values, Distinct values only.
+  - INTERSECT ALL: Uses the Minimum Rule. If 'Uday' is 3 times in A and 2 times in B, result has 2 'Udays' (Min(3, 2)). Common values with duplicate counting, Minimum rule use hota hai.
+  - EXCEPT ALL: Uses subtraction. If 'Uday' is 3 times in A and 2 times in B, result has 1 'Uday' (3 - 2) , Duplicate counting ke saath subtraction.
 
 2.  Indexing Structures
 
