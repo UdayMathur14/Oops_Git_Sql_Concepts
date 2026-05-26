@@ -2,6 +2,8 @@ oops : object oriented programming System
 
 class = Class is a blueprint which defines some properties and behaviors.
 
+properties (data/variables) and behaviors (methods/functions)
+
 object : An object is an instance of a class which has those properties and behaviours .
 or 
 object is an entity which holds properties and behaviour .
@@ -12,5 +14,17 @@ To solve Real world problems through coding .
 Adavantages :
 1-increases readiability 
 2- easily manage 
+4. Data security using encapsulation
+5. Easy maintenance and debugging
+6. Scalability for large applications
 
 //empty class have sizeof(object) = 1 
+class A {};
+
+int main()
+{
+    A obj;
+    cout << sizeof(obj); // 1
+}
+
+The compiler gives at least 1 byte so that different objects can have unique memory addresses.
