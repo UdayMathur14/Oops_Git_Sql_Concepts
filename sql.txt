@@ -228,6 +228,8 @@ for department table
                     dname varchar(20) default 'sonu'  , 
                     primary key(diD));
 
+and yeh default tb hi lega jb isko khaali chod doge na hi NULL bhejoge and na hi empty string agr bheja toh whi store honge na ki default value .
+
 like : insert into department (did ) values (100 ); --> then dname will automatically get sonu without entering any name . 
 
 so we have total 6 constraints 
