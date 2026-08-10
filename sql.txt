@@ -486,10 +486,6 @@ INTERSECT duplicates remove karta h aur distinct common values hi deta h.
 ->except in which it shows those names which contain only in one table and does have in another table.
 Table1 me jo values hain
 lekin Table2 me nahi hain
-
-Important Rule
-Dono queries me same number of columns hone chahiye
-Columns ka datatype compatible hona chahiye
 ---------------------------------------------------------------------------------------
 
 LIKE OPERATOR 
@@ -944,28 +940,28 @@ SELECT RTRIM('   MyText    ') : delete right side of spaces.
 SELECT RTRIM(LTRIM('   MyText    ')): both sides of spaces.
 
 ----------------------------------------------------------------------------------------
---Advanced Level Concepts of SQL 
-
 //VIEWS IN SQL 
 Views : does not create a table but actually created a window and shows the necessary columns that you need .
 
-Query : 
-Create View MyCustomerView 
-as 
-select * from table where country = 'India';
+-- 1. Create View
+CREATE VIEW MyCustomerView AS
+SELECT CustomerID, CustomerName, Country
+FROM Customers
+WHERE Country = 'India';
 
-Execute:
-select * from MyCustomerView ;
+-- 2. Execute / Query View
+SELECT * FROM MyCustomerView;
 
-| Point                                          | Meaning                |
-| ---------------------------------------------- | ---------------------- |
-| View data store nahi karti                     | Query store karti hai  |
-| View virtual hoti hai                          | Physical table nahi    |
-| Table update hoga toh view bhi updated dikhega | Dynamic hoti hai       |
-| Complex queries hide kar sakte hain            | Reusability            |
-| Security ke liye use hoti hai                  | Limited columns dikhao |
-| Reports me bahut use hoti hai                  | Dashboard/reporting    |
-| Joins simplify karti hai                       | Frontend easy          |
+-- 3. Update View Definition
+ALTER VIEW MyCustomerView AS
+SELECT CustomerID, CustomerName, Country, City
+FROM Customers
+WHERE Country = 'India';
+
+-- 4. Drop View
+DROP VIEW MyCustomerView;
+
+cons: Real-time reporting ke liye best. , Sensitive columns (jaise Salary, Password, SSN) ko hide kar sakte hain.,4-5 tables ke complex JOINs aur aggregates ko ek simple View me wrap kar sakte hain.
 
 | View Type                | INSERT       |
 | ------------------------ | ------------ |
@@ -973,12 +969,6 @@ select * from MyCustomerView ;
 | Join view                | ❌ Mostly no  |
 | GROUP BY view            | ❌ No         |
 | Aggregate view           | ❌ No         |
-
-| Trigger            | Procedure         |
-| ------------------ | ----------------- |
-| Control kam        | Full control      |
-| Hidden execution   | Visible execution |
-| Automatically fire | Explicit call     |
 
 
 ----------------------------------------------------------------------------------------
@@ -994,6 +984,9 @@ So triggers are statements that are automatically updated or run when some sort 
 | ---------------------- | -------------------------- |
 | Automatic chalta hai   | Manually chalani padti hai |
 | Event pe fire hota hai | `EXEC` se run hoti hai     |
+| Control kam            | Full control      |
+| Hidden execution       | Visible execution |
+| Automatically fire     | Explicit call     |
 
 
 query :
