@@ -1045,98 +1045,104 @@ CREATE TABLE MYDEMO ; TRIGGER FIRE AND DOES'T ALLOW TO MAKE TABLE .
 
 
 ----------------------------------------------------------------------------------------
-STORED PROCEDURE : 
+Definition
+Stored Procedure (SP) database me saved ek pre-compiled T-SQL code ka block hota hai. Ye multiple SQL statements, business logic, DML operations (INSERT/UPDATE/DELETE), aur transactions ko perform karne ke kaam aata hai.
 
-IS A SET OF SQL STATEMENTS THAT ARE STORED IN THE DATABASE . 
+Key Features
+Pre-compiled: Pehli baar run hone par iska execution plan memory me cache ho jata hai, jisse agli baar ye fast chalta hai.
 
-Query : 
+Full DML Support: Data modify karne (INSERT, UPDATE, DELETE) aur transaction control (COMMIT, ROLLBACK) ke liye use hota hai.
 
-create procedure MytestProc 
-As
-Set nocount on --this will not show how many rows are affected
-select * from table ; 
+Security: Table level access ko restrict karke sirf SP ka access diya ja sakta hai (Data abstraction).
 
-Execute stored procedure : 
+Complete Code Template (Input + Output Parameters)
+SQL
+-- 1. Create Stored Procedure
+CREATE PROCEDURE dbo.sp_GetCustomerOrders
+    @CustomerID INT,               -- Input Parameter
+    @TotalOrders INT OUTPUT        -- Output Parameter
+AS
+BEGIN
+    SET NOCOUNT ON; -- Performance optimization
 
-Execute MytestProc ;
+    -- Statement 1: Query result set
+    SELECT OrderID, OrderDate, Amount 
+    FROM Orders 
+    WHERE CustomerID = @CustomerID;
 
-Another stored proc : 
+    -- Statement 2: Set output parameter
+    SELECT @TotalOrders = COUNT(*) 
+    FROM Orders 
+    WHERE CustomerID = @CustomerID;
+END;
+GO
 
-create procedure MytestProc2 
-As
-Set NOCOUNT off // this will show how many rows are affected
-select * from table ; 
+-- 2. Execute Stored Procedure
+DECLARE @OrderCount INT;
 
-Execute  MytestProc2 or exec MytestProc2  ;
+EXEC dbo.sp_GetCustomerOrders 
+    @CustomerID = 7, 
+    @TotalOrders = @OrderCount OUTPUT;
 
-DROP PROC MytestProc2; //drop the procedure 
+-- Print output parameter
+SELECT @OrderCount AS TotalOrdersCount;
 
-UDF = USER DEFINE FUNCTION :
+-- 3. Drop Stored Procedure
+DROP PROCEDURE dbo.sp_GetCustomerOrders;
+Top Interview Questions (Stored Procedure)
+SET NOCOUNT ON kyu lagate hain?
 
-TYPES OF FUNCTIONS ; 
-1 - SCALAR FUNCTIONS : RETURN A SINGLE DATA VALUE IN RETURN CLAUSE .
-2 - TABLED VALUED FUNCTIONS : RETURN A TABLE DATA TYPE.
-3 - SYSTEM FUNCTIONS : THESE ARE SYSTEM FUNCTIONS THAT CANNOT BE MODIFIED ND THAT PERFORM SOME SPECIFIC FUNCTIONS .
+Default (SET NOCOUNT OFF) me har query ke baad database (N row(s) affected) message bhejta hai.
 
-| Type                  | Meaning             |
-| --------------------- | ------------------- |
-| Scalar Function       | Single value return |
-| Table Valued Function | Table return        |
+SET NOCOUNT ON karne se ye network traffic ruk jata hai, jisse performance aur network speed improve hoti hai.
 
-| Procedure                    | Function                    |
-| ---------------------------- | --------------------------- |
-| EXEC se chalta               | SELECT me use hota          |
-| Value return optional        | Return mandatory            |
-| Multiple results             | Usually value/table         |
-| INSERT/UPDATE/DELETE allowed | Limited                     |
-| Business logic               | Calculations/Reusable logic |
+RETURN vs OUTPUT Parameter:
 
-::user define functions: that accept parameter and perform an action such as a complex calculation and returned the result of an action.
+RETURN: Sirf ek Integer status code de sakta hai (e.g., 0 for success, 1 for error).
 
-1 scalar based :
+OUTPUT: Kisi bhi datatype (VARCHAR, INT, DATETIME) ki multiple values return kar sakta hai.
 
-create function sales ()
-return money
-AS 
-Begin 
-Declare @ytsales Money 
-select @ytsales = sum(salesintable) from table 
-return  @ytsales
+Execution Plan Caching:
 
-Exec; 
-Declare @ytresult money(type)
-select @ytresult = sales(); 
-print @ytresult 
+SP compile hone ke baad apna plan Buffer Pool me save kar leta hai, jisse re-compilation CPU time bachta hai.
+------------------------------------------------------------------------------------------
+Definition
+Function ek reusable SQL block hota hai jo input parameters leta hai, koi specific calculation/logic apply karta hai, aur mandatory ek value ya table return karta hai. Functions permanent table data ko modify nahi kar sakte.
 
+Key Rules
+No Side Effects: Table level par INSERT, UPDATE, DELETE operations blocked hote hain.
 
---Parametrized functions 
+Must Return: RETURN statement compulsory hota hai.
 
-create function sales (@group varchar(20))
-return money
-AS 
-Begin 
-Declare @ytsales as Money 
-select @ytsales = sum(salesintable) from table where group = @group ; 
-return  @ytsales
+dbo. Prefix Mandatory: Scalar function ko query me call karte waqt dbo.FunctionName() likhna zaroori hai.
 
-Declare @ytresult money(type)
-select @ytresult = sales('north America'); 
-print @ytresult 
+UDF Types & Syntax
+Type 1: Scalar Function (Returns Single Value)
+Single output (like String, Int, Decimal) dene ke liye use hota hai.
 
---function returning table ; 
-create function tbl 
-@id int 
-return table 
-as 
-begin 
-select * from table where id = @id ; 
+SQL
+-- Definition (RETURNS is plural)
+CREATE FUNCTION dbo.fn_GetTotalSales (@SalesGroup VARCHAR(20))
+RETURNS MONEY
+AS
+BEGIN
+    DECLARE @TotalSales MONEY;
 
-select * from tbl(7);
-or if you want parameters ; 
-select name , id from tbl(7);
+    SELECT @TotalSales = SUM(Amount) 
+    FROM Sales 
+    WHERE Region = @SalesGroup;
 
+    RETURN ISNULL(@TotalSales, 0); -- RETURN is singular
+END;
+GO
 
-CREATE FUNCTION fnGetOrdersByCustomer(@CustomerID INT)
+-- Execution
+SELECT dbo.fn_GetTotalSales('North America') AS TotalSales;
+Type 2: Inline Table-Valued Function (ITVF - Fastest)
+Single SELECT query se poori table return karta hai. Internal level par View ki tarah behave karta hai.
+
+SQL
+CREATE FUNCTION dbo.fn_GetOrdersByCustomer (@CustomerID INT)
 RETURNS TABLE
 AS
 RETURN (
@@ -1144,6 +1150,34 @@ RETURN (
     FROM Orders
     WHERE CustomerID = @CustomerID
 );
+GO
+
+-- Execution (Directly inside SELECT/FROM/JOIN)
+SELECT * FROM dbo.fn_GetOrdersByCustomer(7);
+Type 3: Multi-Statement Table-Valued Function (MSTVF - Slower)
+Jab multi-line business logic chala kar temporary table populate karni ho.
+
+SQL
+CREATE FUNCTION dbo.fn_GetHighValueCustomers ()
+RETURNS @ResultTable TABLE (
+    CustomerID INT,
+    TotalSpent MONEY
+)
+AS
+BEGIN
+    INSERT INTO @ResultTable
+    SELECT CustomerID, SUM(Amount)
+    FROM Orders
+    GROUP BY CustomerID
+    HAVING SUM(Amount) > 100000;
+
+    RETURN;
+END;
+GO
+
+-- Execution
+SELECT * FROM dbo.fn_GetHighValueCustomers();
+
 ------------------------------------------------------------------------------------------
 
 TRANACTIONS IN SQL:
@@ -1263,11 +1297,6 @@ SELECT * FROM Customers
 WHERE CustomerName NOT LIKE 'a%';
 
 -----------------------------------------------------------------------------------------------------------------------------------------
-
-E.F CODD , RAYMOND , DONALD PURPOSE SEQUEL : A structure English Query Language .
-Based on Relationship algebra . 
-You can move from one platform to another like oracle to MySQL or other so it is portable . oracle give all the features purposed by SQL . 
-
 like % 
 
 if column contain 90% and you want to find the names of the students who got 90% but some of the column data contains 90 only not % is there .
@@ -1288,20 +1317,7 @@ same in this as select * from employee where email id is '%abc\_@%.' so  the out
 Use Function when you need a reusable calculation / logic inside a query.
 Use Stored Procedure when you need to perform business logic, transactions, or modify data.
 
-| **Point**                  | **Function**                                                               | **Stored Procedure**                               |
-| -------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------- |
-| **Return Value**           | Hamesha value return karta hai (scalar ya table)                           | Value return kar bhi sakta hai, nahi bhi           |
-| **Use in SELECT**          | `SELECT`, `WHERE`, `JOIN` ke andar use ho sakta hai                        | `SELECT` ke andar use nahi hota                    |
-| **DML Operations**         | Normally `INSERT`, `UPDATE`, `DELETE` perform nahi karta (read-only logic) | `INSERT`, `UPDATE`, `DELETE` perform kar sakta hai |
-| **Error Handling**         | Direct `TRY...CATCH` support nahi                                          | `TRY...CATCH` support karta hai                    |
-| **Transactions**           | Transactions use nahi kar sakta                                            | Transactions use kar sakta hai                     |
-| **Parameters**             | Sirf **input parameters**                                                  | **Input aur Output parameters** dono ho sakte hain |
-| **Execution**              | `SELECT dbo.FunctionName()`                                                | `EXEC ProcedureName`                               |
-| **Performance / Use Case** | Calculations, reusable logic                                               | Complex business logic, large operations           |
-
-
-
-	======================================================================
+======================================================================
                  SQL INDEXING: DESI SUMMARY (NOTEPAD)
 ======================================================================
 
