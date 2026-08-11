@@ -1434,3 +1434,34 @@ SQL Set Operators & Indexing Summary (GATE Focus)
   - COUNT(Column): Only counts Non-NULL values.
   - Empty Table: COUNT returns 0, while SUM/AVG return NULL.
 
+
+
+
+
+
+----------------------------------------------------------------------------------------------------
+
+SQL QUERIES : 
+
+1- For Nth max salary 
+
+1 - WITH ranklist AS (
+    SELECT salary, DENSE_RANK() OVER (ORDER BY salary DESC) AS nthRow 
+    FROM Employees
+)
+SELECT DISTINCT salary FROM ranklist WHERE nthRow = 3;
+
+
+2 - select distinct salary from Employees e1
+where 2 = (select count(distinct salary) from Employees e2 where e2.salary>e1.salary);
+
+3 - SELECT MAX(Salary) AS ThirdHighestSalary
+FROM Employees
+WHERE Salary NOT IN (
+    SELECT DISTINCT TOP 2 Salary 
+    FROM Employees 
+    ORDER BY Salary DESC
+);
+
+
+
