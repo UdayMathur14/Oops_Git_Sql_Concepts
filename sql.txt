@@ -27,7 +27,7 @@ Rows are known as tuple, record .
 
 Advantages of database:
 1 - Sharing is easy. ex = like fb we stored the profile photo and anybody seen it .
-2 - Avoid data duplicon ex = 2 baar ashish likh dunga table m toh same data store ho jayega wo m nhi chahata toh yeh usko rokta h . by use of primary key toh usse nhi hogi duplicacy.
+2 - Avoid data duplicon ex = ustomer ki same address/contact details ko har order ke saath repeatedly store karne ke bajay customer table mein ek baar store karo aur Customer_ID se reference karo. Proper database design reduces unnecessary data duplication..
 3 - Data consistent = suppose 4 table h and sbme ashish naam h but hme kuch change krna h toh wo sbke ander hona chahiye.
 4 - Confidential = alag alag logo ke liye alag alag view ho skta h like teacher ke liye alag and uske students ke liye alag.
 5 - Highly securable.
@@ -581,6 +581,24 @@ in basically refers as or .
 so the output of this is only sam and ram . 
 
 query : select ename from employee where sex in (F , T); == this will tell me that we have to choose only transgender and female from the table. 
+
+in(5,6,7) = means or 5 or 6 or 7 
+not(5,6,7) = 5 and 6 and 7 nhi hona chahiye and operator h 
+
+SELECT fname
+FROM employee
+WHERE dpno IN (150, NULL);
+
+nhull waale nhi ayenge kyuki null!=null so agr null bhi chchite ho toh 
+WHERE dpno IN (150)
+   OR dpno IS NULL;
+
+
+SELECT fname
+FROM employee
+WHERE dpno NOT IN (150, NULL);
+
+output kuch nhi ayega kyuki yeh h and so suppose 160 aaya toh 150 != 160 shi h but yeh not in toh and h then yeh check kreha 160!=null ab yeh kiise pta tbhi empty result .
 
 -----------------------------------------------------------------------------------------
 select ename from employee where eid not in (100 , 101);
