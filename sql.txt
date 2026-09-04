@@ -644,6 +644,8 @@ all refers to and .
 it means that we have to select those names whose ages are greater than 25 and 26 :
 if the value is unknown it is not consider . 
 
+WHERE salary = ANY (30000,40000,50000) is similar like In 
+
 ANY OR SOME are exactly same in their work there is no difference in that . 
 
 query :select ename from employee where age> some(25,26);
@@ -652,6 +654,14 @@ if the age is greater than any of these single values then it will be count in t
 
 in case of query : select ename from employee where age> all(25,26 , null);
 NULL agar ALL list ke andar ho → pura condition fail ho jaata hai (result empty).
+
+Q3 — <> ANY — sabse deceptive 🔥
+SELECT name
+FROM employee
+WHERE salary <> ANY (10000, 20000); iska mtb h yeh (salary <> 10000 OR salary <> 20000) not in jaisa mt sochna 
+
+lekin agr kisi row m null hoga toh wo nhi ayega kyuki wo null hi h .
+
 ------------------------------------------------------------------------------------------
 NESTED SUBQUIRES in SQL :--> having a query inside a query .
 
