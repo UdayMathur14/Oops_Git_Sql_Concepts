@@ -1329,11 +1329,8 @@ GROUP BY GROUPING SETS
     (Name, Sex),
     (Name, Sex, Family)
 );
-
+-------------------------------------------------------------------------------
 --Ranking functions .
---if you want to give ranking to a table with salary or any other column .
-
-rank repeat bhi ho skti h like 5 bnko ki 500 rs h toh 5,5,5,5,5 rank show ho . 
 
 select 	salary ,
 row_number() over (order by salary) as row 
