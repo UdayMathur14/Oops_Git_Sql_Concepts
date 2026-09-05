@@ -721,6 +721,17 @@ yeh count batega customer id ka ki wo country kitni baar aa rakhi h
 2         india 
 1         finland 
 5         london
+
+SELECT AVG(salary)
+FROM employee
+HAVING AVG(salary) > 50000;
+
+(20000 + 30000 + 40000) / 3
+= 30000
+Condition:
+30000 > 50000
+
+poori table ko ek table ki treat krta h. 
 ----------------------------------------------------------------------------------------
 
 select ID , min(sal) from employee group by ID ;  -- yeh hme minimum salary bta degi apne apne id ki ki sabse jyada minimum salary kitni h particular id ki . 
