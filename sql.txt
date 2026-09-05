@@ -1081,65 +1081,76 @@ CREATE TABLE MYDEMO ; TRIGGER FIRE AND DOES'T ALLOW TO MAKE TABLE .
 
 ----------------------------------------------------------------------------------------
 Definition
-Stored Procedure (SP) database me saved ek pre-compiled T-SQL code ka block hota hai. Ye multiple SQL statements, business logic, DML operations (INSERT/UPDATE/DELETE), aur transactions ko perform karne ke kaam aata hai.
+Stored Procedure  - Set of Sql statements that is stroed in the DB. 
 
 Key Features
-Pre-compiled: Pehli baar run hone par iska execution plan memory me cache ho jata hai, jisse agli baar ye fast chalta hai.
+Reusable: Ek baar create karke multiple times execute kar sakte hain.
+Parameters: Input aur Output parameters support karta hai.
+DML: SELECT, INSERT, UPDATE, DELETE perform kar sakta hai.
+Logic: IF/ELSE, variables, transactions, TRY/CATCH use kar sakte hain.
+Security: Direct table access dene ke bajay SP execute permission di ja sakti hai.
+Execution Plan: SQL Server execution plan ko cache/reuse kar sakta hai.
 
-Full DML Support: Data modify karne (INSERT, UPDATE, DELETE) aur transaction control (COMMIT, ROLLBACK) ke liye use hota hai.
-
-Security: Table level access ko restrict karke sirf SP ka access diya ja sakta hai (Data abstraction).
-
-Complete Code Template (Input + Output Parameters)
-SQL
--- 1. Create Stored Procedure
-CREATE PROCEDURE dbo.sp_GetCustomerOrders
-    @CustomerID INT,               -- Input Parameter
-    @TotalOrders INT OUTPUT        -- Output Parameter
+Example
+CREATE PROCEDURE GetEmployee
 AS
 BEGIN
-    SET NOCOUNT ON; -- Performance optimization
-
-    -- Statement 1: Query result set
-    SELECT OrderID, OrderDate, Amount 
-    FROM Orders 
-    WHERE CustomerID = @CustomerID;
-
-    -- Statement 2: Set output parameter
-    SELECT @TotalOrders = COUNT(*) 
-    FROM Orders 
-    WHERE CustomerID = @CustomerID;
+    SELECT * FROM Employee;
 END;
-GO
+EXEC GetEmployee;
+------------------------------
+CREATE PROCEDURE GetEmployeeName
+    @ID INT,
+    @Name VARCHAR(50) OUTPUT
+AS
+BEGIN
+    SELECT @Name = ename
+    FROM Employee
+    WHERE eid = @ID;
+END;
+DECLARE @N VARCHAR(50);
 
--- 2. Execute Stored Procedure
-DECLARE @OrderCount INT;
+EXEC GetEmployeeName
+    @ID = 101,
+    @Name = @N OUTPUT;
 
-EXEC dbo.sp_GetCustomerOrders 
-    @CustomerID = 7, 
-    @TotalOrders = @OrderCount OUTPUT;
+SELECT @N;
+----------------------------
 
--- Print output parameter
-SELECT @OrderCount AS TotalOrdersCount;
+CREATE PROCEDURE CheckEmployee
+    @ID INT
+AS
+BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM Employee
+        WHERE eid = @ID
+    )
+        RETURN 1;
 
--- 3. Drop Stored Procedure
-DROP PROCEDURE dbo.sp_GetCustomerOrders;
-Top Interview Questions (Stored Procedure)
-SET NOCOUNT ON kyu lagate hain?
+    RETURN 0;
+END;
 
-Default (SET NOCOUNT OFF) me har query ke baad database (N row(s) affected) message bhejta hai.
+DECLARE @Status INT;
+EXEC @Status = CheckEmployee @ID = 101;
+SELECT @Status;
 
-SET NOCOUNT ON karne se ye network traffic ruk jata hai, jisse performance aur network speed improve hoti hai.
+SELECT → rows/table data
+OUTPUT → actual value(s)
+RETURN → one INT status/value
 
-RETURN vs OUTPUT Parameter:
+yeh sb kuch use kr skte h 
+SELECT
+INSERT
+UPDATE
+DELETE
+IF / ELSE
+Variables
+Transactions
+TRY / CATCH
+Input Parameters
+Output Parameters
 
-RETURN: Sirf ek Integer status code de sakta hai (e.g., 0 for success, 1 for error).
-
-OUTPUT: Kisi bhi datatype (VARCHAR, INT, DATETIME) ki multiple values return kar sakta hai.
-
-Execution Plan Caching:
-
-SP compile hone ke baad apna plan Buffer Pool me save kar leta hai, jisse re-compilation CPU time bachta hai.
 ------------------------------------------------------------------------------------------
 Definition
 Function ek reusable SQL block hota hai jo input parameters leta hai, koi specific calculation/logic apply karta hai, aur mandatory ek value ya table return karta hai. Functions permanent table data ko modify nahi kar sakte.
