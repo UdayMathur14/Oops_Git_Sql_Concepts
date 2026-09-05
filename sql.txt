@@ -985,7 +985,10 @@ SELECT RTRIM(LTRIM('   MyText    ')): both sides of spaces.
 
 ----------------------------------------------------------------------------------------
 //VIEWS IN SQL 
-Views : does not create a table but actually created a window and shows the necessary columns that you need .
+Views : A View is a virtual table that shows required data from one or more tables without storing the data separately .
+
+VIEW = What data should I see?
+Stored Procedure = What task should the database perform?
 
 -- 1. Create View
 CREATE VIEW MyCustomerView AS
@@ -1013,7 +1016,6 @@ cons: Real-time reporting ke liye best. , Sensitive columns (jaise Salary, Passw
 | Join view                | ❌ Mostly no  |
 | GROUP BY view            | ❌ No         |
 | Aggregate view           | ❌ No         |
-
 
 ----------------------------------------------------------------------------------------
 TRIGGERS :
