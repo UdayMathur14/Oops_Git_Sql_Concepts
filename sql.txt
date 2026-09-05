@@ -923,6 +923,11 @@ SELECT NAME, LISTPRICE, LISTPRICE + 10 AS ADJUSTED_LIST_PRICE  INTO newtable FRO
 
 ::Temporary table : jb aapko ek temporary table banani ho kisi kaam ke liye aise h . aur temporary h means kaam nhi h uska baad so . so jaise hi hm uss page se jayenge toh wo table apne aap hi delete ho jayegi . for temporary table we use #.
 
+#TempTable   → Local temporary table
+##TempTable  → Global temporary table
+#tmpname generally sirf tumhari current session ko visible hoti hai.
+##tmpname doosri sessions ko bhi visible ho sakti hai while it exists, so ise carefully use karte hain.
+
 query:
  SELECT NAME, LISTPRICE, LISTPRICE + 10 AS ADJUSTED_LIST_PRICE  INTO #tmpname FROM [Production].[Product]
 --------------------------------------------------------------------------------------------------------------
