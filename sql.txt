@@ -1022,18 +1022,7 @@ TRIGGERS :
 We doing something when some sort of things happened . Like if the donation is greater than 1000 million then send a mail , if the donation is 5 rupees then send error and as well as save this in the log . and these actions are some sort of sql statement sequence .
 
 Golden Line
-Trigger = Database ka automatic event listener
-
-So triggers are statements that are automatically updated or run when some sort of an insert/update/delete happens in your table . you can write your own code for run . we can call this automated checks or sort of scripts that get executed when some event or activity happens in your table . 
-
-| Trigger                | Stored Procedure           |
-| ---------------------- | -------------------------- |
-| Automatic chalta hai   | Manually chalani padti hai |
-| Event pe fire hota hai | `EXEC` se run hoti hai     |
-| Control kam            | Full control      |
-| Hidden execution       | Visible execution |
-| Automatically fire     | Explicit call     |
-
+Trigger = Database ka automatic event listener.
 
 query :
 :This is the pattern 
