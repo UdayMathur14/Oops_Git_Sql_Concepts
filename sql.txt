@@ -1153,14 +1153,36 @@ Output Parameters
 
 ------------------------------------------------------------------------------------------
 Definition
-Function ek reusable SQL block hota hai jo input parameters leta hai, koi specific calculation/logic apply karta hai, aur mandatory ek value ya table return karta hai. Functions permanent table data ko modify nahi kar sakte.
+Function ek reusable SQL object hai jo input le sakta hai aur ek value ya table return karta hai.
 
 Key Rules
 No Side Effects: Table level par INSERT, UPDATE, DELETE operations blocked hote hain.
 
-Must Return: RETURN statement compulsory hota hai.
+CREATE FUNCTION dbo.GetFullName
+(
+    @FirstName VARCHAR(30),
+    @LastName VARCHAR(30)
+)
+RETURNS VARCHAR(100)
+AS
+BEGIN
+    RETURN @FirstName + ' ' + @LastName;
+END;
+SELECT dbo.GetFullName('Aman', 'Sharma');
 
-dbo. Prefix Mandatory: Scalar function ko query me call karte waqt dbo.FunctionName() likhna zaroori hai.
+CREATE FUNCTION dbo.GetITEmployees()
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT eid, ename, salary
+    FROM Employee
+    WHERE department = 'IT'
+);
+SELECT *
+FROM dbo.GetITEmployees();
+
+Must Return: RETURN statement compulsory hota hai.
 
 UDF Types & Syntax
 Type 1: Scalar Function (Returns Single Value)
