@@ -1420,6 +1420,15 @@ Leaf Node       | Asli Data hota hai     | Sirf Pointer hota hai
 Speed           | Super Fast (Direct)    | Thoda Slow (Jump logic)
 Best For        | Range (10 se 100)      | Exact Match (Email/Phone)
 
+CLUSTERED INDEX
+        ↓
+B-Tree
+        ↓
+Leaf level
+        ↓
+Actual table data
+
+
 5. IMPORTANT CONCEPTS (INTERVIEW SPECIAL)
 ----------------------------------------------------------------------
 - PAGE SPLIT: Jab bhare hue page ke beech mein naya data ghusana padta 
@@ -1456,11 +1465,9 @@ INCLUDE: Ye wo extra columns hain jo index ke "Leaf Level" par chhupa diye gaye 
 
 4. Covering Index ke Fayde aur NuksanFayde (Pros)Nuksan (Cons)Super Fast: "Key Lookup" khatam ho jata hai, query milliseconds mein chalti hai.Disk Space: Index ka size badh jata hai kyunki aap data ki copy bana rahe ho.I/O Bachata hai: Disk se main table ke pages load nahi karne padte.Write Slow: Jab aap main table mein TotalAmount update karoge, toh index wala TotalAmount bhi update karna padega.
 
-SQL & Indexing Quick Revision Notes
 SQL Set Operators & Indexing Summary (GATE Focus)
 
 1.  Set Operators: Distinct vs. All
-    Default set operators in SQL (UNION, INTERSECT, EXCEPT) perform an implicit DISTINCT operation.
 
   - UNION: Combines rows from both lists. If 'Uday' is in both, result has one 'Uday'.
   - UNION ALL: Appends lists. If 'Uday' is in both, result has two 'Udays'. (Faster because no sorting/filtering).
@@ -1486,47 +1493,8 @@ SQL Set Operators & Indexing Summary (GATE Focus)
   - Clustered Index: The table is the index. Leaf nodes contain the actual data rows. Only one per table.
   - Non-Clustered Index: A separate structure. Leaf nodes contain a pointer to the data.
 
-4.  Transaction Isolation & ACID
-
-  - Atomicity: All-or-nothing execution.
-  - Durability: Data survives crashes after COMMIT.
-  - Dirty Read: Reading uncommitted data from another transaction.
-  - Serializable: Strictest level; prevents all read anomalies.
-
 5.  Aggregate Functions
 
   - COUNT(*): Counts every row, including NULLs.
   - COUNT(Column): Only counts Non-NULL values.
   - Empty Table: COUNT returns 0, while SUM/AVG return NULL.
-
-
-
-
-
-
-----------------------------------------------------------------------------------------------------
-
-SQL QUERIES : 
-
-1- For Nth max salary 
-
-1 - WITH ranklist AS (
-    SELECT salary, DENSE_RANK() OVER (ORDER BY salary DESC) AS nthRow 
-    FROM Employees
-)
-SELECT DISTINCT salary FROM ranklist WHERE nthRow = 3;
-
-
-2 - select distinct salary from Employees e1
-where 2 = (select count(distinct salary) from Employees e2 where e2.salary>e1.salary);
-
-3 - SELECT MAX(Salary) AS ThirdHighestSalary
-FROM Employees
-WHERE Salary NOT IN (
-    SELECT DISTINCT TOP 2 Salary 
-    FROM Employees 
-    ORDER BY Salary DESC
-);
-
-
-
