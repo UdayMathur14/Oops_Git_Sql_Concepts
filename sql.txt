@@ -601,6 +601,33 @@ WHERE dpno NOT IN (150, NULL);
 output kuch nhi ayega kyuki yeh h and so suppose 160 aaya toh 150 != 160 shi h but yeh not in toh and h then yeh check kreha 160!=null ab yeh kiise pta tbhi empty result .
 
 -----------------------------------------------------------------------------------------
+Exam trick:
+NOT IN + NULL in subquery → ⚠️ dangerous
+NOT EXISTS → matching row check karta hai, isliye NULL se ye problem nahi hoti.
+
+
+Tricky Case 1: Aggregate Functions Ka Dhoka (COUNT, MAX, AVG) ⚠️
+Ye sabse bada trap hai. Maan lo aap check karna chahte ho ki kya kisi department me employees hain. Aapne query likhi:
+
+SQL
+SELECT dept_name 
+FROM departments d
+WHERE EXISTS (
+    SELECT COUNT(*) 
+    FROM employees e 
+    WHERE e.dept_id = d.dept_id AND e.salary > 500000
+);
+Yahan kya gadbadi hogi?
+Aapko lagega ki agar koi employee nahi mila, toh EXISTS ko FALSE hona chahiye. Lekin twist ye hai ki ye query SAARE departments return kar degi, chahe unme ek bhi employee na ho!
+
+Kyun? Kyunki COUNT(*) ek aggregate function hai. Agar koi row match nahi bhi hoti, toh COUNT(*) empty return nahi karta, wo 0 return karta hai.
+
+SQL engine ke liye 0 bhi ek valid row/value hai. EXISTS ne dekha ki andar se ek row aayi (jisme 0 likha tha), aur usne use TRUE maan liya!
+
+Fix: EXISTS ke andar kabhi bhi COUNT, MAX, SUM jaise functions bina HAVING ke mat lagao. Wahan seedhe SELECT 1 likho.
+
+
+------------------------------------------------------------------------------------------
 select ename from employee where eid not in (100 , 101);
 
 ans - it shows the ename of only sam and bob . 
