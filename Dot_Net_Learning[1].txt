@@ -1,0 +1,595 @@
+1. API Kya Hota Hai?
+
+API ka matlab hota hai — Application Programming Interface
+Backend us request ko process karega (SQL se data lega), aur response me data JSON format me bhej dega:
+
+[
+  { "CustomerId": 1, "Name": "Uday", "City": "Delhi" },
+  { "CustomerId": 2, "Name": "Amit", "City": "Noida" }
+]
+
+.NET me database se kaam karne ke do popular tareeke hote hain
+🧱 ADO.NET (Purana tareeka – zyada manual control deta hain
+🚀 Entity Framework (EF) (Naya tareeka – fast development ke liye)
+
+🧱 1. ADO.NET – (Manual tareeka)
+ADO.NET ka matlab hai ActiveX Data Object for .NET.
+Isme tum:
+
+Khud connection banate ho
+Query likhte ho (SELECT, INSERT, UPDATE, DELETE)
+Command chalate ho
+Data reader ya DataTable me result lete ho.
+
+📝 Kya yaad rakho:
+Tumhe query khud likhni padti hai.
+CRUD (Create, Read, Update, Delete) sab tum khud code karte ho.
+Fast performance, zyada control deta hai.
+Lekin thoda lamba code ho jata hai.
+
+🧱 1. Entity Framework (EF) — Database ko .NET se connect karne ka bridge
+EF ek ORM (Object Relational Mapper) hai.
+Iska kaam hota hai tumhare database ko C# objects me convert karna.
+Tumhe manually SELECT * FROM Table jaisi queries nahi likhni padti.
+Tum direct C# class ke object ke through data access kar sakte ho.
+
+📝 Kya yaad rakho:
+
+Tumhe queries kam likhni padti hai (LINQ ka use hota hai).
+Maintain karna asaan hai.
+Fast development ke liye best hai.
+Lekin performance kabhi kabhi ADO.NET se kam hoti hai.
+✅ Best jab tum CRUD operation fast banana chahte ho bina zyada query likhe.
+
+| **Feature**          | **ADO.NET 🧱**                                                     | **Entity Framework 🚀**                                                  
+
+| **Query Writing**    | Manual SQL queries likhne padte hain (`SELECT * FROM ...`)         | LINQ ya lambda expressions se query likhte ho (ORM handle karta hai SQL) |
+| **Control**          | ⚙️ Zyada — tum poora control rakhte ho queries aur transactions pe | ⚙️ Kam — EF internally query aur mapping manage karta hai                |
+| **Performance**      | ⚡ Fast — kyunki tum khud optimize kar sakte ho                     | ⚡ Thoda kam — abstraction layer hone ki wajah se overhead hota hai       |
+| **Development Time** | 🕒 Zyada — manually query likhni aur mapping karni padti hai       | 🕒 Kam — auto mapping aur CRUD generation hoti hai                       |
+| **Suitable For**     | 🧩 Complex logic, stored procedures, performance-critical apps     | 🚀 Rapid development, CRUD-based apps                                    |
+| **Code Size**        | 🧾 Lamba — boilerplate code zyada                                  | Chhota — EF zyada code generate kar deta hai                          |
+
+ADO.NET = Manual car (tum clutch + gear khud handle karte ho) — full control, better performance.
+Entity Framework = Automatic car (system gear change karta hai) — easy driving, thoda less control.
+
+
+🧠 LINQ Kya Hota Hai?ssssdddddd
+
+👉 LINQ ka full form hai (Language Integrated Query).
+🧾 Database se data nikalne ke liye (Entity Framework ke sath)
+
+💡 In short:
+LINQ makes querying data in C# easier, faster, and more readable — just like SQL, but inside your code.
+C# ke andar SQL jaisi query likhne ka tareeka
+LINQ ka kaam database se connect karna nahi hai ❌
+Iska kaam hai data ko filter, sort, group ya query karna.
+Yeh C# me likha jaata hai (SQL ki tarah query likhne ke liye).
+
+🧮 Query likhne ka clean aur short tareeka
+
+| SQL                        | LINQ                                         |
+| -------------------------- | -------------------------------------------- |
+| Database me likhte ho      | C# code me likhte ho                         |
+| String query hoti hai      | Strongly typed code hota hai                 |
+| Run time me error aata hai | Compile time me hi error pakad leta hai      |
+| SQL syntax use hota hai    | C# syntax use hota hai (lambda / expression) |
+
+
+🧠 2. LINQ —
+
+
+| Relation                   | Real World               | Code me kaise dikhaya              |
+| -------------------------- | ------------------------ | ---------------------------------- |
+| One Customer → Many Orders | 1 customer ke kai orders | `public ICollection<Order> Orders` |
+| One Order → One Customer   | ek order ka ek customer  | `public Customer Customer`         |
+
+
+🧭 Fluent API :
+“C# code me hi Entity Framework ko batana — table, column, key, relation sab kaise banana hai.”
+Iska use hota hai jab tum:
+Foreign key ka naam custom rakhte ho
+Table ka naam ya column ka naam change karna chahte ho
+Relations (1-to-1, 1-to-many, many-to-many) define karte ho
+Length, required fields ya constraints lagate ho
+
+Fluent API always overrides Data Annotations
+
+| **Feature**                 | **Fluent API**                                         | **Data Annotations**                            |
+| --------------------------- | ------------------------------------------------------ | ----------------------------------------------- |
+| **Control**                 | ✅ High — gives full control over configurations       | ❌ Limited — only basic configurations possible  |
+| **Where to Write**          | Inside the `OnModelCreating()` method (in `DbContext`) | As attributes above model class properties      |
+| **Complex Mapping**         | Easy — supports advanced and custom mappings           | Difficult or sometimes not possible             |
+| **Foreign Key Custom Name** | Fully possible and flexible                            | Sometimes limited or tricky                     |
+| **Example**                 | `.HasOne()`, `.HasMaxLength(50)`                       | `[ForeignKey]`, `[Required]`, `[MaxLength(50)]` |
+
+
+| **Type**    | **Format**        | **Speed**     | **Why Use**                                                                               | **Where to Use (Examples)**                                                                                    | **Notes**                                |
+| ----------- | ----------------- | ------------- | ----------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| **REST**    | JSON              | ⚡ Fast        | Simple, lightweight, easy to develop/test, browser & mobile friendly                      | Web apps, Mobile apps, Public APIs, Microservices, Payment Gateways UI layer (e.g., Razorpay, PayTM REST API)  | Best for CRUD operations                 |
+| **SOAP**    | XML               | 🕐 Medium     | Extreme security, WS-Security, reliable delivery, formal WSDL contract, ACID transactions | Banking internal transactions (IMPS, NEFT, RTGS), Financial institutions, Legacy ERP, Secure corporate systems | Used where **transaction cannot fail**   |
+| **GraphQL** | JSON              | ⚡ Fast        | Client fetches only required data, reduces over-fetching & multiple calls                 | Social media apps (Instagram, Facebook), dashboards, reporting tools                                           | Best for complex nested queries          |
+| **gRPC**    | Binary (ProtoBuf) | ⚡⚡ Super Fast | High performance, low network overhead, streaming support                                 | Real-time systems, IoT, internal microservices, game servers, Chat & video streaming                           | Not browser friendly without WebAssembly |
+      
+
+
+🌐 REST API vs HTTP Methods
+🔸 REST API - 
+it’s a set of architectural principles or rules that define how APIs should be designed
+so that they are simple, scalable, and standard.
+
+Sets the rules and structure for how data will be sent, received, and represented.
+⚙️ 6 Core Principles of REST
+1️⃣ Client–Server Architecture
+The client (like a web app or mobile app) and the server (API/backend) are separate.
+
+Client only sends requests and shows data; server handles business logic and data storage.
+👉 This separation makes the system more flexible and maintainable.
+
+2️⃣ Statelessness
+Each API request should contain all the information needed to process it.
+Server does not remember any previous request (no session data).
+👉 Every request is independent.
+Example:
+If you send a request to /api/customers/1, it must include your token or credentials each time.
+
+3️⃣ Cacheable
+Responses from the server can be cached by the client or intermediate systems to improve performance.
+👉 If data doesn’t change frequently, caching avoids repeated API calls.
+
+4️⃣ Uniform Interface
+All REST APIs should follow a consistent way of interacting (URLs, methods, responses).
+For example:
+Use GET for fetching, POST for creating, etc.
+
+Use clear URLs like /api/products/1
+👉 It keeps the API predictable and easy to use.
+
+5️⃣ Layered System
+REST APIs can have multiple layers (client → API gateway → service → database).
+The client doesn’t need to know how many layers exist.
+👉 Improves scalability and security.
+
+6️⃣ Code on Demand (Optional)
+
+Server can send executable code (like JavaScript) to the client to extend its functionality.
+👉 This is optional and rarely used.
+
+🔹 HTTP Methods
+
+HTTP methods are actions or verbs used inside REST APIs to perform operations.
+They tell what you want to do with the resource — like read, create, update, or delete.
+Common HTTP Methods:
+GET → Read data
+POST → Create data
+PUT → Update data
+DELETE → Remove data
+Each HTTP method represents a single type of request to the server.
+
+
+🔁 Relation Between Them
+REST API is the architecture (the system).
+
+HTTP Methods are the actions used inside REST APIs.
+In short:
+
+REST API = “What resource to expose”
+HTTP Method = “What action to perform on that resource”
+
+
+SOLID PRINCIPLES
+
+It is an acronym 
+1 - S = Single Responsibility Principle = says that a piece of code like a method or instance should only have one 
+responsibility , It should do one thing and do it very well .
+
+ex - one method is doing only addition , it should not doing multiplication and other work . 
+
+advantage = helps us easy in managing. 
+
+2- O = Open closed Principle 
+This principle states that objects , entities , classes should be open for extension but closed for modification .
+
+ex - if you create a class you should be able to extend it without needing to modify its original implementation.
+
+3- L = List of substitution principle 
+Means that every class or derived class should be substitutable for their base or parent class . 
+
+ex - whatever you derive from another class it should be similar enough and not going to cause any conflicts as you extend the code 
+
+4 - I = Interface segregation Principle .
+It states that principle state that client should never be forced to implement methods or functionality that it doesn't need .
+
+ex = try to write your code in such a way , in a modular way that if I need five methods so you can give me the 5 methods 
+that i need . I don't need to have the knowledge of 20 methods to only use 5 of them . 
+
+5 - D = Dependency Inversion Principle 
+It states that entities must depended on abstraction and not implementations
+
+ex = code shouldn't necessarily have all the details of how something is done , it just need to know that something 
+is done .
+
+
+Got it! This structure follows a clean architecture pattern, making the API well-organized. Here’s a simple breakdown of each folder:
+
+1-Api (Presentation Layer)
+This is where the actual API controllers are.
+It handles incoming HTTP requests and sends responses.
+Example: UserController.cs → Manages user-related endpoints like GET /users or POST /users.
+
+2-BusinessLogic (Service Layer)
+Contains the core business logic of the application.
+It processes data and applies business rules.
+Example: UserService.cs → Handles logic like validating user input before saving it.
+
+3-DataAccess (Repository Layer)
+Responsible for database interactions.
+It contains methods to fetch, insert, update, and delete records.
+Example: UserRepository.cs → Defines database queries for users.
+
+4-Models (Data Layer)
+Contains classes that define the structure of data.
+Example: User.cs → Defines properties like Id, Name, Email, etc.
+
+5-Utilities (Helper Layer)
+Stores common helper functions, constants, and reusable methods.
+Example: JwtHelper.cs → Helps generate JWT tokens for authentication.
+
+6-Tests (Testing Layer)
+Contains unit and integration tests to ensure the API functions correctly.
+
+| Step                          | Description                                       | Purpose                                |
+| ----------------------------- | ------------------------------------------------- | -------------------------------------- |
+| **1. Source Code**            | Developer writes C# code.                         | Defines logic and structure.           |
+| **2. Compilation**            | Code converted to **IL (Intermediate Language)**. | Makes it platform-independent.         |
+| **3. CLR**                    | Executes IL code.                                 | Handles security, memory, and threads. |
+| **4. JIT Compiler**           | Converts IL to **machine code** during execution. | Improves performance.                  |
+| **5. Garbage Collector (GC)** | Frees unused memory automatically.                | Prevents memory leaks.                 |
+| **6. Exception Handling**     | Catches runtime errors.                           | Prevents app crashes.                  |
+| **7. Execution & Output**     | Final code executes and returns results.          | Produces UI or API response.           |
+
+
+
+1️⃣ Interfaces: What & Why?
+What is an Interface?
+An interface is like a contract that defines a set of methods without implementing them.
+Think of it like a job description— it tells you what needs to be done but not how to do it.
+
+Why Use an Interface?
+It ensures consistency across multiple classes.
+It allows multiple implementations of the same behavior.
+Supports dependency injection, making the code more testable and maintainable.
+
+2 - AnyAsync() method - Go to the Customers table, and check if any customer has the CustomerCode "RS123". Return true or false.
+
+Use AnyAsync() when:
+You only need to check if a condition is true.
+You want faster performance
+You don’t need the data itself, just confirmation.
+
+
+3 - FirstOrDefaultAsync:
+var customer = await _context.Customers.FirstOrDefaultAsync(c => c.Email == "rahul@mail.com" && c.CustomerCode == "1");
+
+if customer found then it return 
+Customer {
+    Id = 1,
+    Name = "Rahul Sharma",
+    Email = "rahul@mail.com",
+    CustomerCode = "1"
+}
+
+else null
+
+
+-AutoMapper :
+converts complex data type with ease. 
+saves time spent on writing manual mapping code. 
+might lead to performance and debugging.
+
+
+Why validations are important ?
+they are important because they help us to protect our data integrity .
+
+⚔️ Difference Between Single(), First() & FirstOrDefault() in LINQ
+
+Method	                                        Description	                Returns When Not Found	                                      When to Use	                            Example
+First()	                Pehla record return karta hai jo condition match kare	❌ Throws Exception if no match	                         Jab at least one record hamesha expected ho	var user = users.First(u => u.Id == 1);
+FirstOrDefault()	Pehla record return karta hai agar milta hai, warna default value (null)	✅ Returns null if not found	 Jab record ho bhi sakta hai, na bhi ho	        var user = users.FirstOrDefault(u => u.Id == 1);
+Single()	        Sirf ek record milna chahiye — na kam, na zyada	        ❌ Exception agar 0 ya >1 record mile	                 Jab ek hi record exist karna chahiye	        var user = users.Single(u => u.Email == "abc@mail.com");
+SingleOrDefault()	Ek record mile toh return karo, warna null	        ❌ Exception agar zyada record mile	                 Jab ek ya koi bhi record ho sakta hai	        var user = users.SingleOrDefault(u => u.Email == "abc@mail.com");
+
+
+🔍 Quick Summary:
+Case	                             Use This
+You expect only one record ever	   Single() / SingleOrDefault()
+You want first match only	   First() / FirstOrDefault()
+Record may not exist	           Use the OrDefault() version
+
+
+
+⚔️ 4. Q: Difference between REST API and HTTP Methods?
+
+REST API defines the URL structure and data communication style.
+HTTP Methods define what action to perform on that URL.
+Example: GET /api/users vs POST /api/users.
+
+🧭 5. Q: What is Entity Framework?
+
+Entity Framework (EF) ek ORM (Object Relational Mapper) hai jo hume C# classes ke through directly database me kaam karne deta hai bina SQL query likhe.
+Example: context.Customers.ToList();
+
+9. Q: How to fetch data from two tables using LINQ (join)?
+
+var result = from c in context.Customers
+             join o in context.Orders on c.CustomerId equals o.CustomerId
+             select new { c.Name, o.Amount };
+
+📝 12. Q: Fluent API vs Data Annotations — difference?
+
+Fluent API	                      Data Annotations
+Code-based configuration	Attribute-based configuration
+More flexible & powerful	Easy to implement, less flexible
+Used in OnModelCreating()	Used directly in model class
+
+
+Dependency Injection (DI)
+
+Dependency Injection (DI) is a design pattern where an object’s dependencies are injected instead of being created inside the object itself.
+
+Without DI:
+
+public class EmailService {
+    public void SendEmail(string message) {
+        Console.WriteLine($"Sending: {message}");
+    }
+}
+
+public class Notification {
+    private EmailService _emailService = new EmailService(); // tightly coupled
+
+    public void Notify(string msg) {
+        _emailService.SendEmail(msg);
+    }
+}
+
+
+Here, Notification depends directly on EmailService.
+If you want to change the way emails are sent (like via SMS), you’d have to modify this class.
+
+
+With DI:
+
+public interface IMessageService {
+    void Send(string message);
+}
+
+public class EmailService : IMessageService {
+    public void Send(string message) {
+        Console.WriteLine($"Sending email: {message}");
+    }
+}
+
+public class Notification {
+    private readonly IMessageService _messageService;
+
+    public Notification(IMessageService messageService) {
+        _messageService = messageService;
+    }
+
+    public void Notify(string msg) {
+        _messageService.Send(msg);
+    }
+}
+
+
+Now you can easily switch to SMS, push notifications, etc., without changing the Notification class.
+
+Yeh batata hai object kab tak zinda rahega (lifetime)
+Har service type ka ek use-case hota hai.
+
+| Lifetime      | Description                                 | Example Use                                            |
+| ------------- | ------------------------------------------- | ------------------------------------------------------ |
+| **Transient** | New instance every time it’s requested.     | Lightweight, stateless services (e.g. logging helper). |
+| **Scoped**    | One instance per web request (scope).       | Database context in ASP.NET Core.                      |
+| **Singleton** | Single instance for the entire application. | Configuration, caching service, etc.                   |
+
+| Type          | Matlab                                    | Kab use hota hai                                 |
+| ------------- | ----------------------------------------- | ------------------------------------------------ |
+| **Transient** | Har baar naya object banta hai            | Logging, utility classes                         |
+| **Scoped**    | Ek request ke liye ek hi object banta hai | Database context (ek request = ek DB connection) |
+| **Singleton** | Puri app ke liye ek hi object rehta hai   | Configuration, caching                           |
+
+| Service       | Work                                   | Lifetime      |
+| ------------- | -------------------------------------- | ------------- |
+| `DbContext`   | Database se data fetch / save          | **Scoped**    |
+| `MailService` | Email bhejna                           | **Transient** |
+| `AppCache`    | App level configuration ya cached data | **Singleton** |
+
+Transient: When you want a fresh instance every time (e.g., utility, calculation service).
+Scoped: When you want one instance per request (e.g., database operations).
+Singleton: When state/data can be safely shared globally (e.g., caching, logging).
+
+🧠 What is Asynchronous (Async) Programming?
+
+Async programming means running tasks without blocking the main thread — so your program can do other work while waiting for something slow (like a database call, API request, or file I/O) to finish.
+It is used for :
+🚀 Performance	Lets your app handle more work at the same time.
+💻 Responsive UI	UI apps (like WPF/WinForms) don’t freeze while waiting.
+🌐 Efficient Servers	Web APIs (like ASP.NET Core) can serve more users with fewer threads.
+🔄 Non-blocking I/O	Perfect for DB calls, HTTP requests, or reading files.
+
+⚠️ Important Notes
+
+Async does not make code run faster — it just uses resources more efficiently.
+Use async/await mainly for I/O-bound work (DB, API, File I/O) — not for heavy CPU tasks.
+
+✅ Bonus Interview Tip
+
+If asked:
+"What happens to the thread when you call an async method?"
+Say:
+“Async methods don’t create new threads. They use the same thread until the first await. 
+After that, the thread is released, and the rest of the method continues on a thread from the thread pool once the awaited operation completes.”
+
+2. What is the difference between IEnumerable and IQueryable?
+
+
+| Term              | Meaning                                                                                                    |
+| ----------------- | ---------------------------------------------------------------------------------------------------------- |
+| **`IEnumerable`** | Used for **in-memory** collections (like List, Array, etc.). Works in C# (client side).                    |
+| **`IQueryable`**  | Used for **remote data sources** (like SQL Server, via Entity Framework). Works in database (server side). |
+
+| Feature            | `IEnumerable`                | `IQueryable`          |
+| ------------------ | ---------------------------- | --------------------- |
+| Executes           | In-memory                    | Database/server       |
+| Query Translation  | Not possible                 | Translated to SQL     |
+| Performance        | Slower for large data        | Faster for DB queries |
+| Deferred Execution | Yes                          | Yes                   |
+| Namespace          | `System.Collections.Generic` | `System.Linq`         |
+| Use with EF Core   | Not recommended              | Recommended           |
+
+🧩 Example
+👉 Using IEnumerable
+IEnumerable<User> users = _context.Users.ToList(); // Data fetched first
+var filtered = users.Where(u => u.Age > 25).ToList(); // Filter applied in memory
+
+All records are fetched from DB first 😬
+Then filtering (Age > 25) happens in memory → slow if table is large
+
+
+
+3. What is Serialization and why is it used in C#?
+
+| Concept             | Meaning                                      | Example                        |
+| ------------------- | -------------------------------------------- | ------------------------------ |
+| **Serialization**   | Object ➜ Data format (JSON/XML)              | `JsonSerializer.Serialize()`   |
+| **Deserialization** | Data format ➜ Object                         | `JsonSerializer.Deserialize()` |
+| **Used For**        | Storing, transferring, or saving object data | Web APIs, files, DB            |
+
+🧾 Output:
+
+{"Id":1,"Name":"Uday","Department":"IT"}
+That’s serialization — your C# object is converted into a JSON string.
+
+
+🧩 Step 3 – Deserialization
+string jsonData = "{\"Id\":1,\"Name\":\"Uday\",\"Department\":\"IT\"}";
+
+// Convert JSON → Object
+Employee empObj = JsonSerializer.Deserialize<Employee>(jsonData);
+Console.WriteLine(empObj.Name); // Output: Uday
+
+That’s deserialization — converting back to a usable C# object.
+
+4. Explain middleware
+⚙️ Example Flow in ASP.NET Core
+When a request comes in:
+
+Request → Logging → Authentication → Authorization → Routing → Endpoint → Response
+Each of these (Logging, Auth, Routing) is a middleware.
+
+
+5. What is the difference between throw and throw ex?
+
+| Feature     | `throw`                              | `throw ex`                        |
+| ----------- | ------------------------------------ | --------------------------------- |
+| Type        | Re-throws the **original** exception | Throws a **new** exception object |
+| Stack trace | ✅ Preserved                          | ❌ Lost (reset)                 |
+| Debugging   | Easier                               | Harder                            |
+| Recommended | ✅ Always use this                    | 🚫 Avoid this                   |
+
+
+6. What is an extension method in C#?
+An Extension Method is a special static method that lets you add new functionality to existing classes
+👉 without modifying their original code or creating a derived class (inheritance).
+You can “extend” an existing class from outside it.
+
+Extension method = Add new method to an existing class without modifying it.
+public class Student
+{
+    public string Name { get; set; }
+}
+Now you want to add a new function SayHello() to it —
+but you cannot edit the Student class (maybe it’s from another library).
+
+So you create an extension method 👇
+
+✅ Step 1 – Create a static class
+csharp
+Copy code
+public static class MyExtensions
+{
+    // 'this' tells C# that it's an extension method for Student class
+    public static void SayHello(this Student student)
+    {
+        Console.WriteLine($"Hello, {student.Name}!");
+    }
+}
+✅ Step 2 – Use it like a normal method
+csharp
+Copy code
+class Program
+{
+    static void Main()
+    {
+        Student s = new Student();
+        s.Name = "Uday";
+
+        s.SayHello();   // 👈 calling the new function
+    }
+}
+🧾 Output:
+
+Copy code
+Hello, Uday!
+
+Current pattern used:
+Sometimes people call this pattern:
+N-Tier Architecture
+or Layered Pattern
+
+
+| Feature                                                     | **POST**                                                              | **PUT**                                                                             |
+| ----------------------------------------------------------- | --------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **Purpose**                                                 | To **create** a new resource                                          | To **update** an existing resource (or replace it)                                  |
+| **Idempotent (same request multiple times = same result?)** | ❌ **Not idempotent** — calling POST twice will create **two records** | ✅ **Idempotent** — calling PUT twice will **update the same record**, no duplicates |
+| **Typical usage**                                           | `/api/users` → create a new user                                      | `/api/users/5` → update user with ID 5                                              |
+| **Request body**                                            | Contains new data for creation                                        | Contains full data of the resource to update                                        |
+| **Server response**                                         | Usually returns `201 Created` with the new resource info              | Usually returns `200 OK` or `204 No Content` after successful update                |
+| **Creates new resource?**                                   | ✅ Yes                                                                 | 🚫 No (unless you allow “upsert”, but rare)                                         |
+
+
+
+
+✅ In Simple Words
+
+HTTP → “Talks openly” — anyone on the network can read or modify data.
+
+HTTPS → “Talks secretly” — data is encrypted before sending.
+
+Example:
+
+http://example.com/login     ❌ Password visible in network sniffers
+https://example.com/login    ✅ Password encrypted and safe
+
+| Feature             | **HTTP**                                                          | **HTTPS**                                                             |
+| ------------------- | ----------------------------------------------------------------- | --------------------------------------------------------------------- |
+| **Full form**       | HyperText Transfer Protocol                                       | HyperText Transfer Protocol **Secure**                                |
+| **Port**            | 80                                                                | 443                                                                   |
+| **Security**        | ❌ Data is sent in **plain text** (can be intercepted by hackers). | ✅ Data is **encrypted** using **SSL/TLS**, keeping it private.        |
+| **Data Protection** | None — vulnerable to sniffing, tampering.                         | Protects data from **man-in-the-middle attacks**.                     |
+| **Certificate**     | No SSL certificate needed.                                        | Requires an **SSL/TLS certificate** issued by a trusted authority.    |
+| **Speed**           | Slightly faster (no encryption overhead).                         | Slightly slower (encryption + decryption), but almost negligible now. |
+| **SEO & Trust**     | Not preferred by browsers; shows “Not Secure” warning.            | Preferred; improves **SEO ranking** and user trust.                   |
+
+
+
+
+
+
+
+
+
+
+
