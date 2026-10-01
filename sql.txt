@@ -1525,3 +1525,10 @@ SQL Set Operators & Indexing Summary (GATE Focus)
   - COUNT(*): Counts every row, including NULLs.
   - COUNT(Column): Only counts Non-NULL values.
   - Empty Table: COUNT returns 0, while SUM/AVG return NULL.
+
+--------------------------------------------------------------------------------------------------------------------------
+Ekdum ratta wali line:
+
+ON = Match
+AND = Match ki extra condition
+WHERE = Result filter
