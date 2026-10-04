@@ -19,12 +19,27 @@ Adavantages :
 6. Scalability for large applications
 
 //empty class have sizeof(object) = 1 
+#include <iostream>
+using namespace std;
+
 class A {};
 
 int main()
 {
-    A obj;
-    cout << sizeof(obj); // 1
+    A obj1;
+    A obj2;
+
+    cout << sizeof(obj1) << endl;
+
+    cout << &obj1 << endl;
+    cout << &obj2 << endl;
 }
 
+output
+1
+0x61ff08
+0x61ff07
+
 The compiler gives at least 1 byte so that different objects can have unique memory addresses.
+
+Empty class ka object bhi memory mein exist karta hai, isliye C++ uska size 0 nahi rakhta; generally minimum 1 byte rakha jata hai, taaki different objects ko distinct addresses diye ja saken.

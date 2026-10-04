@@ -31,7 +31,20 @@ int main(){
     c.s = "hi mathur";
     p = c; 
 
-    cout<<p.s;
+// p = c;
+
+// Ye bol raha hai:
+
+// "c object ke andar jo values hain, woh p object mein copy kar do."
+
+// Iske baad:
+
+// p                    c
+// ├── a = 23            ├── a = 23
+// └── s = "hi mathur"   └── s = "hi mathur"
+    // Dono alag objects hain.
+    // Bas c ki values p mein copy hui hain.
+    // cout<<p.s;
 
 
     //normal 
@@ -54,3 +67,44 @@ int main(){
     
     return 0 ; 
 }
+
+
+Pen p;
+Yahan p directly object hai.
+p
+↓
+[ Pen object ]
+
+Access:
+
+p.a
+p.s
+p.write()
+
+Example:
+Pen p;
+p.a = 10;
+cout << p.a;
+
+Memory
+
+Ye automatic/local storage mein banta hai (agar local variable hai), aur scope khatam hone par automatically destroy ho jata hai.
+
+Haan bhai, normal object Pen p; ka address chahiye toh & lagayega:
+Pen p;
+cout << &p;
+Output kuch aisa:
+0x61ff08
+
+Pen p;
+Pen* q = new Pen;
+cout << &p;  // p object ka address
+cout << q;   // q ke andar stored address
+
+Pen p;
+
+Pen* ptr = &p;
+
+cout << &p << endl;     // p ka address
+cout << ptr << endl;    // same address
+cout << &ptr << endl;   // ptr pointer ka khud ka address
