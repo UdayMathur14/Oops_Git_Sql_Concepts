@@ -335,8 +335,7 @@ ans - it is not eliminate duplicates , it shows all the values ;
 select distinct enames from employee ; -- it eliminates all duplicates and show the ename table.
 
 DISTINCT → duplicate values remove karta hai
-NULL ko ek value ki tarah treat karta hai
-Multiple NULL → result me sirf 1 NULL
+NULL ko ek value ki tarah treat karta hai , Multiple NULL → result me sirf 1 NULL
 
 select ename from employee where age = 28; -- it will only show names of that member whose have the age 28 ; 
 
@@ -685,8 +684,11 @@ NULL agar ALL list ke andar ho → pura condition fail ho jaata hai (result empt
 Q3 — <> ANY — sabse deceptive 🔥
 SELECT name
 FROM employee
-WHERE salary <> ANY (10000, 20000); iska mtb h yeh (salary <> 10000 OR salary <> 20000) not in jaisa mt sochna 
+WHERE salary <> ANY (10000, 20000, null); iska mtb h yeh (salary <> 10000 OR salary <> 20000) not in jaisa mt sochna 
+Condition banegi: (salary <> 10000 OR salary <> 20000 OR salary <> NULL)
 
+:jo khud null h wo return nhi honge baaki saare ho jayegnge return , kyuki agr 10000 ho toh next true ho jayegi kyuki null se compare karoge toh null hi ayega jo ki false h 
+.
 lekin agr kisi row m null hoga toh wo nhi ayega kyuki wo null hi h .
 
 ------------------------------------------------------------------------------------------
@@ -1459,11 +1461,11 @@ Actual table data
 5. IMPORTANT CONCEPTS (INTERVIEW SPECIAL)
 ----------------------------------------------------------------------
 - PAGE SPLIT: Jab bhare hue page ke beech mein naya data ghusana padta 
-  hai, toh page beech se fat jata hai. Isse performance slow hoti hai.
+  hai, toh page beech se fat jata hai. Isse performance slow hoti hai. Full page ke beech mein data insert hone par page ka do hisso mein tootna.
 - ILAJ: Hamesha Auto-increment ID (Identity) ko Clustered Index banao 
   taaki naya data hamesha aakhir mein jude, beech mein nahi.
 - FILL FACTOR: Page mein pehle se thodi khali jagah (e.g. 20%) chhodna 
-  taaki naya data aane par Page Split na ho.
+  taaki naya data aane par Page Split na ho. Index pages mein future updates ke liye pehle se khali space chhodna.
 - WRITE SPEED: Zyada index = Fast SELECT, lekin Slow INSERT/UPDATE 
   kyunki saare index registers ko update karna padta hai.
 
