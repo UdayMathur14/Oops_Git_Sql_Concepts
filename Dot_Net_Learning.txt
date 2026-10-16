@@ -54,7 +54,7 @@ ADO.NET = Manual car (tum clutch + gear khud handle karte ho) — full control, 
 Entity Framework = Automatic car (system gear change karta hai) — easy driving, thoda less control.
 
 
-🧠 LINQ Kya Hota Hai?ssssdddddd
+🧠 LINQ Kya Hota Hai?
 
 👉 LINQ ka full form hai (Language Integrated Query).
 🧾 Database se data nikalne ke liye (Entity Framework ke sath)
