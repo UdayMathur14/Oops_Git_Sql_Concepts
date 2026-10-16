@@ -256,7 +256,6 @@ An interface is like a contract that defines a set of methods without implementi
 Think of it like a job description— it tells you what needs to be done but not how to do it.
 
 Why Use an Interface?
-It ensures consistency across multiple classes.
 It allows multiple implementations of the same behavior.
 Supports dependency injection, making the code more testable and maintainable.
 
@@ -285,8 +284,6 @@ else null
 -AutoMapper :
 converts complex data type with ease. 
 saves time spent on writing manual mapping code. 
-might lead to performance and debugging.
-
 
 Why validations are important ?
 they are important because they help us to protect our data integrity .
@@ -303,7 +300,7 @@ SingleOrDefault()	Ek record mile toh return karo, warna null	        ❌ Excepti
 🔍 Quick Summary:
 Case	                             Use This
 You expect only one record ever	   Single() / SingleOrDefault()
-You want first match only	   First() / FirstOrDefault()
+You want first match only	       First() / FirstOrDefault()
 Record may not exist	           Use the OrDefault() version
 
 
@@ -334,7 +331,6 @@ Used in OnModelCreating()	Used directly in model class
 
 
 Dependency Injection (DI)
-
 Dependency Injection (DI) is a design pattern where an object’s dependencies are injected instead of being created inside the object itself.
 
 Without DI:
