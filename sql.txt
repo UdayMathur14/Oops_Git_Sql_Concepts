@@ -917,6 +917,83 @@ ON CUSTOMERS.ID = ORDERS.CUSTOMER_ID;
 
 pura data aa gya left and right ka jiski value match nhi kr rhi thi uske ander null aa gya bs .
 ---------------------------------------------------------------------------------------------------
+Relations in DB :
+
+1. One-to-One (1 : 1):  Ek Student Ek Roll Number Concept:Ek Student ka sirf ek hi Roll Number hoga.Ek Roll Number sirf ek hi Student ka ho sakta hai.
+Database Logic : Child table me Foreign Key par UNIQUE constraint lagta hai taaki same Roll No kisi aur student ko na mile.
+
+CREATE TABLE Students (
+    StudentID INT PRIMARY KEY,
+    StudentName VARCHAR(50)
+);
+
+-- Child Table (1 to 1)
+CREATE TABLE StudentRollNumbers (
+    RollNoID INT PRIMARY KEY,
+    RollNumber INT UNIQUE, -- UNIQUE enforce karta hai 1:1 link
+    StudentID INT UNIQUE FOREIGN KEY REFERENCES Students(StudentID)
+);
+
+2 - One-to-Many (1 : M) or Many to One 
+Forward : Ek Student (e.g., Uday) Multiple Subjects (Maths, Science, English) padhta hai.
+Reverse (M : 1): Us Subjects table ki nazar se dekhein toh multiple Subject rows Ek hi Student ID ko point kar rahi hain.
+
+CREATE TABLE Students (
+    StudentID INT PRIMARY KEY,
+    StudentName VARCHAR(50)
+);
+
+-- 2. Subjects Table (Many Side - Foreign Key yahan aayegi)
+CREATE TABLE Subjects (
+    SubjectID INT PRIMARY KEY,
+    SubjectName VARCHAR(50),
+    StudentID INT FOREIGN KEY REFERENCES Students(StudentID) -- Duplicate StudentID allowed
+);
+
+3 - 📚 Many-to-Many (M : M) — Student & Subject Context1. Real-Life Logic (Dono Taraf Se):Forward Ek Student (e.g., Uday) Multiple Subjects (Maths, Science, English) padh sakta hai.
+Reverse : Ek Subject (e.g., Maths) Multiple Students (Uday, Amit, Rahul) dwara padha ja sakta hai.
+
+Database Implementation (3 Tables)
+Hum 3 tables banayenge:
+Students (Main Table 1)
+Subjects (Main Table 2)
+StudentSubjects (Junction Table jo dono ki Primary Keys ko connect karegi)
+
+CREATE TABLE Students (
+    StudentID INT PRIMARY KEY,
+    StudentName VARCHAR(50)
+);
+
+-- 2. Main Table 2: Subjects
+CREATE TABLE Subjects (
+    SubjectID INT PRIMARY KEY,
+    SubjectName VARCHAR(50)
+);
+
+-- 3. Junction / Bridge Table (Break M:M into two 1:M relationships)
+CREATE TABLE StudentSubjects (
+    StudentID INT FOREIGN KEY REFERENCES Students(StudentID),
+    SubjectID INT FOREIGN KEY REFERENCES Subjects(SubjectID),
+    
+    -- Composite Primary Key (Dono IDs milkar unique pair banayenge)
+    PRIMARY KEY (StudentID, SubjectID)
+);
+
+Data Kaise Dikhega?
+StudentID  StudentName
+1           Uday 
+2           Amit
+
+SubjectID	SubjectName
+101	         Maths
+102	         Science
+
+StudentID (FK)	SubjectID (FK)
+1 (Uday)	    101 (Maths)
+1 (Uday)	    102 (Science)
+2 (Amit)	    101 (Maths)
+
+----------------------------------------------------------------------------------------------------
 Some tips and functions:
 
 SELECT * FROM Customers
