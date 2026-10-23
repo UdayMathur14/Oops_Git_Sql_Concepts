@@ -465,8 +465,6 @@ var filtered = users.Where(u => u.Age > 25).ToList(); // Filter applied in memor
 All records are fetched from DB first 😬
 Then filtering (Age > 25) happens in memory → slow if table is large
 
-
-
 3. What is Serialization and why is it used in C#?
 
 | Concept             | Meaning                                      | Example                        |
@@ -489,6 +487,14 @@ Employee empObj = JsonSerializer.Deserialize<Employee>(jsonData);
 Console.WriteLine(empObj.Name); // Output: Uday
 
 That’s deserialization — converting back to a usable C# object.
+
+Serialization :
+Jab data ko apne backend se bahar (network par) bhejna ho.
+Example: Backend se data nikal kar frontend (Angular) ko response bhejna.
+
+Deserialization 
+Jab bahar se data tumhare backend ke andar aaye.
+Example: Frontend se koi Form submit hua aur backend ne us JSON data ko receive kiya.
 
 4. Explain middleware
 ⚙️ Example Flow in ASP.NET Core
