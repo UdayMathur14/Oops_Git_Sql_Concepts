@@ -598,6 +598,64 @@ https://example.com/login    ✅ Password encrypted and safe
 | **SEO & Trust**     | Not preferred by browsers; shows “Not Secure” warning.            | Preferred; improves **SEO ranking** and user trust.                   |
 
 
+Try , Catch and Finally 
+
+try block: Isme wo code rakhte hain jisme error aane ka shak ho.
+catch block: Agar try block me error aati hai, toh code turant catch me jump kar jata hai aur error ko handle karta hai.
+finally block: Yeh block hamesha chalta hai, chahe error aaye ya na aaye (Memory clean up, DB Connection close karne ke liye).
+
+Exception sabse badi (Parent) class hai—iske andar duniya ki saari errors aa jati hain.
+DivideByZeroException ek choti (Child) class hai—iske andar sirf math wali divide by zero error aati hai.
+
+try { ... }
+catch (Exception ex) { /* Yeh saari errors ko pehle hi apne andar chupakar baith jayega */ }
+catch (DivideByZeroException ex) { /* Yeh kabhi chalega hi nahi, error aa jayegi! */ }
+
+Yani rule yeh yaad rakh: finally block return statement ke theek pehle execute hota hai!
+
+Ek try ke andar kitne catch ho sakte hain?
+Kitne bhi ho sakte hain!
+
+try // <-- Outer Try
+{
+    Console.WriteLine("1. Outer try shuru hua.");
+
+    try // <-- Inner Try
+    {
+        Console.WriteLine("2. Inner try shuru hua.");
+        int a = 10;
+        int b = 0;
+        int res = a / b; // Yahan error aayegi!
+    }
+    catch (DivideByZeroException)
+    {
+        Console.WriteLine("3. Inner Catch: Math wali galti pakdi gayi!");
+    }
+    finally
+    {
+        Console.WriteLine("4. 👉 Inner FINALLY chal gaya!"); // Yeh pehle chalega!
+    }
+
+    // Ab outer ka baaki code chalega
+    string text = File.ReadAllText("galat_file.txt"); // Yahan fir se error aayegi!
+}
+catch (FileNotFoundException)
+{
+    Console.WriteLine("5. Outer Catch: File nahi mili!");
+}
+finally
+{
+    Console.WriteLine("6. 👉 Outer FINALLY chal gaya!"); // Yeh aakhiri me chalega!
+}
+1. Kiska Catch Chalega? (Inner vs Outer)
+Agar error Inner Try ke andar aayi: Toh sabse pehle Inner Catch hi usko pakdega. Aur agar inner catch ne error sambhal li, toh program crash nahi hoga, balki wo aage badhkar Outer try ke baaki code ko bhi chalayega!
+
+Agar error Outer Try ke andar aayi (aur inner ke baahar): Toh Inner catch ka usse koi lena-dena nahi hai, seedha Outer Catch usko pakdega.
+
+2. Agar Dono me finally laga ho, toh kya dono chalenge?
+HAAN! Dono ke dono finally blocks chalenge!
+
+
 
 
 
