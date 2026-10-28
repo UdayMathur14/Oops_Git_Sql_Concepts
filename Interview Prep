@@ -15,3 +15,104 @@ IEnumerable<string> readOnlyView = realList;
 realList.Add("Mango"); 
 
 // Toh readOnlyView me bhi "Mango" apne aap dikhne lagega!
+
+Pehle do meanings samjho:
+- Reference equality: kya dono variables usi ek object ko refer karte hain?
+- Value equality: kya dono ko unke data ke according equal maana gaya hai?
+
+== (Operator):
+Custom classes ke liye yeh hamesha Memory Address / Reference check karta hai (ki dono ek hi cheez hain ya nahi).
+
+Lekin agar tune Equals() ko likhte waqt override kar diya ki "Bhai agar ID same hai toh true de dena", tab invoice1.Equals(invoice2) bolega True!
+
+Struct vs Class 
+
+| Point          | Class | Struct |
+| Type           | Reference type | Value type |
+| Normal assignment | Reference copy | Value copy |
+| Constructors/methods/properties | Ho sakte hain | Ho sakte hain |
+| Inheritance | Doosri class se inherit kar sakti hai | Class ya struct se inherit nahi kar sakta |
+| Interfaces implement karna | Haan | Haan |
+| Null | Reference null ho sakta hai | Normal struct null nahi; `Dimensions?` ho sakta hai |
+using System;
+
+public class Program
+{
+    public static void Main()
+    {
+        // ==========================================
+        // 1. CLASS KA KHEL (Reference Type - Heap Memory)
+        // ==========================================
+        Console.WriteLine("--- CLASS EXAMPLE ---");
+        
+        CarClass c1 = new CarClass();
+        c1.Speed = 100;
+
+        // Yahan c2 ko c1 assign kiya (Sirf address copy hua, naya object nahi bana!)
+        CarClass c2 = c1; 
+        c2.Speed = 200; // Humne c2 ki speed badli
+
+        Console.WriteLine($"c1 ki speed: {c1.Speed}"); // Output: 200 (Arey! c1 bhi badal gaya!)
+        Console.WriteLine($"c2 ki speed: {c2.Speed}"); // Output: 200
+
+
+        // ==========================================
+        // 2. STRUCT KA KHEL (Value Type - Stack Memory)
+        // ==========================================
+        Console.WriteLine("\n--- STRUCT EXAMPLE ---");
+
+        CarStruct s1 = new CarStruct();
+        s1.Speed = 100;
+
+        // Yahan s2 ko s1 assign kiya (Poori ki poori nayi copy ban gayi!)
+        CarStruct s2 = s1; 
+        s2.Speed = 200; // Humne sirf s2 ki speed badli
+
+        Console.WriteLine($"s1 ki speed: {s1.Speed}"); // Output: 100 (S1 bilkul safe hai, change nahi hua!)
+        Console.WriteLine($"s2 ki speed: {s2.Speed}"); // Output: 200
+    }
+}
+
+// --- CLASS (Reference Type) ---
+public class CarClass
+{
+    public int Speed { get; set; }
+}
+
+// --- STRUCT (Value Type) ---
+public struct CarStruct
+{
+    public int Speed { get; set; }
+}
+Code se kya sikhne ko mila?
+Class (c1 & c2): Dono ek hi memory address ko point kar rahe the. Jaise hi c2 ki speed badli, c1 ki speed bhi auto-pilot mode me change ho gayi kyunki maal ek hi godown (Heap) me pada tha.
+
+Struct (s1 & s2): Dono ke paas apni-apni independent copy thi (Stack ke alag-alag dabbe). s2 ko badalne se s1 par koi asar nahi pada!
+
+Chhota sa Code Example dekh:
+File 1: User.Basic.cs
+
+C#
+public partial class User 
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+}
+File 2: User.Actions.cs
+
+C#
+public partial class User 
+{
+    public void Login() 
+    {
+        Console.WriteLine($"{Name} login ho gaya!");
+    }
+}
+Compiler ki Nazar me: Jab C# compiler isko dekhta hai, toh wo samajh jata hai ki ye dono alag files nahi, balki ek hi class ke do hisse hain, aur wo inhein jod kar ek poori class bana deta hai! Tum chahe new User() karke Id, Name aur Login() teeno ko ek sath access kar sakte ho.
+
+Interview ke Rules (Yeh yaad rakhna):
+Keyword mandatory: Har ek file me partial keyword likhna zaroori hai (jaise public partial class User).
+
+Ek hi Namespace: Saare partial tukde same namespace ke andar hone chahiye.
+
+Access Modifiers match hone chahiye: Agar ek file me public hai, toh baaki me bhi public hi hona chahiye.
