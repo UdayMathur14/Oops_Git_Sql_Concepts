@@ -1,0 +1,17 @@
+Iquerayable vs Ienumerable 
+
+IQueryable ka kaam hai: SQL Database se baat karna aur wahi par filter lagana taaki network par faltu data na aaye.
+
+IEnumerable ka kaam hai: Ek aam universal collection contract dena, taaki poori application me kahin bhi (chahe DB ho, File ho, ya Memory list ho) 
+data ko aaram se pass kiya ja sake aur loop chalaya ja sake.
+
+List<string> realList = new List<string> { "Apple", "Banana" };
+
+// Humne iska ek IEnumerable view bana liya
+IEnumerable<string> readOnlyView = realList; 
+// readOnlyView.Add("Mango"); // ❌ Error! Kyunki IEnumerable ke paas Add method nahi hai.
+
+// LEKIN doosra banda agar asli list me add kar de:
+realList.Add("Mango"); 
+
+// Toh readOnlyView me bhi "Mango" apne aap dikhne lagega!
