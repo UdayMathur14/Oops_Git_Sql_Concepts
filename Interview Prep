@@ -112,7 +112,148 @@ Compiler ki Nazar me: Jab C# compiler isko dekhta hai, toh wo samajh jata hai ki
 
 Interview ke Rules (Yeh yaad rakhna):
 Keyword mandatory: Har ek file me partial keyword likhna zaroori hai (jaise public partial class User).
-
 Ek hi Namespace: Saare partial tukde same namespace ke andar hone chahiye.
-
 Access Modifiers match hone chahiye: Agar ek file me public hai, toh baaki me bhi public hi hona chahiye.
+
+Boxing & Unboxing 
+Jab aap kisi Value Type (jaise int, char, bool) ko kisi Reference Type (jaise object ya koi Interface) ke andar daalte hain, toh usko Boxing kehte hain.
+int num = 100;        // Yeh ek Value Type hai (Stack par hai)
+object obj = num;     // 🎁 BOXING ho gayi! (Stack ki value Heap par object me pack ho gayi)
+
+Unboxing kya hoti hai? (Reference Type $\rightarrow$ Value Type)
+Jab aap us boxed object se wapas apni original Value Type ki value nikalte hain, toh usko Unboxing kehte hain.
+object obj = 100;             // Pehle se boxed object hai
+int unboxedNum = (int)obj;    // 📦 UNBOXING ho gayi! (Heap se nikal kar wapas int me cast kiya)
+
+const (Compile-Time Constant)
+Kab evaluate hota hai? Code compile hone se pehle (Compile-time).
+Kiske sath lag sakta hai? Sirf primitive types (int, double, bool, string) aur null ke sath. Kisi custom class ya object ke sath const nahi lag sakta.
+
+readonly (Run-Time Constant)
+Kab evaluate hota hai? Jab program run hota hai aur object banta hai (Runtime).
+Kiske sath lag sakta hai? Kisi bhi datatype ke sath—chahe wo int ho, string ho, ya koi bada class object ho!
+
+Seedhi baat:
+Agar value aisi hai jo zindagi bhar kabhi nahi badlegi (jaise PI = 3.14 ya DaysInAWeek = 7), toh const use karo.
+Agar value aisi hai jo object banne par ya constructor ke through set honi hai (jaise API_Key ya ConnectionString), toh readonly use karo!
+
+Managed Code (.NET ki Chhaon me)
+Kaun chalata hai? Isko CLR (Common Language Runtime) execute karta hai.
+Khel kya hai? Jab tu C# me code likhta hai, toh pehle wo Intermediate Language (IL) me compile hota hai, aur phir CLR usko machine code me badalta hai.
+
+Fayde:
+
+Garbage Collector (GC): Faltu memory ko saaf karne ki tension developer ki nahi, GC ki hoti hai.
+Type Safety: C# compiler pehle hi check kar leta hai ki tu galat datatype me kuch ulta-seedha toh nahi daal raha.
+Exception Handling: Runtime khud errors aur exceptions ko aaram se pakadta hai.
+Examples: C#, F#, VB.NET me likha gaya poora code Managed Code hota hai.
+
+2. Unmanaged Code (Azaad aur Khatarnak)
+Kaun chalata hai? Yeh seedha OS (Windows/Linux) aur CPU par chalta hai. Isko .NET ya CLR se koi matlab nahi hota.
+Khel kya hai? Isme sab kuch developer ke bharose hota hai.
+
+Nuqsaan / Khatra:
+Manual Memory Management: Memory allocate bhi khud karni padti hai (malloc se) aur delete bhi khud karni padti hai (free ya delete se). Agar bhool gaya, toh Memory Leak ho jayegi!
+No Garbage Collector: GC yahan nahi hota.
+Unsafe pointers: Yeh memory ke direct address ke sath khel sakta hai, isliye crash hone ke chances zyada hote hain.
+
+
+Main Fark (Ek Line me)
+Delegate: Ek Function Pointer (ya method ka reference) hota hai. Yeh ek variable ki tarah hota hai jo kisi method ko pakad kar rakh sakta hai.
+Khatra: Isko koi bhi bahar wala banda invoke (chala) sakta hai ya overwrite kar sakta hai.
+
+Event: Delegate ke upar ek Security Layer (Encapsulation) hoti hai. Isko sirf wahi class invoke kar sakti hai jisne isko banaya hai.
+Bahar wale classes sirf subscribe (+=) ya unsubscribe (-=) kar sakte hain, poora control nahi le sakte.
+
+// Yeh ek delegate ban gaya jo kisi bhi aisi method ko point kar sakta hai jo void leti ho
+public delegate void ProcessHandler();
+
+public class Process
+{
+    public ProcessHandler ProcessStarted; // Yeh ek delegate variable hai
+}
+2. Ab aate hain Event par (Security Guard)
+Event, delegate ko secure karne ka tareeqa hai. Jab aap delegate ke aage event keyword laga dete ho, toh C# compiler usko lock kar deta hai.
+
+Bahar wale classes sirf += (subscribe) aur -= (unsubscribe) kar sakte hain.
+
+Bahar wale classes na toh = null karke list saaf kar sakte hain, aur na hi khud us event ko fire (invoke) kar sakte hain!
+
+Chhota sa Real-World Example dekh:
+Analogy: Socho ek Fire Alarm (Aag ka alarm) hai.
+
+Delegate: Socho ek aam bell hai jiska connection kisi ke bhi haath me diya ja sakta hai—koi bhi aakar wire kaat de ya baja de.
+
+Event: Fire alarm building ki diwar par laga hai. Tum sirf yeh keh sakte ho ki "Mujhe is alarm ki aawaz sunai deni chahiye" (+= subscription)
+. Lekin alarm bajana kisne hai? Sirf sensor ya building authority (Publisher Class) hi usko trigger kar sakti hai, koi raste chalta aam aadmi jaakar zabardasti alarm nahi baja sakta!
+
+Do Tarah ke Scenarios Hote Hain:
+1. Jab dono ka kaam same ho (Implicit Resolution)
+Agar Interface A aur Interface B dono me ek method hai Show(), aur class ke andar unka logic ek hi jaisa chalna hai, toh C# bohot samajhdar hai—tu class ke andar sirf ek hi method bana de, wo dono interfaces ki zaroorat ko poora kar dega!
+
+2. Asli Conflict (Jab dono ka kaam alag-alag ho!) — Explicit Interface Implementation
+Soch ek Machine class hai jo do interfaces implement kar rahi hai:
+
+IPrinter (jiska Print() method paper print karta hai)
+
+IScanner (jiska Print() method actually document scan karke print jaisa kuch karta hai, ya dono ke kaam bilkul alag hain).
+
+Agar dono ka method signature void Print() hai, toh tu class ke andar ek common method nahi bana sakta. Iske liye C# me Explicit Implementation use hoti hai, jahan hum method ke aage interface ka naam jod dete hain!
+
+Aao Code se Samjhein:
+C#
+using System;
+
+// Pehla Interface
+public interface IPrinter
+{
+    void Print();
+}
+
+// Doosra Interface (Same method name!)
+public interface IScanner
+{
+    void Print();
+}
+
+// Class jo dono ko implement kar rahi hai
+public class MultiFunctionMachine : IPrinter, IScanner
+{
+    // --- EXPLICIT IMPLEMENTATION ---
+    // Note: Yahan 'public' ya 'private' keyword nahi lagate!
+    
+    void IPrinter.Print()
+    {
+        Console.WriteLine("Printer interface wala Print() chal raha hai... 🖨️");
+    }
+
+    void IScanner.Print()
+    {
+        Console.WriteLine("Scanner interface wala Print() chal raha hai... 📠");
+    }
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        MultiFunctionMachine machine = new MultiFunctionMachine();
+
+        // ❌ Error: machine.Print(); 
+        // Seedha call nahi kar sakte kyunki compiler confuse hai ki kaunsa Print() chalaye!
+
+        // ✅ Sahi Tareeqa (Interface ke reference se call karna padega):
+        
+        IPrinter printer = machine;
+        printer.Print(); // Output: Printer interface wala Print() chal raha hai...
+
+        IScanner scanner = machine;
+        scanner.Print(); // Output: Scanner interface wala Print() chal raha hai...
+    }
+}
+Interview ke liye 3 Golden Points (Yaad rakhne wale):
+Access Modifiers nahi hote: Jab aap explicit implementation karte hain (void IPrinter.Print()), toh uske aage public, private, protected kuch bhi likhne ki permission nahi hoti. Yeh by default private ho jaate hain class ke andar se.
+
+Direct Call nahi hota: Aap object.MethodName() karke seedha call nahi kar sakte. Usko chalane ke liye object ko pehle uske Interface type me cast karna padta hai (jaise upar IPrinter printer = machine; kiya).
+
+Kyu zaroori hai? Yeh tab kaam aata hai jab aapko aisi third-party libraries ya multiple interfaces use karne padein jinke methods ke naam aapas me takra (conflict) rahe hon.
