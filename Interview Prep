@@ -298,3 +298,163 @@ Jab tu context.Customers.FirstOrDefault() likhta hai, toh EF Core asli Customer 
 Interception (Jaise hi haath lagaya, query chal gayi!):
 
 Jab tak tu customer.Orders ko haath nahi lagata, database se koi query nahi chalti.
+
+ConfigureServices (Dependency Injection ka Adda)
+Kab chalta hai? Jab application start hoti hai (ek hi baar).
+Kaam kya hai? Iska kaam hai .NET ke built-in DI Container ko batana ki hamare poore project me kaun-kaun si services available rahengi.
+Aap yahan repositories, database contexts, aur third-party services ko add (AddScoped, AddTransient, AddSingleton) karte hain.
+public void ConfigureServices(IServiceCollection services)
+{
+    // Yahan hum .NET container ko bata rahe hain ki hamare paas ye services hain:
+    services.AddControllers();
+    
+    // Database Context register karna
+    services.AddDbContext<AppDbContext>(options => 
+        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+    // Apni custom services add karna
+    services.AddScoped<IUserRepository, UserRepository>();
+}
+
+Configure (HTTP Request Pipeline & Middleware)
+Kab chalta hai? Application start hone par (ConfigureServices ke theek baad).
+Kaam kya hai? Yeh method define karta hai ki jab bhi client (browser ya Angular app) se koi HTTP Request server par aayegi, toh wo kis sequence me process hogi.
+
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+    // 1. Error handling pehle aayegi
+    if (env.IsDevelopment())
+    {
+        app.UseDeveloperExceptionPage();
+    }
+
+    // 2. Routing
+    app.UseRouting();
+
+    // 3. Authentication (Pehle pehchan ho)
+    app.UseAuthentication();
+
+    // 4. Authorization (Fir permission check ho)
+    app.UseAuthorization();
+
+    // 5. Endpoints (Controllers tak request pahunche)
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapControllers();
+    });
+}
+Sabse Badi Interview Trick (Middleware Order): Configure ke andar middlewares ka sequence (order) bohot mayne rakhta hai! 
+Agar aapne Authentication ko Authorization ke baad laga diya, toh app crash ya fail ho jayegi. Pehle Authentication check hoga, tabhi toh Authorization decide hoga!
+
+
+
+Main Definition (Ek Line me)
+HTTP Request Pipeline un saare Middlewares ka ek sequence (katar) hai jiske through ek incoming HTTP Request gujarti hai, aur wahi request ya uska response ulte raste (reverse order) me wapas client ke paas jata hai.
+
+Real-World Analogy: Airport Security Checkpoint ✈️
+Socho tum airport par enter karte ho aur flight pakadne jaate ho:
+
+Gate 1: Security guard ticket check karta hai (Authentication).
+Gate 2: Baggage Scanner check karta hai ki koi illegal cheez toh nahi hai (Authorization / Validation).
+Gate 3: Boarding pass stamp hota hai (Logging / Performance monitoring).
+Final Gate (Plane): Tum apne actual seat (Controller / Endpoint) par baithte ho.
+
+Agar tumhare paas ticket nahi hai, toh pehla gate hi tumhe rok dega, aage jaane hi nahi dega! Wahi haal Request Pipeline ka hota hai.
+
+1. Middleware kya hota hai?
+Pipeline ke andar jo chote-chote components lage hote hain, unko Middleware kehte hain. Har middleware ke paas do kaam hote hain:
+Request ko aage wale middleware ke paas pass karna (await next()).
+Ya fir request ko wahin rok kar direct response wapas bhej dena (jaise agar authentication fail ho gayi toh wahin se 401 Unauthorized return kar dena).
+
+Middleware – Use(), Run(), Map() ✅
+
+app.Use() – The Chain Builder (Chain ko aage badhane wala)
+Yeh kya karta hai? Yeh sabse common method hai. Yeh middleware me logic execute karta hai, aur uske baad aglai middleware ko request pass karne ki taaqat (next()) rakhta hai.
+
+Khel: Yeh "choti-choti daaliyan" jodne jaisa hai. Yeh request ko aage bhi bhej sakta hai aur agar chahe toh wahin rok bhi sakta hai (short-circuit).
+app.Use(async (context, next) =>
+{
+    Console.WriteLine("1. Request aayi, humne kuch check kiya...");
+    
+    // Aage wale middleware ko bulaya (agar yeh nahi likhoge, toh pipeline wahin ruk jayegi!)
+    await next(); 
+    
+    Console.WriteLine("3. Response wapas jaate waqt fir se yahan aae!");
+});
+
+
+app.Run() – The Terminator (Khel Khatam!)
+Yeh kya karta hai? Yeh ek Terminal Middleware hota hai. Iska matlab yeh hai ki iske baad pipeline me koi doosra middleware nahi chal sakta.
+
+Khel: Isme next parameter hota hi nahi hai! Yeh request ko pakadta hai, apna response likhta hai, aur game over kar deta hai (client ko response bhej deta hai).
+
+Kab use hota hai? Aam taur par error pages dikhane ke liye ya jab aapko pata ho ki ab bas yahin se final response dena hai.
+// Iske baad agar koi aur middleware likhoge, toh wo kabhi chalega hi nahi!
+app.Run(async context =>
+{
+    await context.Response.WriteAsync("Hello from Run Middleware! Pipeline khatam.");
+});
+
+. app.Map() – The Branching Master (Rasta Badalne wala)
+Yeh kya karta hai? Yeh URL ke path ke base par pipeline ki branch (alag rasta) bana deta hai.
+
+Khel: Agar aap chahte hain ki jab bhi koi /admin URL par aaye, toh ek alag set of middlewares chalein, aur baaki sabke liye normal pipeline chale, tab aap Map() use karte hain.
+// Agar URL '/admin' se shuru hota hai, toh yeh alag branch me chala jayega
+app.Map("/admin", adminApp =>
+{
+    adminApp.Run(async context =>
+    {
+        await context.Response.WriteAsync("Welcome to Admin Dashboard area!");
+    });
+});
+
+// Yeh normal pipeline hai jo baaki saare URLs ke liye chalegi
+app.Run(async context =>
+{
+    await context.Response.WriteAsync("Welcome to Home Page!");
+});
+
+
+CORS (Cross-Origin Resource Sharing)
+var builder = WebApplication.CreateBuilder(args);
+
+// 1. CORS Policy define karna
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngular", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200") // Sirf is frontend ko allow karo
+              .AllowAnyHeader()                     // Koi bhi header (Authorization, Content-Type) chalega
+              .AllowAnyMethod();                    // GET, POST, PUT, DELETE sab allowed hain
+    });
+});
+
+builder.Services.AddControllers();
+var app = builder.Build();
+CORS ko pipeline me lagane ka ek fix order hota hai. Agar order galat kiya, toh CORS error fix nahi hoga!
+
+C#
+app.UseRouting();
+
+// 2. UseCors ko hamesha UseRouting ke BAAD aur UseAuthorization se PEHLE lagana chahiye!
+app.UseCors("AllowAngular"); 
+
+app.UseAuthorization();
+app.MapControllers();
+app.Run();
+
+AsNoTracking() – Read-Only Queries ka Superhero
+Problem: Jab aap EF Core se data nikaalte hain (context.Users.ToList()), toh EF Core chupchap har object ko apne Change Tracker me yaad rakh leta hai. Kyu? Taki agar aap baad me us data ko badlein (user.Name = "New"), toh SaveChanges() chalne par wo database me update kar sake.
+
+Nuqsaan: Agar aapko sirf data read karna hai (jaise GET API jisme sirf list dikhani hai), toh Change Tracker ki koi zaroorat nahi hai. Phir bhi EF Core har object ko track karne me memory aur CPU khapata hai!
+
+Solution (AsNoTracking): Yeh EF Core ko bolta hai: "Bhai, mujhe data sirf padhne ke liye chahiye, isko yaad mat rakh." Isse query 30% se 50% tak fast ho jati hai aur memory bach jati hai.
+
+2. Caching (Database ka Chakkar Khatam!)
+Problem: Agar 1000 log ek hi API call kar rahe hain (jaise "Country List" ya "App Configuration"), aur har baar database par query ja rahi hai, toh database baith jayega!
+
+Solution: Data ko ek baar database se uthao aur Server ki RAM (Memory) me save kar lo. Agli baar jab request aayegi, toh database jaane ki jagah seedha RAM se uthakar de do.
+
+ASP.NET Core me do tarah ki caching hoti hai:
+
+In-Memory Cache (IMemoryCache): Sirf ek hi server ki RAM me data save hota hai (choti ya single-server apps ke liye).
