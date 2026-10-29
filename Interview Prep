@@ -257,3 +257,44 @@ Access Modifiers nahi hote: Jab aap explicit implementation karte hain (void IPr
 Direct Call nahi hota: Aap object.MethodName() karke seedha call nahi kar sakte. Usko chalane ke liye object ko pehle uske Interface type me cast karna padta hai (jaise upar IPrinter printer = machine; kiya).
 
 Kyu zaroori hai? Yeh tab kaam aata hai jab aapko aisi third-party libraries ya multiple interfaces use karne padein jinke methods ke naam aapas me takra (conflict) rahe hon.
+
+Seedhi baat:
+Eager Loading (.Include()): Hum pehle hi bol dete hain — "Bhai, customer ke sath orders bhi le aa." (Ek hi baar me sab aa jata hai).
+
+using (var context = new AppDbContext())
+{
+    // Eager Loading: Customer ke sath uske saare Orders ek hi query me aa gaye!
+    var customer = context.Customers
+                          .Include(c => c.Orders) 
+                          .FirstOrDefault(c => c.Id == 1);
+
+    // Yahan database se pehle hi orders aa chuke hain, koi nayi query nahi chalegi.
+    foreach (var order in customer.Orders)
+    {
+        Console.WriteLine(order.OrderDate);
+    }
+}
+
+Lazy Loading: Hum pehle sirf customer laate hain, aur jaise hi hum code me customer.Orders likhte hain, EF Core chupchap piche se ek aur query chala kar orders utha laata hai.
+
+using (var context = new AppDbContext())
+{
+    // Yahan sirf Customer aaya, Orders nahi aaye!
+    var customer = context.Customers.FirstOrDefault(c => c.Id == 1);
+
+    // Abhi tak orders database se nahi aaye the...
+    // LEKIN jaise hi humne neeche wali line likhi, EF Core background me chupchap ek nayi SQL query chala dega!
+    foreach (var order in customer.Orders) 
+    {
+        Console.WriteLine(order.OrderDate);
+    }
+}
+Virtual Property ka Khel:
+Lazy loading tabhi kaam karti hai jab tune Entity class me navigation property ke aage virtual keyword lagaya ho (jaise: public virtual ICollection<Order> Orders { get; set; }).
+
+EF Core ka Magic Proxy:
+Jab tu context.Customers.FirstOrDefault() likhta hai, toh EF Core asli Customer class ka ek Duplicate (Proxy) Object memory me banakar deta hai. Is proxy object ko pata hota hai ki mere andar ek Orders property hai jo abhi khali (null) hai.
+
+Interception (Jaise hi haath lagaya, query chal gayi!):
+
+Jab tak tu customer.Orders ko haath nahi lagata, database se koi query nahi chalti.
