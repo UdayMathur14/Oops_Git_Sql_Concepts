@@ -1352,6 +1352,11 @@ GO
 -- Execution
 SELECT * FROM dbo.fn_GetHighValueCustomers();
 
+Stored prod vs function  
+Return Value	Optional (kuch bhi return na kare ya multiple values/tables de sakta hai).	Mandatory (ek single value ya table return karna hi padta hai).
+DML Operations	Isme INSERT, UPDATE, DELETE aram se kar sakte ho.	Isme DML (INSERT/UPDATE/DELETE) allowed nahi hai (sirf read-only calculations ke liye hoti hai).
+Calling Method	EXEC ProcedureName se bulaya jata hai.	SELECT FunctionName() ke andar ya WHERE clause me use kiya ja sakta hai.
+Where can it be used?	Query ke andar use nahi ho sakta.	Query ke andar (SELECT, WHERE, JOIN) easily use ho sakta hai.
 ------------------------------------------------------------------------------------------
 
 TRANACTIONS IN SQL:
