@@ -517,13 +517,25 @@ app.UseAuthorization();
 app.MapControllers();
 app.Run();
 
-AsNoTracking() – Read-Only Queries ka Superhero
+------------------------------------------------------------------------------------------------------------------------------
+Tracking() – Read-Only Queries ka Superhero
 Problem: Jab aap EF Core se data nikaalte hain (context.Users.ToList()), toh EF Core chupchap har object ko apne Change Tracker me yaad rakh leta hai. Kyu? Taki agar aap baad me us data ko badlein (user.Name = "New"), toh SaveChanges() chalne par wo database me update kar sake.
 
 Nuqsaan: Agar aapko sirf data read karna hai (jaise GET API jisme sirf list dikhani hai), toh Change Tracker ki koi zaroorat nahi hai. Phir bhi EF Core har object ko track karne me memory aur CPU khapata hai!
 
 Solution (AsNoTracking): Yeh EF Core ko bolta hai: "Bhai, mujhe data sirf padhne ke liye chahiye, isko yaad mat rakh." Isse query 30% se 50% tak fast ho jati hai aur memory bach jati hai.
+AsNoTracking()
 
+Ab ye dekh:
+var user = context.Users
+.AsNoTracking()
+.First(x => x.Id == 1);
+
+Ab EF bolta hai:
+"Data le aaya hu. Baaki mujhe farak nahi padta."
+Tracking OFF.
+
+-------------------------------------------------------------------------------------------------------------------------------
 2. Caching (Database ka Chakkar Khatam!)
 Problem: Agar 1000 log ek hi API call kar rahe hain (jaise "Country List" ya "App Configuration"), aur har baar database par query ja rahi hai, toh database baith jayega!
 
