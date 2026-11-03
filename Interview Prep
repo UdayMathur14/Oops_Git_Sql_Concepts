@@ -15,15 +15,68 @@ IEnumerable<string> readOnlyView = realList;
 realList.Add("Mango"); 
 
 // Toh readOnlyView me bhi "Mango" apne aap dikhne lagega!
-
+--------------------------------------------------------------------------------------------------------
 Pehle do meanings samjho:
 - Reference equality: kya dono variables usi ek object ko refer karte hain?
 - Value equality: kya dono ko unke data ke according equal maana gaya hai?
 
 == (Operator):
+int a = 10;
+int b = 10;
+Console.WriteLine(a == b); // True
+Yahan a aur b ki memory alag hoti hai, lekin == address compare nahi karta.
+
+Value Types (int, double, bool, char, struct) C# (==) → Value compare karega.
+✅ Reference Types (class, object, Person, etc.) C# (==) → By default reference/address compare karega.
+
 Custom classes ke liye yeh hamesha Memory Address / Reference check karta hai (ki dono ek hi cheez hain ya nahi).
 
+Person = Reference Type
+Person p1 = new Person();
+Person p2 = new Person();
+
+Ab memory kuch aisi hogi:
+
+Plain Text
+p1 ---> Object #100
+p2 ---> Object #200
+
+Ab:
+
+C#
+p1 == p2 false
+
+Equals 
+
+Fir Equals aur == me difference kya hua?
+
+Default case me dono same lagte hain.
+
+C#
+Person p1 = new Person();
+Person p2 = new Person();
+ 
+p1 == p2; // False
+p1.Equals(p2); // False
+
+Dono False.
+
+dono m koi khass difference nhi h 
+Value Types (int, bool, double)
+==      -> value compare
+Equals  -> value compare
+
+Reference Types (class)
+==      -> reference compare
+Equals  -> reference compare by default
+
+Equals override kar doge
+==      -> reference compare
+Equals  -> custom logic compare
+
 Lekin agar tune Equals() ko likhte waqt override kar diya ki "Bhai agar ID same hai toh true de dena", tab invoice1.Equals(invoice2) bolega True!
+
+--------------------------------------------------------------------------------------------------------
 
 Struct vs Class 
 
