@@ -15,6 +15,27 @@ IEnumerable<string> readOnlyView = realList;
 realList.Add("Mango"); 
 
 // Toh readOnlyView me bhi "Mango" apne aap dikhne lagega!
+
+Isko interviewer bahut pasand karte hain
+C#
+var query =
+context.Users
+.Where(x => x.Age > 18);
+
+Abhi SQL run hua?
+❌ Nahi Kyun?
+
+Deferred Execution.
+Query sirf build hui hai.
+SQL tab chalega jab:
+
+C#
+ToList()
+First()
+Count()
+Any()
+
+call karoge.
 --------------------------------------------------------------------------------------------------------
 Pehle do meanings samjho:
 - Reference equality: kya dono variables usi ek object ko refer karte hain?
