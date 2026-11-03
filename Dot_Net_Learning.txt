@@ -503,7 +503,7 @@ When a request comes in:
 Request → Logging → Authentication → Authorization → Routing → Endpoint → Response
 Each of these (Logging, Auth, Routing) is a middleware.
 
-
+--------------------------------------------------------------------------------------------------
 5. What is the difference between throw and throw ex?
 
 | Feature     | `throw`                              | `throw ex`                        |
@@ -513,7 +513,26 @@ Each of these (Logging, Auth, Routing) is a middleware.
 | Debugging   | Easier                               | Harder                            |
 | Recommended | ✅ Always use this                    | 🚫 Avoid this                   |
 
+Rule of Thumb 🚀
+Re-throw karna hai?
+C#
+catch(Exception ex)
+{
+// logging
+throw;
+}
 
+✅ Correct
+Ye avoid karo
+C#
+catch(Exception ex)
+{
+throw ex;
+}
+
+❌ Stack trace lose ho sakta hai.
+
+-------------------------------------------------------------------------------------------------------
 6. What is an extension method in C#?
 An Extension Method is a special static method that lets you add new functionality to existing classes
 👉 without modifying their original code or creating a derived class (inheritance).
