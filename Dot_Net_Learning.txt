@@ -674,6 +674,8 @@ Agar error Outer Try ke andar aayi (aur inner ke baahar): Toh Inner catch ka uss
 2. Agar Dono me finally laga ho, toh kya dono chalenge?
 HAAN! Dono ke dono finally blocks chalenge!
 
+Seedhi baat: Ek hi exception ek sath do catch blocks me kabhi nahi ja sakti. Jo pehle match ho gayi, code wahi execute hokar baahar ho jata hai, aur specific se general ki taraf (upar se neeche) order rakhna padta hai!
+
 
 
 
