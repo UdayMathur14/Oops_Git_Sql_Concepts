@@ -327,12 +327,10 @@ public class Program
 }
 Interview ke liye 3 Golden Points (Yaad rakhne wale):
 Access Modifiers nahi hote: Jab aap explicit implementation karte hain (void IPrinter.Print()), toh uske aage public, private, protected kuch bhi likhne ki permission nahi hoti. Yeh by default private ho jaate hain class ke andar se.
-
 Direct Call nahi hota: Aap object.MethodName() karke seedha call nahi kar sakte. Usko chalane ke liye object ko pehle uske Interface type me cast karna padta hai (jaise upar IPrinter printer = machine; kiya).
-
 Kyu zaroori hai? Yeh tab kaam aata hai jab aapko aisi third-party libraries ya multiple interfaces use karne padein jinke methods ke naam aapas me takra (conflict) rahe hon.
 
-Seedhi baat:
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
 Eager Loading (.Include()): Hum pehle hi bol dete hain — "Bhai, customer ke sath orders bhi le aa." (Ek hi baar me sab aa jata hai).
 
 using (var context = new AppDbContext())
@@ -349,7 +347,8 @@ using (var context = new AppDbContext())
     }
 }
 
-Lazy Loading: Hum pehle sirf customer laate hain, aur jaise hi hum code me customer.Orders likhte hain, EF Core chupchap piche se ek aur query chala kar orders utha laata hai.
+Lazy Loading: Hum pehle sirf customer laate hain, aur jaise hi hum code me customer.Orders likhte hain, EF Core chupchap piche se ek aur query chala
+kar orders utha laata hai.
 
 using (var context = new AppDbContext())
 {
@@ -364,16 +363,20 @@ using (var context = new AppDbContext())
     }
 }
 Virtual Property ka Khel:
-Lazy loading tabhi kaam karti hai jab tune Entity class me navigation property ke aage virtual keyword lagaya ho (jaise: public virtual ICollection<Order> Orders { get; set; }).
+Lazy loading tabhi kaam karti hai jab tune Entity class me navigation property ke aage virtual keyword lagaya ho 
+(jaise: public virtual ICollection<Order> Orders { get; set; }).
 
 EF Core ka Magic Proxy:
-Jab tu context.Customers.FirstOrDefault() likhta hai, toh EF Core asli Customer class ka ek Duplicate (Proxy) Object memory me banakar deta hai. Is proxy object ko pata hota hai ki mere andar ek Orders property hai jo abhi khali (null) hai.
+Jab tu context.Customers.FirstOrDefault() likhta hai, toh EF Core asli Customer class ka ek Duplicate (Proxy) Object memory me banakar deta hai. 
+Is proxy object ko pata hota hai ki mere andar ek Orders property hai jo abhi khali (null) hai.
 
 Interception (Jaise hi haath lagaya, query chal gayi!):
 
 Jab tak tu customer.Orders ko haath nahi lagata, database se koi query nahi chalti.
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
 ConfigureServices (Dependency Injection ka Adda)
+
 Kab chalta hai? Jab application start hoti hai (ek hi baar).
 Kaam kya hai? Iska kaam hai .NET ke built-in DI Container ko batana ki hamare poore project me kaun-kaun si services available rahengi.
 Aap yahan repositories, database contexts, aur third-party services ko add (AddScoped, AddTransient, AddSingleton) karte hain.
@@ -417,9 +420,9 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         endpoints.MapControllers();
     });
 }
+
 Sabse Badi Interview Trick (Middleware Order): Configure ke andar middlewares ka sequence (order) bohot mayne rakhta hai! 
 Agar aapne Authentication ko Authorization ke baad laga diya, toh app crash ya fail ho jayegi. Pehle Authentication check hoga, tabhi toh Authorization decide hoga!
-
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Pipeline
@@ -492,7 +495,9 @@ app.Run(async context =>
 });
 
 ------------------------------------------------------------------------------------------------------------------------------------------
-CORS (Cross-Origin Resource Sharing)
+CORS (Cross-Origin Resource Sharing) - "CORS is a permission mechanism set by the backend server that tells the
+browser it is safe to share data with a frontend running on a different domain or port.
+
 var builder = WebApplication.CreateBuilder(args);
 // 1. CORS Policy define karna
 builder.Services.AddCors(options =>
