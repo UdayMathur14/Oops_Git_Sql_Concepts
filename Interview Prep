@@ -189,6 +189,7 @@ Keyword mandatory: Har ek file me partial keyword likhna zaroori hai (jaise publ
 Ek hi Namespace: Saare partial tukde same namespace ke andar hone chahiye.
 Access Modifiers match hone chahiye: Agar ek file me public hai, toh baaki me bhi public hi hona chahiye.
 
+----------------------------------------------------------------------------------------------------------------------------------------------
 Boxing & Unboxing 
 Jab aap kisi Value Type (jaise int, char, bool) ko kisi Reference Type (jaise object ya koi Interface) ke andar daalte hain, toh usko Boxing kehte hain.
 int num = 100;        // Yeh ek Value Type hai (Stack par hai)
@@ -198,7 +199,7 @@ Unboxing kya hoti hai? (Reference Type $\rightarrow$ Value Type)
 Jab aap us boxed object se wapas apni original Value Type ki value nikalte hain, toh usko Unboxing kehte hain.
 object obj = 100;             // Pehle se boxed object hai
 int unboxedNum = (int)obj;    // 📦 UNBOXING ho gayi! (Heap se nikal kar wapas int me cast kiya)
-
+-------------------------------------------------------------------------------------------------------------------------------
 const (Compile-Time Constant)
 Kab evaluate hota hai? Code compile hone se pehle (Compile-time).
 Kiske sath lag sakta hai? Sirf primitive types (int, double, bool, string) aur null ke sath. Kisi custom class ya object ke sath const nahi lag sakta.
@@ -210,7 +211,7 @@ Kiske sath lag sakta hai? Kisi bhi datatype ke sath—chahe wo int ho, string ho
 Seedhi baat:
 Agar value aisi hai jo zindagi bhar kabhi nahi badlegi (jaise PI = 3.14 ya DaysInAWeek = 7), toh const use karo.
 Agar value aisi hai jo object banne par ya constructor ke through set honi hai (jaise API_Key ya ConnectionString), toh readonly use karo!
-
+-------------------------------------------------------------------------------------------------------------------------------------
 Managed Code (.NET ki Chhaon me)
 Kaun chalata hai? Isko CLR (Common Language Runtime) execute karta hai.
 Khel kya hai? Jab tu C# me code likhta hai, toh pehle wo Intermediate Language (IL) me compile hota hai, aur phir CLR usko machine code me badalta hai.
@@ -230,7 +231,7 @@ Nuqsaan / Khatra:
 Manual Memory Management: Memory allocate bhi khud karni padti hai (malloc se) aur delete bhi khud karni padti hai (free ya delete se). Agar bhool gaya, toh Memory Leak ho jayegi!
 No Garbage Collector: GC yahan nahi hota.
 Unsafe pointers: Yeh memory ke direct address ke sath khel sakta hai, isliye crash hone ke chances zyada hote hain.
-
+--------------------------------------------------------------------------------------------------------------------------------------------
 
 Main Fark (Ek Line me)
 Delegate: Ek Function Pointer (ya method ka reference) hota hai. Yeh ek variable ki tarah hota hai jo kisi method ko pakad kar rakh sakta hai.
@@ -260,7 +261,7 @@ Delegate: Socho ek aam bell hai jiska connection kisi ke bhi haath me diya ja sa
 
 Event: Fire alarm building ki diwar par laga hai. Tum sirf yeh keh sakte ho ki "Mujhe is alarm ki aawaz sunai deni chahiye" (+= subscription)
 . Lekin alarm bajana kisne hai? Sirf sensor ya building authority (Publisher Class) hi usko trigger kar sakti hai, koi raste chalta aam aadmi jaakar zabardasti alarm nahi baja sakta!
-
+--------------------------------------------------------------------------------------------------------------------------------------
 Do Tarah ke Scenarios Hote Hain:
 1. Jab dono ka kaam same ho (Implicit Resolution)
 Agar Interface A aur Interface B dono me ek method hai Show(), aur class ke andar unka logic ek hi jaisa chalna hai, toh C# bohot samajhdar hai—tu class ke andar sirf ek hi method bana de, wo dono interfaces ki zaroorat ko poora kar dega!
@@ -272,11 +273,8 @@ IPrinter (jiska Print() method paper print karta hai)
 
 IScanner (jiska Print() method actually document scan karke print jaisa kuch karta hai, ya dono ke kaam bilkul alag hain).
 
-Agar dono ka method signature void Print() hai, toh tu class ke andar ek common method nahi bana sakta. Iske liye C# me Explicit Implementation use hoti hai, jahan hum method ke aage interface ka naam jod dete hain!
-
-Aao Code se Samjhein:
-C#
-using System;
+Agar dono ka method signature void Print() hai, toh tu class ke andar ek common method nahi bana sakta. 
+Iske liye C# me Explicit Implementation use hoti hai, jahan hum method ke aage interface ka naam jod dete hain!
 
 // Pehla Interface
 public interface IPrinter
@@ -317,7 +315,6 @@ public class Program
         // Seedha call nahi kar sakte kyunki compiler confuse hai ki kaunsa Print() chalaye!
 
         // ✅ Sahi Tareeqa (Interface ke reference se call karna padega):
-        
         IPrinter printer = machine;
         printer.Print(); // Output: Printer interface wala Print() chal raha hai...
 
@@ -326,9 +323,12 @@ public class Program
     }
 }
 Interview ke liye 3 Golden Points (Yaad rakhne wale):
-Access Modifiers nahi hote: Jab aap explicit implementation karte hain (void IPrinter.Print()), toh uske aage public, private, protected kuch bhi likhne ki permission nahi hoti. Yeh by default private ho jaate hain class ke andar se.
-Direct Call nahi hota: Aap object.MethodName() karke seedha call nahi kar sakte. Usko chalane ke liye object ko pehle uske Interface type me cast karna padta hai (jaise upar IPrinter printer = machine; kiya).
-Kyu zaroori hai? Yeh tab kaam aata hai jab aapko aisi third-party libraries ya multiple interfaces use karne padein jinke methods ke naam aapas me takra (conflict) rahe hon.
+--Access Modifiers nahi hote: Jab aap explicit implementation karte hain (void IPrinter.Print()), toh uske aage public, private, protected kuch bhi likhne ki
+permission nahi hoti. Yeh by default private ho jaate hain class ke andar se.
+--Direct Call nahi hota: Aap object.MethodName() karke seedha call nahi kar sakte. Usko chalane ke liye object ko pehle uske Interface type 
+me cast karna padta hai (jaise upar IPrinter printer = machine; kiya).
+--Kyu zaroori hai? Yeh tab kaam aata hai jab aapko aisi third-party libraries ya multiple interfaces use karne padein jinke methods 
+ke naam aapas me takra (conflict) rahe hon.
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 Eager Loading (.Include()): Hum pehle hi bol dete hain — "Bhai, customer ke sath orders bhi le aa." (Ek hi baar me sab aa jata hai).
