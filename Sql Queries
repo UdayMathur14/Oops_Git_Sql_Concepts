@@ -35,3 +35,33 @@ SELECT emp_name, department, salary
 FROM RankedEmployees
 WHERE row_num <= 2;
 
+--delete duplicate records 
+
+- DELETE FROM employees
+WHERE emp_id NOT IN (
+    SELECT MIN(emp_id)
+    FROM employees
+    GROUP BY emp_name, department, salary
+);
+
+
+-WITH CTE_Duplicates AS (
+    SELECT 
+        emp_id,
+        emp_name,
+        department,
+        ROW_NUMBER() OVER (
+            PARTITION BY emp_name, department, salary -- In columns ke base par check karo ki duplicate kaun hai
+            ORDER BY emp_id ASC -- Pehla wala record rank 1 payega, baaki duplicates 2, 3...
+        ) as row_num
+    FROM employees
+)
+SELECT * FROM CTE_Duplicates WHERE row_num > 1; -- Ye query sirf duplicate rows dikhayegi
+
+
+
+
+
+
+
+
