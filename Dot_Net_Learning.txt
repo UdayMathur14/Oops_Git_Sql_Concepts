@@ -676,11 +676,37 @@ HAAN! Dono ke dono finally blocks chalenge!
 
 Seedhi baat: Ek hi exception ek sath do catch blocks me kabhi nahi ja sakti. Jo pehle match ho gayi, code wahi execute hokar baahar ho jata hai, aur specific se general ki taraf (upar se neeche) order rakhna padta hai!
 
+// ❌ KABHI MAT LIKHNA: 'void' matlab koi raseed/Task nahi hai
+public async void EmailBhejo() 
+{
+    throw new Exception("Server down!"); // Poori app CRASH ho jayegi!
+}
 
+// ✅ HAMESHA AISE LIKHO: 'Task' matlab raseed hai, error isme pakdi jayegi
+public async Task EmailBhejo() 
+{
+    throw new Exception("Server down!"); // Safe! Catch block pakad lega
+}
+Interviewer ko kya bolna hai: "Hum kabhi async void use nahi karte (sirf button click events ko chhod kar), hamesha async Task use karte hain kyunki async void me error aane par try-catch kaam nahi karta aur poori app crash ho jati hai."
 
+-------------------------------------------------------------------------------------------------------------------------------
+API Versioning – Quick Interview Notes
+What is it?
+Running multiple versions (v1, v2) of an API simultaneously within the same deployment/port so you can introduce breaking changes without crashing existing clients (mobile apps, third-party integrations, or microservices).
 
+1. When to Version vs. Not Version
+Create a New Version (Breaking Changes): Renaming/removing JSON fields, changing data types, or adding new required parameters.
 
+Do NOT Version (Non-Breaking Changes): Adding optional response fields, bug fixes, or internal performance optimizations.
 
+Skip Versioning Completely: When your own frontend (e.g., Angular) and backend deploy together at the exact same time.
+
+2. Three Ways to Implement Versioning
+URL Path (Most Common): GET /api/v1/products vs. GET /api/v2/products
+
+Query String: GET /api/products?api-version=2.0
+
+Custom Header: GET /api/products with header X-Api-Version: 2.0
 
 
 
