@@ -19,3 +19,19 @@ WHERE n-1 = (
     FROM employees e2 
     WHERE e2.salary > e1.salary
 );
+
+--Top N Records Per Group
+
+-WITH RankedEmployees AS (
+    SELECT 
+        emp_name,
+        department,
+        salary,
+        ROW_NUMBER() OVER (PARTITION BY department ORDER BY salary DESC) as row_num
+    FROM employees
+    WHERE salary IS NOT NULL
+)
+SELECT emp_name, department, salary
+FROM RankedEmployees
+WHERE row_num <= 2;
+
