@@ -59,6 +59,33 @@ WHERE emp_id NOT IN (
 SELECT * FROM CTE_Duplicates WHERE row_num > 1; -- Ye query sirf duplicate rows dikhayegi
 
 
+--top salary in each dept 
+
+WITH RankedEmployees AS (
+    SELECT 
+        EmployeeId, 
+        EmployeeName, 
+        Salary, 
+        Dept,
+        DENSE_RANK() OVER (PARTITION BY Dept ORDER BY Salary DESC) as rnk
+    FROM Employee
+)
+SELECT EmployeeId, EmployeeName, Salary, Dept
+FROM RankedEmployees
+WHERE rnk = 1;
+
+
+SELECT e.EmployeeId, e.EmployeeName, e.Salary, e.Dept
+FROM Employee e
+INNER JOIN (
+    SELECT Dept, MAX(Salary) AS MaxSalary
+    FROM Employee
+    GROUP BY Dept
+) m 
+    ON e.Dept = m.Dept 
+    AND e.Salary = m.MaxSalary;
+
+
 
 
 
