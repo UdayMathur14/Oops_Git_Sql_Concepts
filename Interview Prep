@@ -563,4 +563,38 @@ Yahan tak ki agar user logout bhi kar de, toh bhi wo "Country List" ka cache del
 
 Server cache ko delete hone ke 2 hi tarike hote hain:Time Out (Expiration) , server restart .
 
+-------------------------------------------------------------------------------------------------------------------
+
+What is Deferred Execution in LINQ? When does the query actually execute?
+
+Deferred Execution in LINQ means that defining a query (using methods like .Where(), .Select(), or .OrderBy()) does not run the query immediately.
+// 1. DEFERRED: No SQL query runs on this line!
+var query = _context.Users.Where(u => u.IsActive);
+
+// Still no SQL query! We can keep adding conditions dynamically:
+query = query.Where(u => u.Age > 25);
+
+// 2. EXECUTED: The SQL query hits the database RIGHT HERE!
+var activeAdults = await query.ToListAsync();
+
+var users = _context.Users.Where(u => u.IsActive); // Deferred
+
+int count = users.Count();          // Hits DB #1 (SELECT COUNT(*))
+var list = users.ToList();          // Hits DB #2 (SELECT * FROM Users)
+
+// 1. Without .ToList() -> Both filters combine into ONE optimized SQL query:
+// SELECT * FROM Orders WHERE Status = 'Paid' AND Total > 5000
+var query = _context.Orders
+    .Where(o => o.Status == "Paid")
+    .Where(o => o.Total > 5000);
+var finalOrders = await query.ToListAsync();
+
+// 2. Calling .ToList() too early -> Pulls ALL paid orders into RAM first!
+// SQL: SELECT * FROM Orders WHERE Status = 'Paid' (could be 1 million rows!)
+var paidOrders = await _context.Orders
+    .Where(o => o.Status == "Paid")
+    .ToListAsync(); 
+
+// This second filter now runs in C# memory instead of SQL Server!
+var bigOrders = paidOrders.Where(o => o.Total > 5000).ToList();
 
